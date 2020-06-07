@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>資安 on Louis&#39;s blog</title>
+    <link>https://github.com/SZLforGithub/louis_hugo/tags/%E8%B3%87%E5%AE%89/</link>
+    <description>Recent content in 資安 on Louis&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Jun 2020 18:21:38 +0800</lastBuildDate>
+    
+	<atom:link href="https://github.com/SZLforGithub/louis_hugo/tags/%E8%B3%87%E5%AE%89/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用 PHP 獲取使用者 IP 以及漏洞分析</title>
+      <link>https://github.com/SZLforGithub/louis_hugo/post/php_ip/</link>
+      <pubDate>Sat, 06 Jun 2020 18:21:38 +0800</pubDate>
+      
+      <guid>https://github.com/SZLforGithub/louis_hugo/post/php_ip/</guid>
+      <description>工作上有這樣的需求，需要在使用者訪問網站之後獲取 IP 並儲存，花了一些時間研究，也發現很多有趣的地方，特地記錄下來。</description>
+    </item>
+    
+  </channel>
+</rss>

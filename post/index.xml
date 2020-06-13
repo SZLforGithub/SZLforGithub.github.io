@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Git 簡單介紹與常用指令</title>
+      <link>https://szlforgithub.github.io/post/git/</link>
+      <pubDate>Sat, 13 Jun 2020 16:24:11 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/git/</guid>
+      <description>Git 介紹與常用指令 什麼是 Git？ Git 是一種分散式版本控制系統。</description>
+    </item>
+    
+    <item>
       <title>Composer 介紹與使用</title>
       <link>https://szlforgithub.github.io/post/composer/</link>
       <pubDate>Sun, 07 Jun 2020 19:33:01 +0800</pubDate>

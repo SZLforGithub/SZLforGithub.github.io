@@ -6,10 +6,19 @@
     <description>Recent content in PHP on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Jun 2020 19:33:01 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jul 2020 13:18:23 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Laravel Conf Taiwan - Less is More 參加心得</title>
+      <link>https://szlforgithub.github.io/post/laravelconf2020/</link>
+      <pubDate>Sun, 26 Jul 2020 13:18:23 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/laravelconf2020/</guid>
+      <description>Laravel Conf 是目前台灣最大的 Laravel 社群。在疫情影響下仍然如期舉辦，今年是第四屆的 Laravel Conf。</description>
+    </item>
     
     <item>
       <title>Composer 介紹與使用</title>

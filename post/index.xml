@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Laravel one-to-many Relationship</title>
+      <link>https://szlforgithub.github.io/post/laravelonetomany/</link>
+      <pubDate>Sun, 26 Jul 2020 18:34:02 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/laravelonetomany/</guid>
+      <description>Laravel 一對多關聯。</description>
+    </item>
+    
+    <item>
       <title>Singleton pattern (單例模式) for PHP</title>
       <link>https://szlforgithub.github.io/post/singletonphp/</link>
       <pubDate>Sun, 26 Jul 2020 14:15:24 +0800</pubDate>

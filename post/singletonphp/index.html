@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Singleton pattern (單例模式) for PHP | Louis&#39;s blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.58.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+      <link rel="stylesheet" href="/dist/css/custom.css">
+    
+
+    
+      
+<link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/prism.css"/>
+    <script src="/prism.js"></script>
+
+    <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <meta property="og:title" content="Singleton pattern (單例模式) for PHP" />
+<meta property="og:description" content="什" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://szlforgithub.github.io/post/singletonphp/" />
+<meta property="article:published_time" content="2020-07-26T14:15:24+08:00" />
+<meta property="article:modified_time" content="2020-07-26T14:15:24+08:00" />
+<meta itemprop="name" content="Singleton pattern (單例模式) for PHP">
+<meta itemprop="description" content="什">
+
+
+<meta itemprop="datePublished" content="2020-07-26T14:15:24&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-26T14:15:24&#43;08:00" />
+<meta itemprop="wordCount" content="771">
+
+
+
+<meta itemprop="keywords" content="學習筆記,PHP,design pattern," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Singleton pattern (單例模式) for PHP"/>
+<meta name="twitter:description" content="什"/>
+
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-169325906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white production">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://szlforgithub.github.io/images/php.jpg');">
+    <div class="pb3-m pb6-l bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib" style="font-family: oswald; font-weight:bold;">
+      
+        Louis&#39;s blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/post/" title="Articles page">
+              Articles
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">Singleton pattern (單例模式) for PHP</h1>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked">
+          
+        ARTICLES
+      </aside>
+      
+
+
+
+
+
+      <h1 class="f1 athelas mt3 mb1">Singleton pattern (單例模式) for PHP</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-07-26T14:15:24&#43;08:00">July 26, 2020</time>
+
+      
+      
+        <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 771 words</span>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="什麼是單例模式">什麼是單例模式</h2>
+
+<p>單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。</p>
+
+<p>在實作時的邏輯就是：「一個 Class 只能有一個儲存自身實例化的靜態變數 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$instance</code> 、和一個獲得這個變數的靜態方法 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">getInstance()</code> 」
+實際在使用時會 call <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">getInstance()</code> 這個靜態方法，他會檢查 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$instance</code> 是否為空，若不為空則回傳，若為空則實例化 Class 賦予 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$instance</code> 並回傳。</p>
+
+<h2 id="以php為例">以PHP為例</h2>
+
+<pre><code class="language-php=">&lt;?php
+final class Singleton
+{
+    private static $instance;
+    
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new Singleton;
+        }
+        
+        return self::$instance;
+    }
+    
+    public $_somethingWeWantToKeep = null;
+}
+</code></pre>
+
+<p>我們用 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">final</code> 宣告 class 來確保不會被繼承，並如同上面所說的，建立 static function 來 return 一個存了 class 實體化後物件的 static 變數，最後在 class 中宣告一個變數 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_somethingWeWantToKeep</code>。</p>
+
+<p>實際上在使用的情況是這樣的：</p>
+
+<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+</code></pre>
+
+<p>之後我們在任何地方都可以引用 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">Singleton::getInstance()->_somethingWeWantToKeep</code> ，並且都會得到一樣的 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">I'm smart!</code></p>
+
+<p>但這樣就夠了嗎？</p>
+
+<p>在上面的例子中， Singleton 大致上完成了，但還不夠嚴謹。</p>
+
+<h3 id="防止被外部調用">防止被外部調用</h3>
+
+<p>舉一個簡單的例子：</p>
+
+<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
+
+$stupidGuy = new Singleton;
+$stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
+</code></pre>
+
+<p>上述的情況簡單來說就是在 Singleton 之後，被外部調用並重新賦值，所以我們可以在 class 中新增：</p>
+
+<pre><code class="language-php=">private function __construct() {}
+</code></pre>
+
+<p>覆寫 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">__construct()</code> 來避免 Singleton 被外部調用。</p>
+
+<h3 id="防止被-clone">防止被 clone</h3>
+
+<p>還有可能出現另一種情況：</p>
+
+<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
+
+$stupidGuy = clone Singleton::getInstance();
+$stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
+</code></pre>
+
+<p>這個地方也是發生類似的事情，我們的 Singleton 被 clone 之後調用了 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">getInstance()</code> ，同樣的我們</p>
+
+<pre><code class="language-php=">private function __clone() {}
+</code></pre>
+
+<p>覆寫 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">__clone</code> 來避免 Singleton 被 clone 。</p>
+
+<h3 id="防止被序列化">防止被序列化</h3>
+
+<p>最後還有一個可能是序列化(serialize)</p>
+
+<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
+
+$stupidGuy = serialize(Singleton::getInstance());
+$stupidGuy = unserialize($stupidGuy);
+$stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
+var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
+</code></pre>
+
+<p>相對應的防範措施是</p>
+
+<pre><code class="language-php=">private function __wakeup() {}
+</code></pre>
+
+<p>所以完整的 Singleton 如下：</p>
+
+<pre><code class="language-php=">&lt;?php
+final class Singleton
+{
+    private static $instance;
+    
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new Singleton;
+        }
+        
+        return self::$instance;
+    }
+    
+    public $_somethingWeWantToKeep = null;
+    
+    private function __construct() {}
+
+    private function __clone() {}
+
+    private function __wakeup() {}
+}
+</code></pre>
+
+<h2 id="結語">結語</h2>
+
+<p>總之我們做的事情就是防止這位 stupidGuy 對這個應該要是單例的 Class 建了物件，然後還呼叫 static function 來修改我們想要保持不變的東西，也就是<strong>在其他開發者在不知情的情況下，建立了副本並修改時，噴 error 給他</strong>。</p>
+
+<p>事實上 Singleton pattern 因為隱藏依賴和難以測試，被廣泛地認為是一種 anti-pattern，可以參考<a href="https://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">在 stackoverflow 的討論</a>。</p>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">學習筆記</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/php" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">PHP</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/design-pattern" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">design pattern</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What&#39;s in this post</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#什麼是單例模式">什麼是單例模式</a></li>
+<li><a href="#以php為例">以PHP為例</a>
+<ul>
+<li><a href="#防止被外部調用">防止被外部調用</a></li>
+<li><a href="#防止被-clone">防止被 clone</a></li>
+<li><a href="#防止被序列化">防止被序列化</a></li>
+</ul></li>
+<li><a href="#結語">結語</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/post/laravelconf2020/">Laravel Conf Taiwan - Less is More 參加心得</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/composer/">Composer 介紹與使用</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/php_ip/">使用 PHP 獲取使用者 IP 以及漏洞分析</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/post/git/">Git 簡單介紹與常用指令</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://szlforgithub.github.io/" >
+    &copy;  Louis's blog 2020 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

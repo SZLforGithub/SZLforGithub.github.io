@@ -47,7 +47,7 @@
 
 <meta itemprop="datePublished" content="2020-06-13T16:24:11&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-13T16:24:11&#43;08:00" />
-<meta itemprop="wordCount" content="999">
+<meta itemprop="wordCount" content="4266">
 
 
 
@@ -166,8 +166,8 @@ if (!doNotTrack) {
 
       
       
-        <span class="f6 mv4 dib tracked"> - 5 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 999 words</span>
+        <span class="f6 mv4 dib tracked"> - 9 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 4266 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
@@ -186,7 +186,7 @@ if (!doNotTrack) {
 
 <p>在 Git 中，每個協作者都會擁有一個自己完整的版本庫，你可以在自己的版本庫中盡情的開 branch、修改程式碼，只要不 push 到主要的版本庫，你不會影響任何一個與你協作的夥伴。</p>
 
-<p>而只要將專案 clone 到自己的設備，你不需要連網，就可以在自己的版本庫中查看歷史紀錄(git log)、創建分支(git branch)、切換分支(git checkout)、甚至是提交(git commit)。也就是說假設你遇難隻身一人漂流到孤島，突然有一股修改專案的衝動，打開筆電就可以開始工作。</p>
+<p>而只要將專案 clone 到自己的設備，你不需要連網，就可以在自己的版本庫中查看歷史紀錄(<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log</code>)、創建分支(<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git branch</code>)、切換分支(<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git checkout</code>)、甚至是提交(<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git commit</code>)。也就是說假設你遇難隻身一人漂流到孤島，突然有一股修改專案的衝動，打開筆電就可以開始工作。</p>
 
 <p>若您在公司使用的是SVN，但又想體驗 Git 自由自在的感覺，Git 也有和 SVN 溝通的 bridge，請 Google git svn。</p>
 
@@ -257,7 +257,7 @@ U = updated but unmerged</p>
 
 <h3 id="git-diff">git diff</h3>
 
-<p>直接輸入 <code>git diff</code> 可以看到當前工作目錄和暫存區的差別。</p>
+<p>直接輸入 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git diff</code> 可以看到當前工作目錄和暫存區的差別。</p>
 
 <pre><code class="language-git=">git diff &lt;commitId1&gt; &lt;commitId2&gt;
 </code></pre>
@@ -391,7 +391,7 @@ U = updated but unmerged</p>
 
 <h3 id="git-rebase">git rebase</h3>
 
-<p><code>git rebase</code> 是一個很有趣的功能，也有其他不同功能的用法，這裡主要介紹它在合併上的使用，進階的使用請見下方「我可以修改以前的 commit 嗎？」。</p>
+<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git rebase</code> 是一個很有趣的功能，也有其他不同功能的用法，這裡主要介紹它在合併上的使用，進階的使用請見下方「我可以修改以前的 commit 嗎？」。</p>
 
 <p>base 是基準點，也就是分支從哪裡長出來，所以 rebase 的意思接近於「重新定義分支的參考基準」。</p>
 
@@ -402,7 +402,7 @@ U = updated but unmerged</p>
 
 <p>意思就是「我 (feature02) 要重新定義 (re) 我的參考基準 (base)，那個參考基準就是 feature01 」。</p>
 
-<p>以結果來說，feature02 的 commit 會直接接在 feature01 的後面，看起來很像剪下貼上，但對 Git 來說 feature02 的那些 commit 都是新的 commit ，可以從 <code>git log --oneline</code>看到他們和原本的 SHA-1 值不一樣。</p>
+<p>以結果來說，feature02 的 commit 會直接接在 feature01 的後面，看起來很像剪下貼上，但對 Git 來說 feature02 的那些 commit 都是新的 commit ，可以從 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log --oneline</code>看到他們和原本的 SHA-1 值不一樣。</p>
 
 <p>至於在 feature01 時 rebase feature02 ，和在 feature02 時 rebase feature01 的差別，只在最後 log 上 commit 的順序不同。</p>
 
@@ -414,8 +414,8 @@ U = updated but unmerged</p>
 </code></pre>
 
 <p>將分支 master 推上遠端數據庫 origin
-若有設定 remote，不帶參數執行 <code>git push</code> 相當於 <code>git push &lt;remote&gt;</code>
-若沒有設定 remote ，不帶參數執行 <code>git push</code> 相當於 <code>git push origin</code></p>
+若有設定 remote，不帶參數執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git push</code> 相當於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git push <remote></code>
+若沒有設定 remote ，不帶參數執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git push</code> 相當於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git push origin</code></p>
 
 <hr />
 
@@ -425,10 +425,10 @@ U = updated but unmerged</p>
 </code></pre>
 
 <p>將遠端數據庫 origin 的 master 分支拉下並合併到本地數據庫
-若有設定 remote，不帶參數執行 <code>git pull</code> 相當於 <code>git pull &lt;remote&gt;</code>
-若沒有設定 remote ，不帶參數執行 <code>git pull</code> 相當於 <code>git pull origin</code></p>
+若有設定 remote，不帶參數執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git pull</code> 相當於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git pull <remote></code>
+若沒有設定 remote ，不帶參數執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git pull</code> 相當於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git pull origin</code></p>
 
-<p><code>git pull</code> 做的事情實際上等於 <code>git fetch</code> + <code>git merge</code>，<code>git fetch</code> 會比對本地與遠端的差別，並在本地形成分支，<code>git merge</code> 則會將分支合併。</p>
+<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git pull</code> 做的事情實際上等於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git fetch</code> + <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git merge</code>，<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git fetch</code> 會比對本地與遠端的差別，並在本地形成分支，<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git merge</code> 則會將分支合併。</p>
 
 <hr />
 
@@ -436,19 +436,19 @@ U = updated but unmerged</p>
 
 <h3 id="正確的使用姿勢">正確的使用姿勢？</h3>
 
-<p><code>git init</code> 或是 <code>git clone</code> 之後，你可能會手癢先 <code>git status</code> 看一下，你會看到一個乾淨的目錄，然後開始編寫程式碼，一邊寫一邊 <code>git diff</code> 看自己到底改了哪些東西，改了一個段落在 <code>git add</code> 之前或許會 <code>git branch</code> 確定一下自己在哪個分支，有錯的話趕快 <code>git checkout branchName</code> 到正確的分支，接著 <code>git add</code> 把修改存到暫存區，<code>git status</code> 看一下是不是正確的狀態，然後 <code>git commit -m &quot;This is my new git description&quot;</code>，最後 <code>git push</code> 。</p>
+<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git init</code> 或是 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git clone</code> 之後，你可能會手癢先 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git status</code> 看一下，你會看到一個乾淨的目錄，然後開始編寫程式碼，一邊寫一邊 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git diff</code> 看自己到底改了哪些東西，改了一個段落在 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git add</code> 之前或許會 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git branch</code> 確定一下自己在哪個分支，有錯的話趕快 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git checkout branchName</code> 到正確的分支，接著 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git add</code> 把修改存到暫存區，<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git status</code> 看一下是不是正確的狀態，然後 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git commit -m "This is my new git description"</code>，最後 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git push</code> 。</p>
 
 <hr />
 
 <h3 id="這行誰寫的">這行誰寫的！</h3>
 
-<p>一覺醒來發現網站掛了，怎麼多了這一行扣！<code>git blame index.php</code> 可以看到 index.php 裡每一行的作者是誰。</p>
+<p>一覺醒來發現網站掛了，怎麼多了這一行扣！<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git blame index.php</code> 可以看到 index.php 裡每一行的作者是誰。</p>
 
 <hr />
 
 <h3 id="這個-commit-到底修改了啥">這個 commit 到底修改了啥？</h3>
 
-<p>先 <code>git log</code> 找到那次修改的 commit ID，你或許會用到</p>
+<p>先 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log</code> 找到那次修改的 commit ID，你或許會用到</p>
 
 <pre><code class="language-git=">git log --author=&quot;Louis.Su&quot;
 </code></pre>
@@ -464,7 +464,7 @@ U = updated but unmerged</p>
 </code></pre>
 
 <p>來找到上傳檔案有包含 functionA 的 commit。
-最後<code>git show commitID</code>，就可以看到修改記錄了。</p>
+最後<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git show commitID</code>，就可以看到修改記錄了。</p>
 
 <hr />
 
@@ -475,7 +475,7 @@ U = updated but unmerged</p>
 <pre><code class="language-git=">git commit --amend -m &quot;This is right description&quot;
 </code></pre>
 
-<p>對人類來說只是修改 commit 的訊息，但對 git 來說，這其實是一個全新的 commit 了，可以從 <code>git log --oneline</code> 中看到 commit 的 SHA-1 值是不同的。</p>
+<p>對人類來說只是修改 commit 的訊息，但對 git 來說，這其實是一個全新的 commit 了，可以從 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log --oneline</code> 中看到 commit 的 SHA-1 值是不同的。</p>
 
 <hr />
 
@@ -489,7 +489,7 @@ U = updated but unmerged</p>
 <pre><code class="language-git=">git rebase -i
 </code></pre>
 
-<p>可以開啟對話模式，要給他一個參數，這個參數可以是 <code>git rebase -i HEAD~3</code> 這樣從當前分支往前算的形式，也可以是 <code>git rebase -i 6ee9b6b</code> 這樣的 SHA-1 值，意思是「從這一個 commit 往後算到現在位子的所有 commit 」。</p>
+<p>可以開啟對話模式，要給他一個參數，這個參數可以是 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git rebase -i HEAD~3</code> 這樣從當前分支往前算的形式，也可以是 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git rebase -i 6ee9b6b</code> 這樣的 SHA-1 值，意思是「從這一個 commit 往後算到現在位子的所有 commit 」。</p>
 
 <p>之後會出現像這樣的列表：</p>
 
@@ -536,7 +536,7 @@ pick 310154e add some files
 pick a5f4a0d feat: complete a feature
 </code></pre>
 
-<p>存檔離開後， git 會 checkout 到你想修改的 commit ，當你進行完你想做的修改之後， <code>git add [你有修改的檔案]</code> ，之後再 <code>git commit --amend</code> 修改 commit message ，最後再輸入 <code>git rebase --continue</code> 將 rebase 完成。</p>
+<p>存檔離開後， git 會 checkout 到你想修改的 commit ，當你進行完你想做的修改之後， <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git add [你有修改的檔案]</code> ，之後再 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git commit --amend </code> 修改 commit message ，最後再輸入 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git rebase --continue</code> 將 rebase 完成。</p>
 
 <p>另外的 squash 和 fixup 則是用來合併 commit，不同的地方是當你用 squash 要合併時，會把多個要合併的 commit message 放進編輯器裡面讓你修改最後合併的 commit message ；而 fixup 則是把這個 commit 合併到上一個 commit 中，並直接捨棄這個 commit message。</p>
 
@@ -550,14 +550,14 @@ pick a5f4a0d feat: complete a feature
 
 <h4 id="如何將暫存區的檔案移出">如何將暫存區的檔案移出</h4>
 
-<p>這樣的場景會出現在你修改了兩個檔案，想要分別提交，但你手速太快不小心打了 <code>git add -A</code> 全部加到暫存區了。</p>
+<p>這樣的場景會出現在你修改了兩個檔案，想要分別提交，但你手速太快不小心打了 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git add -A</code> 全部加到暫存區了。</p>
 
 <pre><code class="language-git=">git reset HEAD &lt;filename&gt;
 </code></pre>
 
 <h4 id="如何將剛剛的-commit-拆回來">如何將剛剛的 commit 拆回來</h4>
 
-<p>這樣的場景則出現在後悔剛剛那個 commit 的內容，想拆回來重做，你可以先下 <code>git log</code> 或 <code>git log --oneline</code> 來看到 SHA-1 值，然後：</p>
+<p>這樣的場景則出現在後悔剛剛那個 commit 的內容，想拆回來重做，你可以先下 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log</code> 或 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">git log --oneline</code> 來看到 SHA-1 值，然後：</p>
 
 <pre><code class="language-git=">git reset 6ee9b6b
 </code></pre>
@@ -588,18 +588,20 @@ pick a5f4a0d feat: complete a feature
 
 <p>講到這裡聰明的你一定已經隱約感覺到 reset 的意義了，在中文會比較接近「前往」。</p>
 
-<p>而 <code>--hard</code> 是參數，有三種常見的： <code>--mixed</code> 、 <code>--soft</code> 、 <code>--hard</code> ，這個參數決定的是「那些我不要的東西最後要去哪裡」
-<code>--mixed</code> 是預設，這個模式下的 reset commit 會把 commit 內容丟進工作目錄裡面
-<code>--soft</code> 則會把 commit 內容丟進暫存區
-<code>--hard</code> 則是工作目錄和暫存區都不會留</p>
+<p>而 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--hard</code> 是參數，有三種常見的： <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--mixed</code> 、 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--soft</code> 、 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--hard</code> ，這個參數決定的是「那些我不要的東西最後要去哪裡」
+<code><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--mixed`</code> 是預設，這個模式下的 reset commit 會把 commit 內容丟進工作目錄裡面
+</code><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--soft`</code> 則會把 commit 內容丟進暫存區
+`<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">--hard`</code> 則是工作目錄和暫存區都不會留</p>
 
 <p>所以前文說的「拆」 commit 其實並不準確，而是「回到」那個 commit 的狀態，不同參數則決定了路過的那幾個檔案將何去何從。</p>
 
 <h2 id="參考資料">參考資料</h2>
 
-<p>Git官方文件：<a href="https://git-scm.com/book/zh-tw/v2">https://git-scm.com/book/zh-tw/v2</a>
-為你自己學Git：<a href="https://gitbook.tw/">https://gitbook.tw/</a>
-連猴子都能懂的Git入門指南：<a href="https://backlog.com/git-tutorial/tw/">https://backlog.com/git-tutorial/tw/</a></p>
+<ol>
+<li><a href="https://git-scm.com/book/zh-tw/v2">Git官方文件</a></li>
+<li><a href="https://gitbook.tw/">為你自己學Git</a></li>
+<li><a href="https://backlog.com/git-tutorial/tw/">連猴子都能懂的Git入門指南</a></li>
+</ol>
 <ul class="pa0">
   
    <li class="list">

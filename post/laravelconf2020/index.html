@@ -47,7 +47,7 @@
 
 <meta itemprop="datePublished" content="2020-07-26T13:18:23&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-26T13:18:23&#43;08:00" />
-<meta itemprop="wordCount" content="296">
+<meta itemprop="wordCount" content="1446">
 
 
 
@@ -166,8 +166,8 @@ if (!doNotTrack) {
 
       
       
-        <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 296 words</span>
+        <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 1446 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
@@ -187,7 +187,7 @@ if (!doNotTrack) {
 <p>但真的是這樣嗎？</p>
 
 <blockquote>
-<p>It&rsquo;s no secret that the performance jump of PHP 7 was originally initiated by attempts to implement JIT for PHP. We started these efforts at Zend (mostly by Dmitry) back in 2011 and since that time tried 3 different implementations. We never moved forward to propose to release any of them, for three main reasons: <font color=#FF6600>They resulted in no substantial performance gains for typical Web apps;</font> They were complex to develop and maintain; We still had additional directions we could explore to improve performance without having to use JIT.</p>
+<p>It&rsquo;s no secret that the performance jump of PHP 7 was originally initiated by attempts to implement JIT for PHP. We started these efforts at Zend (mostly by Dmitry) back in 2011 and since that time tried 3 different implementations. We never moved forward to propose to release any of them, for three main reasons: <span style="color:#FF6600">They resulted in no substantial performance gains for typical Web apps;</span> They were complex to develop and maintain; We still had additional directions we could explore to improve performance without having to use JIT.</p>
 </blockquote>
 
 <p>以上引用自 <a href="https://wiki.php.net/rfc/jit">PHP 官方的 RFC</a>，其中提到 JIT 並不會對一般的 Web apps 帶來明顯的效能提升，因為 PHP 效能主要受到 I/O-bound 的約束，而 JIT 帶來的 CPU-bound 方面的優勢並不明顯。</p>
@@ -214,7 +214,7 @@ if (!doNotTrack) {
 
 <p>這一堂相對來說比較基本，大多是對 PHP 本身語法的效能測試，也提出一個想法： PHP 原生函式的 overhead 相對大，減少原生函式呼叫，可能會提升效能。</p>
 
-<p>Laravel 的部分則是提出了 <code>php artisan optimize</code>、移除掉多餘的 ServiceProvider 和 Middleware 這幾種方法，並提醒 Eager loading 的重要性，最近開發的專案剛好有使用到，蠻有感觸的。</p>
+<p>Laravel 的部分則是提出了 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan optimize</code>、移除掉多餘的 ServiceProvider 和 Middleware 這幾種方法，並提醒 Eager loading 的重要性，最近開發的專案剛好有使用到，蠻有感觸的。</p>
 
 <p>沒有超出我預想外的優化方案，但也中規中矩的做了基本的介紹和解釋。</p>
 

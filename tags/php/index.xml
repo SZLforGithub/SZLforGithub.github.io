@@ -17,7 +17,8 @@
       <pubDate>Sun, 26 Jul 2020 14:15:24 +0800</pubDate>
       
       <guid>https://szlforgithub.github.io/post/singletonphp/</guid>
-      <description>什</description>
+      <description>什麼是單例模式 單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。
+在實作時的邏輯就是：「一個 Class 只能有一個儲存自身實例化的靜態變數 $instance 、和一個獲得這個變數的靜態方法 getInstance() 」 實際在使用時會 call getInstance() 這個靜態方法，他會檢查 $instance 是否為空，若不為空則回傳，若為空則實例化 Class 賦予 $instance 並回傳。</description>
     </item>
     
     <item>
@@ -26,7 +27,8 @@
       <pubDate>Sun, 26 Jul 2020 13:18:23 +0800</pubDate>
       
       <guid>https://szlforgithub.github.io/post/laravelconf2020/</guid>
-      <description>Laravel</description>
+      <description>Laravel Conf 是目前台灣最大的 Laravel 社群。在疫情影響下仍然如期舉辦，今年是第四屆的 Laravel Conf。
+要起飛了！快速了解 PHP 8 大進化 在令人驚豔的 PHP7 發布後的五年，PHP8 即將發佈，他會帶給我們更多驚喜嗎？</description>
     </item>
     
     <item>
@@ -35,7 +37,8 @@
       <pubDate>Sun, 07 Jun 2020 19:33:01 +0800</pubDate>
       
       <guid>https://szlforgithub.github.io/post/composer/</guid>
-      <description>什</description>
+      <description>什麼是 Composer？ Composer 是 PHP 用來管理套件的工具，是現代 PHPer 必備的武器之一。
+為什麼我們需要 Composer？ 在沒有使用 Composer 的情況下，每使用一個套件就必須 include 一次，套件又可能相依其他套件，於是我們又要再 include 那個套件。</description>
     </item>
     
     <item>
@@ -44,7 +47,8 @@
       <pubDate>Sat, 06 Jun 2020 18:21:38 +0800</pubDate>
       
       <guid>https://szlforgithub.github.io/post/php_ip/</guid>
-      <description>工</description>
+      <description>工作上有這樣的需求，需要在使用者訪問網站之後獲取 IP 並儲存，花了一些時間研究，也發現很多有趣的地方，特地記錄下來。
+市面上常見的方法 其實要得到使用者 IP 這件事情本身不難，拿磚頭往大學資工系隨便砸，砸到的那個學生應該都有辦法回答這個問題，以 PHP 來說不外乎是去讀取 $_SERVER 這個預定義變數，包含了一大堆的參數可以對應到不同的值，這些值可能有可能沒有，有些可以偽造有些無法偽造。</description>
     </item>
     
   </channel>

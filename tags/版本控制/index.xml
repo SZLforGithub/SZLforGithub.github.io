@@ -17,7 +17,9 @@
       <pubDate>Sat, 13 Jun 2020 16:24:11 +0800</pubDate>
       
       <guid>https://szlforgithub.github.io/post/git/</guid>
-      <description>什</description>
+      <description>什麼是 Git？ Git 是一種分散式版本控制系統。
+版本控制系統？ 未導入版本控制系統之前，我們對專案進行修改或整合時，必須耗費大量的人力來對程式碼做備份和比對的工作。這在專案規模逐漸擴大或是多人協作的場景時，每個人的程式碼進度不一，哪段程式碼被修改或覆蓋？這段程式碼和上一次的版本有什麼不同？導致程式碼混亂不堪，難以維護，而版本控制系統就是要解決這樣的問題。
+分散式？ 版本控制主要分為集中式(Centralized Version Control Systems，CVCSs)和分散式(Distributed Version Control Systems, DVCSs)兩種，前者如 SVN，後者如 Git。</description>
     </item>
     
   </channel>

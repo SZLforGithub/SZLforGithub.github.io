@@ -47,7 +47,7 @@
 
 <meta itemprop="datePublished" content="2020-07-26T18:34:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-26T18:34:02&#43;08:00" />
-<meta itemprop="wordCount" content="363">
+<meta itemprop="wordCount" content="678">
 
 
 
@@ -162,13 +162,13 @@ if (!doNotTrack) {
 
       
       
-        <span class="f6 mv4 dib tracked"> - 1 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 363 words</span>
+        <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 678 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<p>當一筆資料同時關聯到另一張表的許多資料時，我們通常會用一對多來操作，比如說一個用戶 (user) 會有很多則貼文 (post) ，我會盡可能的從創建到使用都記錄下來，希望可以幫到同樣使用這個框架的 <del>未來的自己</del> 你。</p>
+<p>當一筆資料同時關聯到另一張表的許多資料時，我們通常會用一對多來操作，比如說一個用戶 (user) 會有很多則貼文 (posts) ，我會盡可能的從創建到使用都記錄下來，希望可以幫到同樣使用這個框架的 <del>未來的自己</del> 你。</p>
 
 <h2 id="environment">Environment</h2>
 
@@ -181,7 +181,7 @@ if (!doNotTrack) {
 
 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:migration create_users_table</code>
 
-<pre><code class="language-php=">Schema::create('users', function (Blueprint $table) {
+<pre><code class="language-php">Schema::create('users', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
     $table-&gt;string('name');
     $table-&gt;timestamps();
@@ -190,7 +190,7 @@ if (!doNotTrack) {
 
 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:migration create_posts_table</code>
 
-<pre><code class="language-php=">Schema::create('posts', function (Blueprint $table) {
+<pre><code class="language-php">Schema::create('posts', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
     $table-&gt;bigInteger('user_id')-&gt;unsigned();
     $table-&gt;text-&gt;content();
@@ -204,7 +204,7 @@ if (!doNotTrack) {
 
 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:model Models/User</code>
 
-<pre><code class="language-php=">&lt;?php
+<pre><code class="language-php">&lt;?php
 
 namespace App\Models;
 
@@ -225,7 +225,7 @@ class User extends Model
 
 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:model Models/Post</code>
 
-<pre><code class="language-php=">&lt;?php
+<pre><code class="language-php">&lt;?php
 
 namespace App\Models;
 
@@ -252,9 +252,9 @@ class Post extends Model
 
 <h3 id="get">Get</h3>
 
-<p>UserRepository.php</p>
+<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">UserRepository.php</code>
 
-<pre><code class="language-php=">namespace App\Repositories;
+<pre><code class="language-php">namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Post;
@@ -277,9 +277,9 @@ class UserRepository
 }
 </code></pre>
 
-<p>PostRepository.php</p>
+<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">PostRepository.php</code>
 
-<pre><code class="language-php=">namespace App\Repositories;
+<pre><code class="language-php">namespace App\Repositories;
 
 use App\Models\Post;
 
@@ -301,30 +301,148 @@ class PostRepository
 }
 </code></pre>
 
-<h3 id="create">Create</h3>
-
-<pre><code class="language-php=">function createPost($user)
-{
-    $user-&gt;posts()-&gt;create([
-        'content' =&gt; 'blablabla...'
-    ]);
-    
-    return;
-}
-</code></pre>
-
 <h3 id="associate">Associate</h3>
 
-<pre><code class="language-php=">function associate($user_id, $post_id)
+<pre><code class="language-php">function associate($user_id, $post_id)
 {
     $user = $_user::find($user_id);
 
     // 如果有注入 Post Model 的話
     $post = $_post::find($post_id);
     
+    $user-&gt;posts()-&gt;associate($post)-&gt;save;
+    // or
     $post-&gt;user()-&gt;associate($user)-&gt;save;
 }
 </code></pre>
+
+<h3 id="dissociate">Dissociate</h3>
+
+<pre><code class="language-php">function dissociate($user_id, $post_id)
+{
+    $user = $_user::find($user_id);
+
+    // 如果有注入 Post Model 的話
+    $post = $_post::find($post_id);
+
+    $user-&gt;posts()-&gt;dissociate();
+}
+</code></pre>
+
+<h3 id="create">Create</h3>
+
+<pre><code class="language-php">function createPostWithCreate($user_id)
+{
+    $user = $_user::find($user_id);
+
+    $user-&gt;posts()-&gt;create([
+        'content' =&gt; 'blablabla...'
+    ]);
+    
+    // ...
+}
+</code></pre>
+
+<pre><code class="language-php">function createPostWithCreateMany($user_id, $post_id)
+{
+    $user = $_user::find($user_id);
+    
+    $user-&gt;posts()-&gt;createMany([
+        ['content' =&gt; 'blablabla...'],
+        ['content' =&gt; 'Another blablabla...'],
+    ]);
+
+    // ...
+}
+</code></pre>
+
+<pre><code class="language-php">function createPostWithSave($user_id)
+{
+    $post = new App\Models\Post(['content' =&gt; 'blablabla...']);
+
+    $user = $_user::find($user_id);
+
+    $user-&gt;posts()-&gt;save($post);
+}
+</code></pre>
+
+<pre><code class="language-php">function createPostWithSaveMany($user_id, $post_id)
+{
+    $user = $_user::find($user_id);
+    
+    $user-&gt;posts()-&gt;saveMany([
+        new App\Models\Post(['content' =&gt; 'blablabla...']),
+        new App\Models\Post(['content' =&gt; 'Another blablabla...']),
+    ]);
+
+    // ...
+}
+</code></pre>
+
+<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">create</code> 和 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">save</code> 的差別在於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">save</code> 接收的是一個 Model 物件。</p>
+
+<p>從 Laravel 的 source code 可以看到：
+<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
+
+<pre><code class="language-php">/**
+ * Save a new model and return the instance.
+ *
+ * @param  array  $attributes
+ * @return \Illuminate\Database\Eloquent\Model|$this
+ */
+public function create(array $attributes = [])
+{
+    return tap($this-&gt;newModelInstance($attributes), function ($instance) {
+        $instance-&gt;save();
+    });
+}
+</code></pre>
+
+<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">tap</code> 是 Laravel 的 Helper Function：
+<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
+
+<pre><code class="language-php">/**
+ * Call the given Closure with the given value then return the value.
+ *
+ * @param  mixed  $value
+ * @param  callable|null  $callback
+ * @return mixed
+ */
+function tap($value, $callback = null)
+{
+    if (is_null($callback)) {
+        return new HigherOrderTapProxy($value);
+    }
+
+    $callback($value);
+
+    return $value;
+}
+</code></pre>
+
+<p>接收兩個參數 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$value</code> 和 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$callback</code>，並將 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$value</code> 放進 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$callback</code> 後返回。</p>
+
+<p>所以我們回到 create 就可以看出，它其實只是在裡面幫你把 new 物件這件事做掉而已。</p>
+
+<h3 id="delete">Delete</h3>
+
+<p>這會把 user 所有的 posts 都刪掉</p>
+
+<pre><code class="language-php">public function delete($user_id)
+{
+    $user = $_user::find($user_id);
+
+    $user-&gt;posts()-&gt;delete();
+
+    // ...
+}
+</code></pre>
+
+<h2 id="參考資料">參考資料</h2>
+
+<ol>
+<li><a href="https://laravel.com/docs/6.x/eloquent-relationships">Laravel 官方文件</a></li>
+</ol>
 <ul class="pa0">
   
    <li class="list">
@@ -354,9 +472,12 @@ class PostRepository
 <li><a href="#how-to-use">How to use</a>
 <ul>
 <li><a href="#get">Get</a></li>
-<li><a href="#create">Create</a></li>
 <li><a href="#associate">Associate</a></li>
+<li><a href="#dissociate">Dissociate</a></li>
+<li><a href="#create">Create</a></li>
+<li><a href="#delete">Delete</a></li>
 </ul></li>
+<li><a href="#參考資料">參考資料</a></li>
 </ul></li>
 </ul>
 </nav>

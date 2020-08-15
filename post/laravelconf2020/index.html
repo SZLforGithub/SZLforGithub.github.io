@@ -22,6 +22,10 @@
     
 
     
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
       
 <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
 
@@ -34,7 +38,7 @@
     <script src="/prism.js"></script>
 
     <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
+
     <meta property="og:title" content="LaravelConf Taiwan - Less is More 參加心得" />
 <meta property="og:description" content="我就是跟著大家進來看看熱鬧" />
 <meta property="og:type" content="article" />
@@ -217,7 +221,7 @@ if (!doNotTrack) {
 
 <p>這一堂相對來說比較基本，大多是對 PHP 本身語法的效能測試，也提出一個想法： PHP 原生函式的 overhead 相對大，減少原生函式呼叫，可能會提升效能。</p>
 
-<p>Laravel 的部分則是提出了 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan optimize</code>、移除掉多餘的 ServiceProvider 和 Middleware 這幾種方法，並提醒 Eager loading 的重要性，最近開發的專案剛好有使用到，蠻有感觸的。</p>
+<p>Laravel 的部分則是提出了 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan optimize</code>、移除掉多餘的 ServiceProvider 和 Middleware 這幾種方法，並提醒 Eager loading 的重要性，最近開發的專案剛好有使用到，蠻有感觸的。</p>
 
 <p>沒有超出我預想外的優化方案，但也中規中矩的做了基本的介紹和解釋。</p>
 
@@ -272,75 +276,275 @@ if (!doNotTrack) {
   
 </ul>
 <div class="mt6 instapaper_ignoref">
-      
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "louissublog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://louissublog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
+                            
       
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">What&#39;s in this post</p>
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#要起飛了-快速了解-php-8-大進化">要起飛了！快速了解 PHP 8 大進化</a>
-<ul>
-<li><a href="#jit-just-in-time">JIT (Just In Time)</a></li>
-</ul></li>
-<li><a href="#大象也能飛翔-聊-laravel-效能調校">大象也能飛翔！聊 Laravel 效能調校</a></li>
-<li><a href="#severless-php-case-agile-dashboard-via-gitlab-board-api">Severless PHP Case : Agile Dashboard via GitLab Board &amp; API</a></li>
-<li><a href="#serverless-php-applications">Serverless PHP Applications</a></li>
-<li><a href="#serverless-laravel-with-bref">Serverless Laravel with Bref</a></li>
-<li><a href="#我們與-serverless-的距離">我們與 Serverless 的距離</a></li>
-<li><a href="#結語">結語</a></li>
-<li><a href="#參考資料">參考資料</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    <aside class="w-30-l mt6-l">
 
 
 
 
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">Related</p>
-    <ul class="pa0 list">
-	   
-	     <li  class="mb2">
-          <a href="/post/composer/">Composer 介紹與使用</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/php_ip/">使用 PHP 獲取使用者 IP 以及漏洞分析</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/git/">Git 簡單介紹與常用指令</a>
-        </li>
-	    
-    </ul>
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>Table of contents</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e8%a6%81%e8%b5%b7%e9%a3%9b%e4%ba%86-%e5%bf%ab%e9%80%9f%e4%ba%86%e8%a7%a3-php-8-%e5%a4%a7%e9%80%b2%e5%8c%96">
+                            要起飛了！快速了解 PHP 8 大進化
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#jit-just-in-time">
+                            JIT (Just In Time)
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%a4%a7%e8%b1%a1%e4%b9%9f%e8%83%bd%e9%a3%9b%e7%bf%94-%e8%81%8a-laravel-%e6%95%88%e8%83%bd%e8%aa%bf%e6%a0%a1">
+                            大象也能飛翔！聊 Laravel 效能調校
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#severless-php-case-agile-dashboard-via-gitlab-board-api">
+                            Severless PHP Case : Agile Dashboard via GitLab Board &amp; API
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#serverless-php-applications">
+                            Serverless PHP Applications
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#serverless-laravel-with-bref">
+                            Serverless Laravel with Bref
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e6%88%91%e5%80%91%e8%88%87-serverless-%e7%9a%84%e8%b7%9d%e9%9b%a2">
+                            我們與 Serverless 的距離
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e7%b5%90%e8%aa%9e">
+                            結語
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%8f%83%e8%80%83%e8%b3%87%e6%96%99">
+                            參考資料
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
 </div>
+
+
+
+
+
+
+
+  
 
 </aside>
 

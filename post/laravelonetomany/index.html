@@ -22,6 +22,10 @@
     
 
     
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
       
 <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
 
@@ -34,7 +38,7 @@
     <script src="/prism.js"></script>
 
     <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
+
     <meta property="og:title" content="Laravel 一對多關聯 (one-to-many Relationship)" />
 <meta property="og:description" content="Laravel 一對多關聯的學習紀錄。" />
 <meta property="og:type" content="article" />
@@ -179,7 +183,7 @@ if (!doNotTrack) {
 
 <h2 id="migration">Migration</h2>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:migration create_users_table</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:migration create_users_table</code>
 
 <pre><code class="language-php">Schema::create('users', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
@@ -188,7 +192,7 @@ if (!doNotTrack) {
 }
 </code></pre>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:migration create_posts_table</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:migration create_posts_table</code>
 
 <pre><code class="language-php">Schema::create('posts', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
@@ -202,7 +206,7 @@ if (!doNotTrack) {
 
 <h2 id="models">Models</h2>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:model Models/User</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:model Models/User</code>
 
 <pre><code class="language-php">&lt;?php
 
@@ -223,7 +227,7 @@ class User extends Model
 }
 </code></pre>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php artisan make:model Models/Post</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:model Models/Post</code>
 
 <pre><code class="language-php">&lt;?php
 
@@ -252,7 +256,7 @@ class Post extends Model
 
 <h3 id="get">Get</h3>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">UserRepository.php</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">UserRepository.php</code>
 
 <pre><code class="language-php">namespace App\Repositories;
 
@@ -277,7 +281,7 @@ class UserRepository
 }
 </code></pre>
 
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">PostRepository.php</code>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">PostRepository.php</code>
 
 <pre><code class="language-php">namespace App\Repositories;
 
@@ -381,10 +385,10 @@ class PostRepository
 }
 </code></pre>
 
-<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">create</code> 和 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">save</code> 的差別在於 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">save</code> 接收的是一個 Model 物件。</p>
+<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">create</code> 和 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">save</code> 的差別在於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">save</code> 接收的是一個 Model 物件。</p>
 
 <p>從 Laravel 的 source code 可以看到：
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
 
 <pre><code class="language-php">/**
  * Save a new model and return the instance.
@@ -400,8 +404,8 @@ public function create(array $attributes = [])
 }
 </code></pre>
 
-<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">tap</code> 是 Laravel 的 Helper Function：
-<code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
+<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">tap</code> 是 Laravel 的 Helper Function：
+<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
 
 <pre><code class="language-php">/**
  * Call the given Closure with the given value then return the value.
@@ -422,7 +426,7 @@ function tap($value, $callback = null)
 }
 </code></pre>
 
-<p>接收兩個參數 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$value</code> 和 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$callback</code>，並將 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$value</code> 放進 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$callback</code> 後返回。</p>
+<p>接收兩個參數 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$value</code> 和 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$callback</code>，並將 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$value</code> 放進 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$callback</code> 後返回。</p>
 
 <p>所以我們回到 create 就可以看出，它其實只是在裡面幫你把 new 物件這件事做掉而已。</p>
 
@@ -468,86 +472,371 @@ function tap($value, $callback = null)
   
 </ul>
 <div class="mt6 instapaper_ignoref">
-      
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "louissublog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://louissublog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
+                            
       
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">What&#39;s in this post</p>
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#environment">Environment</a></li>
-<li><a href="#migration">Migration</a></li>
-<li><a href="#models">Models</a></li>
-<li><a href="#how-to-use">How to use</a>
-<ul>
-<li><a href="#get">Get</a></li>
-<li><a href="#associate">Associate</a></li>
-<li><a href="#dissociate">Dissociate</a></li>
-<li><a href="#create">Create</a></li>
-<li><a href="#save">Save</a></li>
-<li><a href="#delete">Delete</a></li>
-<li><a href="#select">Select</a></li>
-</ul></li>
-<li><a href="#參考資料">參考資料</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    <aside class="w-30-l mt6-l">
 
 
 
 
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">Related</p>
-    <ul class="pa0 list">
-	   
-	     <li  class="mb2">
-          <a href="/post/singletonphp/">Singleton pattern (單例模式) for PHP</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/laravelconf2020/">LaravelConf Taiwan - Less is More 參加心得</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/composer/">Composer 介紹與使用</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/php_ip/">使用 PHP 獲取使用者 IP 以及漏洞分析</a>
-        </li>
-	    
-	     <li  class="mb2">
-          <a href="/post/git/">Git 簡單介紹與常用指令</a>
-        </li>
-	    
-    </ul>
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>Table of contents</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#environment">
+                            Environment
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#migration">
+                            Migration
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#models">
+                            Models
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#how-to-use">
+                            How to use
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#get">
+                            Get
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#associate">
+                            Associate
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#dissociate">
+                            Dissociate
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#create">
+                            Create
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#save">
+                            Save
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#delete">
+                            Delete
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#select">
+                            Select
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%8f%83%e8%80%83%e8%b3%87%e6%96%99">
+                            參考資料
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
 </div>
+
+
+
+
+
+
+
+  
 
 </aside>
 

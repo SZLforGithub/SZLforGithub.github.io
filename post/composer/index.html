@@ -22,6 +22,10 @@
     
 
     
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
       
 <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
 
@@ -34,7 +38,7 @@
     <script src="/prism.js"></script>
 
     <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
+
     <meta property="og:title" content="Composer 介紹與使用" />
 <meta property="og:description" content="還在 include 一大堆檔案？" />
 <meta property="og:type" content="article" />
@@ -224,7 +228,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
 
 <hr />
 
-<p>按照上面的方法安裝完後，你會發現你的目錄中多了一個 composer.phar 檔案，執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">php composer.phar</code> ，出現 Composer 圖案就代表成功了。</p>
+<p>按照上面的方法安裝完後，你會發現你的目錄中多了一個 composer.phar 檔案，執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php composer.phar</code> ，出現 Composer 圖案就代表成功了。</p>
 
 <p><img src="https://i.imgur.com/ZsbNXIi.png" alt="composer_success" /></p>
 
@@ -233,7 +237,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
 <pre><code class="language-bash=">mv composer.phar /usr/local/bin/composer
 </code></pre>
 
-<p>直接執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer</code> ，如果看到一樣的 Composer 圖案就代表成功了。</p>
+<p>直接執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer</code> ，如果看到一樣的 Composer 圖案就代表成功了。</p>
 
 <h2 id="如何使用">如何使用？</h2>
 
@@ -258,21 +262,21 @@ php -r &quot;unlink('composer-setup.php');&quot;
 <pre><code>composer require --dev phpunit/phpunit ^9.1
 </code></pre>
 
-<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer require</code> 這個指令會安裝你指定的套件，並新增一個 composer.lock (如果沒有的話)，然後把這個套件的資訊記錄在 composer.lock 和 composer.json 中。</p>
+<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer require</code> 這個指令會安裝你指定的套件，並新增一個 composer.lock (如果沒有的話)，然後把這個套件的資訊記錄在 composer.lock 和 composer.json 中。</p>
 
-<p>&ndash;dev 的意思則是相關設定會寫在 composer.json 和 composer.lock 的 require-dev 中，這樣的區分是因為有些套件只需要在測試環境中執行 (development or testing)，在正式環境中並不需要 (production)，在正式環境中只需要執行 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer install --no-dev</code> 就可以排除掉 require-dev 中的套件 (<a href="https://stackoverflow.com/questions/19117871/what-is-the-difference-between-require-and-require-dev-sections-in-composer-json">詳見此</a>)。</p>
+<p>&ndash;dev 的意思則是相關設定會寫在 composer.json 和 composer.lock 的 require-dev 中，這樣的區分是因為有些套件只需要在測試環境中執行 (development or testing)，在正式環境中並不需要 (production)，在正式環境中只需要執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer install --no-dev</code> 就可以排除掉 require-dev 中的套件 (<a href="https://stackoverflow.com/questions/19117871/what-is-the-difference-between-require-and-require-dev-sections-in-composer-json">詳見此</a>)。</p>
 
 <p>最後的 ^9.1 則代表版本。</p>
 
 <h3 id="composer-install">composer install</h3>
 
-<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer install</code> 指令會去找專案內的 composer.lock，並按照裡面記錄的套件和版號安裝。如果找不到 composer.lock ，就會按照 composer.json 的紀錄安裝，並產生一個 composer.lock。</p>
+<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer install</code> 指令會去找專案內的 composer.lock，並按照裡面記錄的套件和版號安裝。如果找不到 composer.lock ，就會按照 composer.json 的紀錄安裝，並產生一個 composer.lock。</p>
 
 <h3 id="composer-update">composer update</h3>
 
-<p><code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer update</code> 則會根據 composer.json 中指定的版本下載。</p>
+<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer update</code> 則會根據 composer.json 中指定的版本下載。</p>
 
-<p>也就是說，如果有 composer.lock，就乖乖用 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer install</code> 來確保自己的套件版本與原開發者是一模一樣的。若是用 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer update</code> 的話，就有套件的版本可能不同導致的不相容問題。另外，在沒有 composer.lock 的情況下， <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer install</code> 和 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">composer update</code> 做的事情是一樣的 (讀取 composer.json 並安裝套件)。</p>
+<p>也就是說，如果有 composer.lock，就乖乖用 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer install</code> 來確保自己的套件版本與原開發者是一模一樣的。若是用 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer update</code> 的話，就有套件的版本可能不同導致的不相容問題。另外，在沒有 composer.lock 的情況下， <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer install</code> 和 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">composer update</code> 做的事情是一樣的 (讀取 composer.json 並安裝套件)。</p>
 
 <p>以上就是基本的 Composer 使用方式，想了解更多請至參考資料。</p>
 
@@ -295,71 +299,343 @@ php -r &quot;unlink('composer-setup.php');&quot;
   
 </ul>
 <div class="mt6 instapaper_ignoref">
-      
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "louissublog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://louissublog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
+                            
       
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">What&#39;s in this post</p>
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#什麼是-composer">什麼是 Composer？</a></li>
-<li><a href="#為什麼我們需要-composer">為什麼我們需要 Composer？</a></li>
-<li><a href="#怎麼開始">怎麼開始？</a>
-<ul>
-<li><a href="#if-your-system-windows">if (your_system == &ldquo;windows&rdquo;)</a></li>
-<li><a href="#if-your-system-linux-unix-macos">if (your_system == &ldquo;Linux / Unix / macOS&rdquo;)</a></li>
-</ul></li>
-<li><a href="#如何使用">如何使用？</a>
-<ul>
-<li><a href="#初始化">初始化</a></li>
-<li><a href="#安裝套件">安裝套件</a></li>
-<li><a href="#composer-install">composer install</a></li>
-<li><a href="#composer-update">composer update</a></li>
-</ul></li>
-<li><a href="#參考資料">參考資料</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    <aside class="w-30-l mt6-l">
 
 
 
 
-  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">Related</p>
-    <ul class="pa0 list">
-	   
-	     <li  class="mb2">
-          <a href="/post/php_ip/">使用 PHP 獲取使用者 IP 以及漏洞分析</a>
-        </li>
-	    
-    </ul>
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>Table of contents</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e4%bb%80%e9%ba%bc%e6%98%af-composer">
+                            什麼是 Composer？
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e7%82%ba%e4%bb%80%e9%ba%bc%e6%88%91%e5%80%91%e9%9c%80%e8%a6%81-composer">
+                            為什麼我們需要 Composer？
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e6%80%8e%e9%ba%bc%e9%96%8b%e5%a7%8b">
+                            怎麼開始？
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#if-your-system-windows">
+                            if (your_system == “windows”)
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#if-your-system-linux-unix-macos">
+                            if (your_system == “Linux / Unix / macOS”)
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8">
+                            如何使用？
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%88%9d%e5%a7%8b%e5%8c%96">
+                            初始化
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%ae%89%e8%a3%9d%e5%a5%97%e4%bb%b6">
+                            安裝套件
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#composer-install">
+                            composer install
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#composer-update">
+                            composer update
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%8f%83%e8%80%83%e8%b3%87%e6%96%99">
+                            參考資料
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
 </div>
+
+
+
+
+
+
+
+  
 
 </aside>
 

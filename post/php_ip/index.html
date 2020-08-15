@@ -22,6 +22,10 @@
     
 
     
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
       
 <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
 
@@ -34,7 +38,7 @@
     <script src="/prism.js"></script>
 
     <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    
+
     <meta property="og:title" content="使用 PHP 獲取使用者 IP 以及漏洞分析" />
 <meta property="og:description" content="你獲取 IP 的方式真的安全嗎？" />
 <meta property="og:type" content="article" />
@@ -176,17 +180,17 @@ if (!doNotTrack) {
 
 <h2 id="市面上常見的方法">市面上常見的方法</h2>
 
-<p>其實要得到使用者 IP 這件事情本身不難，拿磚頭往大學資工系隨便砸，砸到的那個學生應該都有辦法回答這個問題，以 PHP 來說不外乎是去讀取 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER</code> 這個預定義變數，包含了一大堆的參數可以對應到不同的值，這些值可能有可能沒有，有些可以偽造有些無法偽造。</p>
+<p>其實要得到使用者 IP 這件事情本身不難，拿磚頭往大學資工系隨便砸，砸到的那個學生應該都有辦法回答這個問題，以 PHP 來說不外乎是去讀取 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER</code> 這個預定義變數，包含了一大堆的參數可以對應到不同的值，這些值可能有可能沒有，有些可以偽造有些無法偽造。</p>
 
-<p>主要是透過 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['HTTP_CLIENT_IP']</code> 、 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 、 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['REMOTE_ADDR']</code> 等等的值來取到 IP。</p>
+<p>主要是透過 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['HTTP_CLIENT_IP']</code> 、 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 、 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['REMOTE_ADDR']</code> 等等的值來取到 IP。</p>
 
 <h2 id="問題">問題</h2>
 
 <p>接下來就是有趣的地方了，這些值除了 $_SERVER[&lsquo;REMOTE_ADDR&rsquo;] 以外<strong>都是可以偽造的</strong>，但唯一可靠的 $_SERVER[&lsquo;REMOTE_ADDR&rsquo;] 得到的未必是使用者真實的 IP ，例如使用者有代理伺服器、或自己本身有使用反向代理伺服器，這樣的情況通常會去讀取 $_SERVER[&lsquo;HTTP_X_FORWARDED_FOR&rsquo;] ，這個欄位是特地用來辨識有透過 HTTP 代理的使用者 IP ，在正常情況下他會儲存每一個經過的 IP (格式為 clientIP, proxy1, proxy2&hellip;)。</p>
 
-<p>麻煩的地方在於：我們雖然可以透過 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['REMOTE_ADDR']</code> 取得安全可靠的 IP ，但卻無法確定這是使用者真正的 IP ；當我們想透過 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 來取得真正的 IP 時，卻無法確認這個 IP 是安全可靠的。</p>
+<p>麻煩的地方在於：我們雖然可以透過 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['REMOTE_ADDR']</code> 取得安全可靠的 IP ，但卻無法確定這是使用者真正的 IP ；當我們想透過 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 來取得真正的 IP 時，卻無法確認這個 IP 是安全可靠的。</p>
 
-<p>這個問題可大可小，小一點只是無法取得正確的 IP ，大一點別有用心的使用者可以透過偽造 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 的方式達成 SQL injection 。</p>
+<p>這個問題可大可小，小一點只是無法取得正確的 IP ，大一點別有用心的使用者可以透過偽造 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$_SERVER['HTTP_X_FORWARDED_FOR']</code> 的方式達成 SQL injection 。</p>
 
 <p>一方面再一次的驗證「所有來自客戶端的資料都是不可信任的」，另一方面也說明了 IP 無法成為辨別使用者身份的銀彈，至於如何辨別使用者身份，我們下一期會特地發一篇文章給各位介紹。</p>
 
@@ -251,7 +255,7 @@ echo 'UserIp: ' . $ip;
 <img src="https://i.imgur.com/t9gttlY.png" alt="" />
 顯然 server.php 乖乖的被我們騙了。</p>
 
-<p>這還是 server 端有乖乖消毒的情況，要是沒有消毒，我們把 X-FORWARDED-FOR 改成 <code style="padding: .2em;margin: 0;font-size: 85%;background-color: rgba(0,0,0,.04);border-radius: 3px;">"Robert');DROP TABLE students;--"</code> 之類的，就會聽到DB BOMB 的一聲跟大家說再見了。</p>
+<p>這還是 server 端有乖乖消毒的情況，要是沒有消毒，我們把 X-FORWARDED-FOR 改成 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">"Robert');DROP TABLE students;--"</code> 之類的，就會聽到DB BOMB 的一聲跟大家說再見了。</p>
 
 <h2 id="參考資料">參考資料</h2>
 
@@ -275,46 +279,146 @@ echo 'UserIp: ' . $ip;
   
 </ul>
 <div class="mt6 instapaper_ignoref">
-      
-        <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "louissublog" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+      <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://louissublog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-      
+                            
       
       </div>
     </div>
 
-    <aside class="w-30-l mt6-l"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
-    <p class="f5 b mb3">What&#39;s in this post</p>
-      <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#市面上常見的方法">市面上常見的方法</a></li>
-<li><a href="#問題">問題</a></li>
-<li><a href="#talk-is-cheap-show-me-the-code">Talk is cheap. Show me the code.</a></li>
-<li><a href="#參考資料">參考資料</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
+    <aside class="w-30-l mt6-l">
+
+
+
+
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>Table of contents</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%b8%82%e9%9d%a2%e4%b8%8a%e5%b8%b8%e8%a6%8b%e7%9a%84%e6%96%b9%e6%b3%95">
+                            市面上常見的方法
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%95%8f%e9%a1%8c">
+                            問題
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#talk-is-cheap-show-me-the-code">
+                            Talk is cheap. Show me the code.
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%8f%83%e8%80%83%e8%b3%87%e6%96%99">
+                            參考資料
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
+</div>
+
+
+
 
 
 

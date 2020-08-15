@@ -47,7 +47,7 @@
 
 <meta itemprop="datePublished" content="2020-07-26T18:34:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-26T18:34:02&#43;08:00" />
-<meta itemprop="wordCount" content="678">
+<meta itemprop="wordCount" content="764">
 
 
 
@@ -72,7 +72,7 @@ if (!doNotTrack) {
 	
   </head>
 
-  <body class="ma0 avenir bg-near-white production">
+  <body class="ma0 sans-serif production">
 
     
    
@@ -163,10 +163,10 @@ if (!doNotTrack) {
       
       
         <span class="f6 mv4 dib tracked"> - 2 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 678 words</span>
+        <span class="f6 mv4 dib tracked"> - 764 words</span>
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+    <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
 <p>當一筆資料同時關聯到另一張表的許多資料時，我們通常會用一對多來操作，比如說一個用戶 (user) 會有很多則貼文 (posts) ，我會盡可能的從創建到使用都記錄下來，希望可以幫到同樣使用這個框架的 <del>未來的自己</del> 你。</p>
 
@@ -356,6 +356,8 @@ class PostRepository
 }
 </code></pre>
 
+<h3 id="save">Save</h3>
+
 <pre><code class="language-php">function createPostWithSave($user_id)
 {
     $post = new App\Models\Post(['content' =&gt; 'blablabla...']);
@@ -438,6 +440,17 @@ function tap($value, $callback = null)
 }
 </code></pre>
 
+<h3 id="select">Select</h3>
+
+<p>有時候可能會需要對關聯的資料做篩選，比如說：需要篩選出 Post 的 content 包含 Laravel 這個詞的 User：</p>
+
+<pre><code class="language-php">$user = $this-&gt;_user::with(['post' =&gt; function ($query) {
+    $query-&gt;where('content', 'like', '%Laravel%');
+}])-&gt;get();
+</code></pre>
+
+<p>用 with 來避免 N+1 problem，並傳送一個 Closure 來對其中的資料做篩選。</p>
+
 <h2 id="參考資料">參考資料</h2>
 
 <ol>
@@ -455,6 +468,27 @@ function tap($value, $callback = null)
   
 </ul>
 <div class="mt6 instapaper_ignoref">
+      
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "louissublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
       
       </div>
@@ -475,7 +509,9 @@ function tap($value, $callback = null)
 <li><a href="#associate">Associate</a></li>
 <li><a href="#dissociate">Dissociate</a></li>
 <li><a href="#create">Create</a></li>
+<li><a href="#save">Save</a></li>
 <li><a href="#delete">Delete</a></li>
+<li><a href="#select">Select</a></li>
 </ul></li>
 <li><a href="#參考資料">參考資料</a></li>
 </ul></li>

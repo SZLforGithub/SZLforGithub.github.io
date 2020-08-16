@@ -176,19 +176,19 @@ if (!doNotTrack) {
     </header>
     <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h3 id="正確的使用姿勢">正確的使用姿勢？</h3>
+<h2 id="正確的使用姿勢">正確的使用姿勢？</h2>
 
 <p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git init</code> 或是 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git clone</code> 之後，你可能會手癢先 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git status</code> 看一下，你會看到一個乾淨的目錄，然後開始編寫程式碼，一邊寫一邊 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git diff</code> 看自己到底改了哪些東西，改了一個段落在 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git add</code> 之前或許會 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git branch</code> 確定一下自己在哪個分支，有錯的話趕快 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git checkout branchName</code> 到正確的分支，接著 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git add</code> 把修改存到暫存區，<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git status</code> 看一下是不是正確的狀態，然後 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git commit -m "This is my new git description"</code>，最後 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git push</code> 。</p>
 
 <hr />
 
-<h3 id="這行誰寫的">這行誰寫的！</h3>
+<h2 id="這行誰寫的">這行誰寫的！</h2>
 
 <p>一覺醒來發現網站掛了，怎麼多了這一行扣！<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git blame index.php</code> 可以看到 index.php 裡每一行的作者是誰。</p>
 
 <hr />
 
-<h3 id="這個-commit-到底修改了啥">這個 commit 到底修改了啥？</h3>
+<h2 id="這個-commit-到底修改了啥">這個 commit 到底修改了啥？</h2>
 
 <p>先 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git log</code> 找到那次修改的 commit ID，你或許會用到</p>
 
@@ -210,7 +210,7 @@ if (!doNotTrack) {
 
 <hr />
 
-<h3 id="我想修改剛剛的-commit">我想修改剛剛的 commit</h3>
+<h2 id="我想修改剛剛的-commit">我想修改剛剛的 commit</h2>
 
 <p>想修改最後一次的 commit，可以輸入</p>
 
@@ -221,7 +221,7 @@ if (!doNotTrack) {
 
 <hr />
 
-<h3 id="我可以修改更之前的-commit-嗎">我可以修改更之前的 commit 嗎？</h3>
+<h2 id="我可以修改更之前的-commit-嗎">我可以修改更之前的 commit 嗎？</h2>
 
 <p>這通常發生在自己開的 branch 裡 commit 雜亂無章的情況，想做好修剪之後再 push。盡量不要在已經 push 到中央伺服器的 commit 進行這種操作，除非你和你的團隊非常清楚自己在做什麼，這會造成協作者的混亂，因為同樣的程式碼有不同的版本，而且它會改變歷史 (這也是 rebase 屬於危險指令的原因)。</p>
 
@@ -284,20 +284,20 @@ pick a5f4a0d feat: complete a feature
 
 <hr />
 
-<h3 id="挫賽-我可以重來嗎">挫賽！我可以重來嗎？</h3>
+<h2 id="挫賽-我可以重來嗎">挫賽！我可以重來嗎？</h2>
 
 <p>git 的強大之處在於他大部分的指令都是可逆的，但它同樣也是危險的，因為並不是所有操作都可逆，一不小心就會搞得整個環境亂七八糟，在實戰時執行指令前都要謹慎思考，清楚知道自己在幹嘛，強烈建議可以搭配 Github 開一個自己來玩玩看。</p>
 
 <p>這一 part 會先介紹如何反悔，再說明 reset 這個指令的意義，建議看完再操作。</p>
 
-<h4 id="如何將暫存區的檔案移出">如何將暫存區的檔案移出</h4>
+<h3 id="如何將暫存區的檔案移出">如何將暫存區的檔案移出</h3>
 
 <p>這樣的場景會出現在你修改了兩個檔案，想要分別提交，但你手速太快不小心打了 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git add -A</code> 全部加到暫存區了。</p>
 
 <pre><code class="language-git=">git reset HEAD &lt;filename&gt;
 </code></pre>
 
-<h4 id="如何將剛剛的-commit-拆回來">如何將剛剛的 commit 拆回來</h4>
+<h3 id="如何將剛剛的-commit-拆回來">如何將剛剛的 commit 拆回來</h3>
 
 <p>這樣的場景則出現在後悔剛剛那個 commit 的內容，想拆回來重做，你可以先下 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git log</code> 或 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git log --oneline</code> 來看到 SHA-1 值，然後：</p>
 
@@ -309,14 +309,14 @@ pick a5f4a0d feat: complete a feature
 <pre><code class="language-git=">git reset HEAD^
 </code></pre>
 
-<h4 id="哇塞我整個專案都玩壞了-怎麼回復成原本的樣子">哇塞我整個專案都玩壞了，怎麼回復成原本的樣子</h4>
+<h3 id="哇塞我整個專案都玩壞了-怎麼回復成原本的樣子">哇塞我整個專案都玩壞了，怎麼回復成原本的樣子</h3>
 
 <pre><code class="language-git=">git reset --hard HEAD~2
 </code></pre>
 
 <p>這行指令的意思是最後的兩個版本(HEAD、HEAD^)我都不要了，我也不想讓人看見他，專案會直接回到 HEAD^^ 的狀態，所以在下指令前請確保你的 HEAD、HEAD^ 都是不要的。</p>
 
-<h4 id="我還想要-head-或-head-能回復嗎">我還想要 HEAD 或 HEAD^，能回復嗎？</h4>
+<h3 id="我還想要-head-或-head-能回復嗎">我還想要 HEAD 或 HEAD^，能回復嗎？</h3>
 
 <p>其實還是救的回來，先下：</p>
 
@@ -389,7 +389,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <div class="toc">
 
-    <div class="page-header"><strong>Table of contents</strong></div>
+    <div class="page-header"><strong>目錄</strong></div>
 
     <div id="page-scrollspy" class="toc-nav">
 
@@ -398,8 +398,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -417,8 +415,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -426,8 +422,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -445,8 +439,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -454,8 +446,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -473,8 +463,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -482,8 +470,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -501,8 +487,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -510,8 +494,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -529,8 +511,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -538,8 +518,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -557,8 +535,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -566,8 +542,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -589,8 +563,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -598,8 +570,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -621,8 +591,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -630,8 +598,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -653,8 +619,6 @@ s.setAttribute('data-timestamp', +new Date());
                     
                     </ul>
                     
-                    </ul>
-                    
                 
             
         
@@ -662,8 +626,6 @@ s.setAttribute('data-timestamp', +new Date());
             
                 
                 
-                    
-                    <ul class="nav">
                     
                     <ul class="nav">
                     
@@ -678,8 +640,6 @@ s.setAttribute('data-timestamp', +new Date());
                             </a>
                         </li>
                     
-                    
-                    </ul>
                     
                     </ul>
                     

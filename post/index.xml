@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>Git 常見問題</title>
-      <link>https://szlforgithub.github.io/post/gitproblem/</link>
-      <pubDate>Sat, 15 Aug 2020 20:47:43 +0800</pubDate>
-      
-      <guid>https://szlforgithub.github.io/post/gitproblem/</guid>
-      <description>Git 到底怎麼用？怎麼修改剛剛的 Commit？想重來要怎麼做？Git 踩坑及用法紀錄</description>
-    </item>
-    
-    <item>
       <title>Laravel 一對多關聯 (one-to-many Relationship)</title>
       <link>https://szlforgithub.github.io/post/laravelonetomany/</link>
       <pubDate>Sun, 26 Jul 2020 18:34:02 +0800</pubDate>
@@ -45,6 +36,15 @@
       
       <guid>https://szlforgithub.github.io/post/laravelconf2020/</guid>
       <description>Laravel Conf 是目前台灣最大的 Laravel 社群。在疫情影響下仍然如期舉辦，今年是第四屆的 Laravel Conf。</description>
+    </item>
+    
+    <item>
+      <title>Git 常見問題</title>
+      <link>https://szlforgithub.github.io/post/gitproblem/</link>
+      <pubDate>Sun, 14 Jun 2020 20:47:43 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/gitproblem/</guid>
+      <description>Git 到底怎麼用？怎麼修改剛剛的 Commit？想重來要怎麼做？Git 踩坑及用法紀錄</description>
     </item>
     
     <item>

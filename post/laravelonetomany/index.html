@@ -188,7 +188,7 @@ if (!doNotTrack) {
 
 <h2 id="migration">Migration</h2>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:migration create_users_table</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">php artisan make:migration create_users_table</code>
 
 <pre><code class="language-php">Schema::create('users', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
@@ -197,7 +197,7 @@ if (!doNotTrack) {
 }
 </code></pre>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:migration create_posts_table</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">php artisan make:migration create_posts_table</code>
 
 <pre><code class="language-php">Schema::create('posts', function (Blueprint $table) {
     $table-&gt;bigIncrements('id');
@@ -211,7 +211,7 @@ if (!doNotTrack) {
 
 <h2 id="models">Models</h2>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:model Models/User</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">php artisan make:model Models/User</code>
 
 <pre><code class="language-php">&lt;?php
 
@@ -232,7 +232,7 @@ class User extends Model
 }
 </code></pre>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">php artisan make:model Models/Post</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">php artisan make:model Models/Post</code>
 
 <pre><code class="language-php">&lt;?php
 
@@ -261,7 +261,7 @@ class Post extends Model
 
 <h3 id="get">Get</h3>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">UserRepository.php</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">UserRepository.php</code>
 
 <pre><code class="language-php">namespace App\Repositories;
 
@@ -286,7 +286,7 @@ class UserRepository
 }
 </code></pre>
 
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">PostRepository.php</code>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">PostRepository.php</code>
 
 <pre><code class="language-php">namespace App\Repositories;
 
@@ -390,10 +390,10 @@ class PostRepository
 }
 </code></pre>
 
-<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">create</code> 和 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">save</code> 的差別在於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">save</code> 接收的是一個 Model 物件。</p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">create</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">save</code> 的差別在於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">create</code> 接收的參數是 PHP 的陣列，而 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">save</code> 接收的是一個 Model 物件。</p>
 
 <p>從 Laravel 的 source code 可以看到：
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
 
 <pre><code class="language-php">/**
  * Save a new model and return the instance.
@@ -409,8 +409,8 @@ public function create(array $attributes = [])
 }
 </code></pre>
 
-<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">tap</code> 是 Laravel 的 Helper Function：
-<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">tap</code> 是 Laravel 的 Helper Function：
+<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
 
 <pre><code class="language-php">/**
  * Call the given Closure with the given value then return the value.
@@ -431,7 +431,7 @@ function tap($value, $callback = null)
 }
 </code></pre>
 
-<p>接收兩個參數 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$value</code> 和 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$callback</code>，並將 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$value</code> 放進 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">$callback</code> 後返回。</p>
+<p>接收兩個參數 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$value</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$callback</code>，並將 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$value</code> 放進 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$callback</code> 後返回。</p>
 
 <p>所以我們回到 create 就可以看出，它其實只是在裡面幫你把 new 物件這件事做掉而已。</p>
 

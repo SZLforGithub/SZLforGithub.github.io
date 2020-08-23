@@ -195,7 +195,7 @@ if (!doNotTrack) {
 
 <p>在 Git 中，每個協作者都會擁有一個自己完整的版本庫，你可以在自己的版本庫中盡情的開 branch、修改程式碼，只要不 push 到主要的版本庫，你不會影響任何一個與你協作的夥伴。</p>
 
-<p>而只要將專案 clone 到自己的設備，你不需要連網，就可以在自己的版本庫中查看歷史紀錄(<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git log</code>)、創建分支(<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git branch</code>)、切換分支(<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git checkout</code>)、甚至是提交(<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git commit</code>)。也就是說假設你遇難隻身一人漂流到孤島，突然有一股修改專案的衝動，打開筆電就可以開始工作。</p>
+<p>而只要將專案 clone 到自己的設備，你不需要連網，就可以在自己的版本庫中查看歷史紀錄(<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log</code>)、創建分支(<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git branch</code>)、切換分支(<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git checkout</code>)、甚至是提交(<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git commit</code>)。也就是說假設你遇難隻身一人漂流到孤島，突然有一股修改專案的衝動，打開筆電就可以開始工作。</p>
 
 <p>若您在公司使用的是SVN，但又想體驗 Git 自由自在的感覺，Git 也有和 SVN 溝通的 bridge，請 Google git svn。</p>
 
@@ -266,7 +266,7 @@ U = updated but unmerged</p>
 
 <h3 id="git-diff">git diff</h3>
 
-<p>直接輸入 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git diff</code> 可以看到當前工作目錄和暫存區的差別。</p>
+<p>直接輸入 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git diff</code> 可以看到當前工作目錄和暫存區的差別。</p>
 
 <pre><code class="language-git=">git diff &lt;commitId1&gt; &lt;commitId2&gt;
 </code></pre>
@@ -400,7 +400,7 @@ U = updated but unmerged</p>
 
 <h3 id="git-rebase">git rebase</h3>
 
-<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git rebase</code> 是一個很有趣的功能，也有其他不同功能的用法，這裡主要介紹它在合併上的使用，進階的使用請見 <a href="https://szlforgithub.github.io/post/gitproblem/#我可以修改更之前的-commit-嗎">Git 常見問題</a>。</p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git rebase</code> 是一個很有趣的功能，也有其他不同功能的用法，這裡主要介紹它在合併上的使用，進階的使用請見 <a href="https://szlforgithub.github.io/post/gitproblem/#我可以修改更之前的-commit-嗎">Git 常見問題</a>。</p>
 
 <p>base 是基準點，也就是分支從哪裡長出來，所以 rebase 的意思接近於「重新定義分支的參考基準」。</p>
 
@@ -411,7 +411,7 @@ U = updated but unmerged</p>
 
 <p>意思就是「我 (feature02) 要重新定義 (re) 我的參考基準 (base)，那個參考基準就是 feature01 」。</p>
 
-<p>以結果來說，feature02 的 commit 會直接接在 feature01 的後面，看起來很像剪下貼上，但對 Git 來說 feature02 的那些 commit 都是新的 commit ，可以從 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git log --oneline</code>看到他們和原本的 SHA-1 值不一樣。</p>
+<p>以結果來說，feature02 的 commit 會直接接在 feature01 的後面，看起來很像剪下貼上，但對 Git 來說 feature02 的那些 commit 都是新的 commit ，可以從 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log --oneline</code>看到他們和原本的 SHA-1 值不一樣。</p>
 
 <p>至於在 feature01 時 rebase feature02 ，和在 feature02 時 rebase feature01 的差別，只在最後 log 上 commit 的順序不同。</p>
 
@@ -423,8 +423,8 @@ U = updated but unmerged</p>
 </code></pre>
 
 <p>將分支 master 推上遠端數據庫 origin
-若有設定 remote，不帶參數執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git push</code> 相當於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git push <remote></code>
-若沒有設定 remote ，不帶參數執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git push</code> 相當於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git push origin</code></p>
+若有設定 remote，不帶參數執行 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git push</code> 相當於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git push <remote></code>
+若沒有設定 remote ，不帶參數執行 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git push</code> 相當於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git push origin</code></p>
 
 <hr />
 
@@ -434,10 +434,10 @@ U = updated but unmerged</p>
 </code></pre>
 
 <p>將遠端數據庫 origin 的 master 分支拉下並合併到本地數據庫
-若有設定 remote，不帶參數執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git pull</code> 相當於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git pull <remote></code>
-若沒有設定 remote ，不帶參數執行 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git pull</code> 相當於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git pull origin</code></p>
+若有設定 remote，不帶參數執行 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git pull</code> 相當於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git pull <remote></code>
+若沒有設定 remote ，不帶參數執行 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git pull</code> 相當於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git pull origin</code></p>
 
-<p><code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git pull</code> 做的事情實際上等於 <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git fetch</code> + <code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git merge</code>，<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git fetch</code> 會比對本地與遠端的差別，並在本地形成分支，<code style="font-size: 85%;background-color: rgba(0,0,0,.1);border-radius: 3px;">git merge</code> 則會將分支合併。</p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git pull</code> 做的事情實際上等於 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git fetch</code> + <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git merge</code>，<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git fetch</code> 會比對本地與遠端的差別，並在本地形成分支，<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git merge</code> 則會將分支合併。</p>
 
 <h2 id="參考資料">參考資料</h2>
 

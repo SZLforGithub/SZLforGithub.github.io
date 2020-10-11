@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-10-11T14:02:31&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-11T14:02:31&#43;08:00" />
-<meta itemprop="wordCount" content="257">
+<meta itemprop="wordCount" content="266">
 
 
 
@@ -176,7 +176,7 @@ if (!doNotTrack) {
       
       
         <span class="f6 mv4 dib tracked"> - 1 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 257 words</span>
+        <span class="f6 mv4 dib tracked"> - 266 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
@@ -185,13 +185,13 @@ if (!doNotTrack) {
 
 <p>開好一個新的伺服器之後，我希望新建一個 user louis 讓他可以用 ssh 的方式登入，所以我建完帳號之後在該用戶的 home 目錄 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">mkdir .ssh</code> ，然後在 .ssh 裡面 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">vim autorized_keys</code>，最後把 local 的 ssh public key 放進 autorized_keys 裡面</p>
 
-<pre><code class="language-bash=">adduser louis
-passwd louis
-usermod -aG wheel louis
-su louis
-cd
-mkdir .ssh
-vim autorized_keys
+<pre><code class="language-bash=">$ adduser louis
+$ passwd louis
+$ usermod -aG wheel louis
+$ su louis
+$ cd
+$ mkdir .ssh
+$ vim autorized_keys
 </code></pre>
 
 <p>回到我自己的機器後 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">ssh louis@serverIP</code> 之後出現：</p>
@@ -209,8 +209,8 @@ vim autorized_keys
 
 <p>主要是 user 目錄底下的 .ssh 的權限必須是 700 而 autorized_keys 的權限必須是 600</p>
 
-<pre><code class="language-bash=">chmod 700 .ssh
-chmod 600 .ssh/authorized_keys
+<pre><code class="language-bash=">$ chmod 700 .ssh
+$ chmod 600 .ssh/authorized_keys
 </code></pre>
 
 <p>離開後重新 ssh 應該就可以成功登入了</p>

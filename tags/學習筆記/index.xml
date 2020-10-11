@@ -6,10 +6,19 @@
     <description>Recent content in 學習筆記 on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Jul 2020 18:34:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2020 14:02:31 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CentOS 的 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). 問題</title>
+      <link>https://szlforgithub.github.io/post/centos_ssh_user_permission_denied/</link>
+      <pubDate>Sun, 11 Oct 2020 14:02:31 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/centos_ssh_user_permission_denied/</guid>
+      <description>新建 user ssh 時遇到的權限問題</description>
+    </item>
     
     <item>
       <title>Laravel 一對多關聯 (one-to-many Relationship)</title>

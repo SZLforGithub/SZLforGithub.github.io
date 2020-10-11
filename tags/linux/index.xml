@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Louis&#39;s blog</title>
+    <link>https://szlforgithub.github.io/tags/linux/</link>
+    <description>Recent content in Linux on Louis&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 11 Oct 2020 14:02:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://szlforgithub.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CentOS 的 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). 問題</title>
+      <link>https://szlforgithub.github.io/post/centos_ssh_user_permission_denied/</link>
+      <pubDate>Sun, 11 Oct 2020 14:02:31 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/centos_ssh_user_permission_denied/</guid>
+      <description>新建 user ssh 時遇到的權限問題</description>
+    </item>
+    
+  </channel>
+</rss>

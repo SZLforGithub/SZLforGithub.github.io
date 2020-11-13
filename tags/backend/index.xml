@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>backend on Louis&#39;s blog</title>
+    <link>https://szlforgithub.github.io/tags/backend/</link>
+    <description>Recent content in backend on Louis&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 13 Nov 2020 17:54:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://szlforgithub.github.io/tags/backend/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>用 Aglio 做出漂亮的 API 文件</title>
+      <link>https://szlforgithub.github.io/post/aglio_practice/</link>
+      <pubDate>Fri, 13 Nov 2020 17:54:10 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/aglio_practice/</guid>
+      <description>Aglio 的簡單介紹，並透過一個 CRUD 的 API 作為例子。</description>
+    </item>
+    
+  </channel>
+</rss>

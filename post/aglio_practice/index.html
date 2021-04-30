@@ -206,16 +206,16 @@ v14.4.0
 <pre><code class="language-bash">$ npm install -g aglio
 </code></pre></li>
 
-<li><p>開始撰寫你的文件並以 .apib 做為副檔名，你可能會需要用到 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">aglio -i your_file_name.apib -s</code>，讓你可以 hot reload ，不必每次修改都要重新編譯一次。</p></li>
+<li><p>開始撰寫你的文件並以 .apib 做為副檔名，你可能會需要用到 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">aglio -i your_file_name.apib -s</code>，讓你可以 hot reload ，不必每次修改都要重新編譯一次。</p></li>
 
-<li><p>完成之後使用 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">aglio -i your_file_name.apib -o your_file_name.html</code> 就可以成功編譯了</p></li>
+<li><p>完成之後使用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">aglio -i your_file_name.apib -o your_file_name.html</code> 就可以成功編譯了</p></li>
 </ol>
 
 <blockquote>
-<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">aglio -h</code> 可以看到 aglio 相關的全部指令，上述用到的參數：<br />
-<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">-i, --input Input file</code><br />
-<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">-o, --output Output file</code><br />
-<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">-s, --server Start a local live preview server</code></p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">aglio -h</code> 可以看到 aglio 相關的全部指令，上述用到的參數：<br />
+<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">-i, --input Input file</code><br />
+<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">-o, --output Output file</code><br />
+<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">-s, --server Start a local live preview server</code></p>
 </blockquote>
 
 <h2 id="實際範例">實際範例</h2>
@@ -226,7 +226,7 @@ v14.4.0
 
 <p><img src="https://i.imgur.com/h5TvZ0Q.png" alt="" /></p>
 
-<h3 id="輸入指令-hahahugoshortcode-s6-hbhb">輸入指令 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">aglio -i api_doc.apib -s</code></h3>
+<h3 id="輸入指令-hahahugoshortcode-s6-hbhb">輸入指令 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">aglio -i api_doc.apib -s</code></h3>
 
 <pre><code class="language-bash">$ aglio -i api_doc.apib -s
 Server started on http://127.0.0.1:3000/
@@ -308,7 +308,7 @@ Socket connected
             }
 </code></pre>
 
-<p>可以用 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">+</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">-</code> 或 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">*</code>  來開頭，在 Request 後面可以指定你的 Content-Type，Aglio 會在渲染時自動幫你加上 Header，而 Response 後面則需要多加一個 HTTP Status Code ，你可以根據你的 API 來調整。如果需要 Header 也可以自己新增，語法和 Body 是一樣的。</p>
+<p>可以用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">+</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">-</code> 或 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">*</code>  來開頭，在 Request 後面可以指定你的 Content-Type，Aglio 會在渲染時自動幫你加上 Header，而 Response 後面則需要多加一個 HTTP Status Code ，你可以根據你的 API 來調整。如果需要 Header 也可以自己新增，語法和 Body 是一樣的。</p>
 
 <h4 id="include">include</h4>
 

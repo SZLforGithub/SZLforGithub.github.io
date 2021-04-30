@@ -180,7 +180,7 @@ if (!doNotTrack) {
 
 <h2 id="問題描述">問題描述</h2>
 
-<p>開好一個新的伺服器之後，我希望新建一個 user louis 讓他可以用 ssh 的方式登入，所以我建完帳號之後在該用戶的 home 目錄 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">mkdir .ssh</code> ，然後在 .ssh 裡面 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">vim autorized_keys</code>，最後把 local 的 ssh public key 放進 autorized_keys 裡面：</p>
+<p>開好一個新的伺服器之後，我希望新建一個 user louis 讓他可以用 ssh 的方式登入，所以我建完帳號之後在該用戶的 home 目錄 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">mkdir .ssh</code> ，然後在 .ssh 裡面 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vim autorized_keys</code>，最後把 local 的 ssh public key 放進 autorized_keys 裡面：</p>
 
 <pre><code class="language-bash=">$ adduser louis
 $ passwd louis
@@ -191,7 +191,7 @@ $ mkdir .ssh
 $ vim autorized_keys
 </code></pre>
 
-<p>回到我自己的機器後 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">ssh louis@serverIP</code> 之後出現：</p>
+<p>回到我自己的機器後 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">ssh louis@serverIP</code> 之後出現：</p>
 
 <pre><code class="language-bash=">Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 </code></pre>

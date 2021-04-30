@@ -178,8 +178,8 @@ if (!doNotTrack) {
 
 <p>單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。</p>
 
-<p>在實作時的邏輯就是：「一個 Class 只能有一個儲存自身實例化的靜態變數 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$instance</code> 、和一個獲得這個變數的靜態方法 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">getInstance()</code> 」
-實際在使用時會 call <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">getInstance()</code> 這個靜態方法，他會檢查 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$instance</code> 是否為空，若不為空則回傳，若為空則實例化 Class 賦予 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$instance</code> 並回傳。</p>
+<p>在實作時的邏輯就是：「一個 Class 只能有一個儲存自身實例化的靜態變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 、和一個獲得這個變數的靜態方法 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> 」
+實際在使用時會 call <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> 這個靜態方法，他會檢查 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 是否為空，若不為空則回傳，若為空則實例化 Class 賦予 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 並回傳。</p>
 
 <h2 id="以php為例">以PHP為例</h2>
 
@@ -201,14 +201,14 @@ final class Singleton
 }
 </code></pre>
 
-<p>我們用 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">final</code> 宣告 class 來確保不會被繼承，並如同上面所說的，建立 static function 來 return 一個存了 class 實體化後物件的 static 變數，最後在 class 中宣告一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">$_somethingWeWantToKeep</code>。</p>
+<p>我們用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">final</code> 宣告 class 來確保不會被繼承，並如同上面所說的，建立 static function 來 return 一個存了 class 實體化後物件的 static 變數，最後在 class 中宣告一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$_somethingWeWantToKeep</code>。</p>
 
 <p>實際上在使用的情況是這樣的：</p>
 
 <pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
 </code></pre>
 
-<p>之後我們在任何地方都可以引用 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">Singleton::getInstance()->_somethingWeWantToKeep</code> ，並且都會得到一樣的 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">I'm smart!</code></p>
+<p>之後我們在任何地方都可以引用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Singleton::getInstance()->_somethingWeWantToKeep</code> ，並且都會得到一樣的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">I'm smart!</code></p>
 
 <p>但這樣就夠了嗎？</p>
 
@@ -231,7 +231,7 @@ var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
 <pre><code class="language-php=">private function __construct() {}
 </code></pre>
 
-<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">__construct()</code> 來避免 Singleton 被外部調用。</p>
+<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__construct()</code> 來避免 Singleton 被外部調用。</p>
 
 <h3 id="防止被-clone">防止被 clone</h3>
 
@@ -245,12 +245,12 @@ $stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
 </code></pre>
 
-<p>這個地方也是發生類似的事情，我們的 Singleton 被 clone 之後調用了 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">getInstance()</code> ，同樣的我們</p>
+<p>這個地方也是發生類似的事情，我們的 Singleton 被 clone 之後調用了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> ，同樣的我們</p>
 
 <pre><code class="language-php=">private function __clone() {}
 </code></pre>
 
-<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">__clone</code> 來避免 Singleton 被 clone 。</p>
+<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__clone</code> 來避免 Singleton 被 clone 。</p>
 
 <h3 id="防止被序列化">防止被序列化</h3>
 

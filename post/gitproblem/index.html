@@ -180,19 +180,19 @@ if (!doNotTrack) {
 
 <h2 id="正確的使用姿勢">正確的使用姿勢？</h2>
 
-<p><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git init</code> 或是 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git clone</code> 之後，你可能會手癢先 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git status</code> 看一下，你會看到一個乾淨的目錄，然後開始編寫程式碼，一邊寫一邊 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git diff</code> 看自己到底改了哪些東西，改了一個段落在 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git add</code> 之前或許會 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git branch</code> 確定一下自己在哪個分支，有錯的話趕快 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git checkout branchName</code> 到正確的分支，接著 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git add</code> 把修改存到暫存區，<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git status</code> 看一下是不是正確的狀態，然後 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git commit -m "This is my new git description"</code>，最後 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git push</code> 。</p>
+<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git init</code> 或是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git clone</code> 之後，你可能會手癢先 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git status</code> 看一下，你會看到一個乾淨的目錄，然後開始編寫程式碼，一邊寫一邊 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git diff</code> 看自己到底改了哪些東西，改了一個段落在 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git add</code> 之前或許會 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git branch</code> 確定一下自己在哪個分支，有錯的話趕快 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git checkout branchName</code> 到正確的分支，接著 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git add</code> 把修改存到暫存區，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git status</code> 看一下是不是正確的狀態，然後 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git commit -m "This is my new git description"</code>，最後 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git push</code> 。</p>
 
 <hr />
 
 <h2 id="這行誰寫的">這行誰寫的！</h2>
 
-<p>一覺醒來發現網站掛了，怎麼多了這一行扣！<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git blame index.php</code> 可以看到 index.php 裡每一行的作者是誰。</p>
+<p>一覺醒來發現網站掛了，怎麼多了這一行扣！<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git blame index.php</code> 可以看到 index.php 裡每一行的作者是誰。</p>
 
 <hr />
 
 <h2 id="這個-commit-到底修改了啥">這個 commit 到底修改了啥？</h2>
 
-<p>先 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log</code> 找到那次修改的 commit ID，你或許會用到</p>
+<p>先 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git log</code> 找到那次修改的 commit ID，你或許會用到</p>
 
 <pre><code class="language-git=">git log --author=&quot;Louis.Su&quot;
 </code></pre>
@@ -208,7 +208,7 @@ if (!doNotTrack) {
 </code></pre>
 
 <p>來找到上傳檔案有包含 functionA 的 commit。
-最後<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git show commitID</code>，就可以看到修改記錄了。</p>
+最後<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git show commitID</code>，就可以看到修改記錄了。</p>
 
 <hr />
 
@@ -219,7 +219,7 @@ if (!doNotTrack) {
 <pre><code class="language-git=">git commit --amend -m &quot;This is right description&quot;
 </code></pre>
 
-<p>對人類來說只是修改 commit 的訊息，但對 git 來說，這其實是一個全新的 commit 了，可以從 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log --oneline</code> 中看到 commit 的 SHA-1 值是不同的。</p>
+<p>對人類來說只是修改 commit 的訊息，但對 git 來說，這其實是一個全新的 commit 了，可以從 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git log --oneline</code> 中看到 commit 的 SHA-1 值是不同的。</p>
 
 <hr />
 
@@ -233,7 +233,7 @@ if (!doNotTrack) {
 <pre><code class="language-git=">git rebase -i
 </code></pre>
 
-<p>可以開啟對話模式，要給他一個參數，這個參數可以是 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git rebase -i HEAD~3</code> 這樣從當前分支往前算的形式，也可以是 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git rebase -i 6ee9b6b</code> 這樣的 SHA-1 值，意思是「從這一個 commit 往後算到現在位子的所有 commit 」。</p>
+<p>可以開啟對話模式，要給他一個參數，這個參數可以是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git rebase -i HEAD~3</code> 這樣從當前分支往前算的形式，也可以是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git rebase -i 6ee9b6b</code> 這樣的 SHA-1 值，意思是「從這一個 commit 往後算到現在位子的所有 commit 」。</p>
 
 <p>之後會出現像這樣的列表：</p>
 
@@ -280,7 +280,7 @@ pick 310154e add some files
 pick a5f4a0d feat: complete a feature
 </code></pre>
 
-<p>存檔離開後， git 會 checkout 到你想修改的 commit ，當你進行完你想做的修改之後， <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git add [你有修改的檔案]</code> ，之後再 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git commit --amend </code> 修改 commit message ，最後再輸入 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git rebase --continue</code> 將 rebase 完成。</p>
+<p>存檔離開後， git 會 checkout 到你想修改的 commit ，當你進行完你想做的修改之後， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git add [你有修改的檔案]</code> ，之後再 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git commit --amend </code> 修改 commit message ，最後再輸入 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git rebase --continue</code> 將 rebase 完成。</p>
 
 <p>另外的 squash 和 fixup 則是用來合併 commit，不同的地方是當你用 squash 要合併時，會把多個要合併的 commit message 放進編輯器裡面讓你修改最後合併的 commit message ；而 fixup 則是把這個 commit 合併到上一個 commit 中，並直接捨棄這個 commit message。</p>
 
@@ -294,14 +294,14 @@ pick a5f4a0d feat: complete a feature
 
 <h3 id="如何將暫存區的檔案移出">如何將暫存區的檔案移出</h3>
 
-<p>這樣的場景會出現在你修改了兩個檔案，想要分別提交，但你手速太快不小心打了 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git add -A</code> 全部加到暫存區了。</p>
+<p>這樣的場景會出現在你修改了兩個檔案，想要分別提交，但你手速太快不小心打了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git add -A</code> 全部加到暫存區了。</p>
 
 <pre><code class="language-git=">git reset HEAD &lt;filename&gt;
 </code></pre>
 
 <h3 id="如何將剛剛的-commit-拆回來">如何將剛剛的 commit 拆回來</h3>
 
-<p>這樣的場景則出現在後悔剛剛那個 commit 的內容，想拆回來重做，你可以先下 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log</code> 或 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">git log --oneline</code> 來看到 SHA-1 值，然後：</p>
+<p>這樣的場景則出現在後悔剛剛那個 commit 的內容，想拆回來重做，你可以先下 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git log</code> 或 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">git log --oneline</code> 來看到 SHA-1 值，然後：</p>
 
 <pre><code class="language-git=">git reset 6ee9b6b
 </code></pre>
@@ -332,10 +332,10 @@ pick a5f4a0d feat: complete a feature
 
 <p>講到這裡聰明的你一定已經隱約感覺到 reset 的意義了，在中文會比較接近「前往」。</p>
 
-<p>而 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--hard</code> 是參數，有三種常見的： <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--mixed</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--soft</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--hard</code> ，這個參數決定的是「那些我不要的東西最後要去哪裡」
-<code><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--mixed`</code> 是預設，這個模式下的 reset commit 會把 commit 內容丟進工作目錄裡面
-</code><code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--soft`</code> 則會把 commit 內容丟進暫存區
-`<code style="font-size: 85%; background-color: rgba(0,0,0,.1); border-radius: 3px; word-wrap: break-word;">--hard`</code> 則是工作目錄和暫存區都不會留</p>
+<p>而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--hard</code> 是參數，有三種常見的： <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--mixed</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--soft</code> 、 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--hard</code> ，這個參數決定的是「那些我不要的東西最後要去哪裡」
+<code><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--mixed`</code> 是預設，這個模式下的 reset commit 會把 commit 內容丟進工作目錄裡面
+</code><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--soft`</code> 則會把 commit 內容丟進暫存區
+`<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">--hard`</code> 則是工作目錄和暫存區都不會留</p>
 
 <p>所以前文說的「拆」 commit 其實並不準確，而是「回到」那個 commit 的狀態，不同參數則決定了路過的那幾個檔案將何去何從。</p>
 

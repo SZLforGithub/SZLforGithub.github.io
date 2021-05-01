@@ -6,10 +6,19 @@
     <description>Recent content in Louis的技術部落格 on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Nov 2020 17:54:10 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 01 May 2021 13:08:19 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PHP 關於 zero、false、null 和 isset、empty、is_null 之間的恩怨糾葛</title>
+      <link>https://szlforgithub.github.io/post/php_wtf/</link>
+      <pubDate>Sat, 01 May 2021 13:08:19 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/php_wtf/</guid>
+      <description>PHP 混亂的空值判斷和隱藏在其後的自動轉型，惡名昭彰的程度應該只在 JS 之下，這是一篇自己梳理過一遍的紀錄。</description>
+    </item>
     
     <item>
       <title>用 Aglio 做出漂亮的 API 文件</title>

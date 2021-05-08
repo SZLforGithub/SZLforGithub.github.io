@@ -6,10 +6,19 @@
     <description>Recent content in backend on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 May 2021 13:08:19 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 08 May 2021 15:03:37 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/tags/backend/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>開發自己的 Composer package</title>
+      <link>https://szlforgithub.github.io/post/composer_package/</link>
+      <pubDate>Sat, 08 May 2021 15:03:37 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/composer_package/</guid>
+      <description>開源的 Composer package 都會發布在 packagist 上，本文以一個最簡單的例子，走一次發布到使用的流程。</description>
+    </item>
     
     <item>
       <title>PHP 關於 zero、false、null 和 isset、empty、is_null 之間的恩怨糾葛</title>

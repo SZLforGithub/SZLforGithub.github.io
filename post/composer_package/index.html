@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>開發自己的 Composer package | Louis&#39;s blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.58.3" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+      <link rel="stylesheet" href="/dist/css/custom.css">
+    
+
+    
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
+      
+<link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/prism.css"/>
+    <script src="/prism.js"></script>
+
+    <script data-ad-client="ca-pub-3625283913171459" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <meta property="og:title" content="開發自己的 Composer package" />
+<meta property="og:description" content="用了那麼久的 Composer，也該自己寫一個了吧？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://szlforgithub.github.io/post/composer_package/" />
+
+<meta property="og:image" content="https://szlforgithub.github.io/images/composer.png" />
+<meta property="article:published_time" content="2021-05-08T15:03:37+08:00" />
+<meta property="article:modified_time" content="2021-05-08T15:03:37+08:00" />
+<meta itemprop="name" content="開發自己的 Composer package">
+<meta itemprop="description" content="用了那麼久的 Composer，也該自己寫一個了吧？">
+
+
+<meta itemprop="datePublished" content="2021-05-08T15:03:37&#43;08:00" />
+<meta itemprop="dateModified" content="2021-05-08T15:03:37&#43;08:00" />
+<meta itemprop="wordCount" content="1302">
+
+  <meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
+
+
+
+<meta itemprop="keywords" content="學習筆記,backend,心得分享,PHP," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://szlforgithub.github.io/images/composer.png"/>
+
+<meta name="twitter:title" content="開發自己的 Composer package"/>
+<meta name="twitter:description" content="用了那麼久的 Composer，也該自己寫一個了吧？"/>
+
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-169325906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+	
+  </head>
+
+  <body class="ma0 sans-serif production">
+
+    
+   
+  
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://szlforgithub.github.io/images/composer.png');">
+    <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib" style="font-family: oswald; font-weight:bold;">
+      
+        Louis&#39;s blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/post/" title="Articles page">
+              Articles
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    <div class="pb3-m pb6-l bg-black-60">
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">開發自己的 Composer package</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              用了那麼久的 Composer，也該自己寫一個了吧？
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      
+
+      
+
+      
+
+      <h1 class="f1 athelas mt3 mb1">開發自己的 Composer package</h1>
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-05-08T15:03:37&#43;08:00">May 8, 2021</time>
+
+      
+      
+        <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
+        <span class="f6 mv4 dib tracked"> - 1302 words</span>
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="前言">前言</h2>
+
+<p>最近剛好有一些小工具的需求，本來是想要在 Local 用腳本處理就好，但既然都要寫了，不如寫成一個 Package，剛好填上一個文章的坑，之後如果要做成 web 也比較方便。</p>
+
+<p>本篇的對象是已經了解什麼是 Composer，並且想要自己開發一個 Package 的朋友，如果你還不知道什麼是 Composer，<a href="https://szlforgithub.github.io/post/composer/">請移駕此處</a>。</p>
+
+<h2 id="ok-let-s-do-it">Ok, Let&rsquo;s do it!</h2>
+
+<h3 id="step-1-建立你的-package-資料夾">Step 1. 建立你的 Package 資料夾</h3>
+
+<pre><code class="language-bash">$ mkdir composer-practice
+$ cd composer-practice
+</code></pre>
+
+<h3 id="step-2-初始化-composer-package">Step 2. 初始化 Composer package</h3>
+
+<pre><code class="language-bash">$ composer init
+</code></pre>
+
+<p>接下來會有一系列的交互式問答：</p>
+
+<h4 id="package-name">Package Name</h4>
+
+<pre><code>This command will guide you through creating your composer.json config.
+
+Package name (&lt;vendor&gt;/&lt;name&gt;) [suzhonglin/composer-practice]:
+</code></pre>
+
+<p>首先是 Package name，它會出現在完成頁面的這裡：
+<img src="https://i.imgur.com/5gAn8db.png" alt="" />
+也就是別人 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 時輸入的 Package 名稱。</p>
+
+<h4 id="description">Description</h4>
+
+<pre><code>Description []:
+</code></pre>
+
+<p>Package 描述，會出現在完成頁面的這裡：
+<img src="https://i.imgur.com/0iVgODc.png" alt="" /></p>
+
+<h4 id="author">Author</h4>
+
+<pre><code>Author [Louis.Su &lt;i0989872540@gmail.com&gt;, n to skip]:
+</code></pre>
+
+<p>維護者的姓名及連絡信箱。</p>
+
+<h4 id="minimum-stability">Minimum Stability</h4>
+
+<pre><code>Minimum Stability []:
+</code></pre>
+
+<p>這個值花了我一點時間才搞懂，<a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">官方文件</a>定義它由低到高有以下幾種值：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">dev, alpha, beta, RC, and stable</code>，並且標註了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code>。</p>
+
+<p>首先它預設的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code>，意思是當 A package 依賴 B package 時，若 B package 都低於穩定版本(stable)時，就會出問題。而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code> 的意思則是對當前 A package 向下的依賴有效， B package 的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 裡面同樣也可以設置 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Minimun Stability</code>，這時的 root 就變成 B package 了。</p>
+
+<p>講到這裡你應該可以明白，這個欄位做的是穩定性檢查，當你設為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code> 時，你就可以確保你依賴的其他 Package 都會是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code>。</p>
+
+<h4 id="package-type">Package Type:</h4>
+
+<pre><code>Package Type (e.g. library, project, metapackage, composer-plugin) []:
+</code></pre>
+
+<p>看你的 Package 是哪一種類型就填哪一種，預設是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">library</code>。</p>
+
+<h4 id="license">License</h4>
+
+<pre><code>License []:
+</code></pre>
+
+<p>授權條款，我通常是用 MIT。</p>
+
+<h4 id="dependencies">Dependencies</h4>
+
+<pre><code>Define your dependencies.
+
+Would you like to define your dependencies (require) interactively [yes]?
+</code></pre>
+
+<p>是否依賴其他的 Package，輸入 yes 之後：</p>
+
+<pre><code>Search for a package:
+</code></pre>
+
+<p>輸入 php</p>
+
+<pre><code>Enter the version constraint to require (or leave blank to use the latest version):
+</code></pre>
+
+<p>輸入依賴的 php 版本，這邊填的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">^7.3 || ^8.0</code>。</p>
+
+<p>接下來會再問一次依賴的流程，但這次是在 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">require-dev</code> 的情況。</p>
+
+<h4 id="generate">Generate</h4>
+
+<pre><code>Do you confirm generation [yes]? yes
+Would you like to install dependencies now [yes]? yes
+</code></pre>
+
+<p>最後會幫你安裝依賴的 Package，完成之後你應該要看到你的專案資料夾多了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vendor</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.lock</code>。</p>
+
+<h3 id="step-3-完成-package-內容">Step 3. 完成 Package 內容</h3>
+
+<p>首先先來看一下我們的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code>：</p>
+
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;louissu/composer-practice&quot;,
+    &quot;description&quot;: &quot;composer-practice is a package which I use to practice&quot;,
+    &quot;type&quot;: &quot;library&quot;,
+    &quot;require&quot;: {
+        &quot;php&quot;: &quot;^7.3 || ^8.0&quot;
+    },
+    &quot;require-dev&quot;: {
+        &quot;php&quot;: &quot;^7.3 || ^8.0&quot;
+    },
+    &quot;license&quot;: &quot;MIT&quot;,
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Louis.Su&quot;,
+            &quot;email&quot;: &quot;i0989872540@gmail.com&quot;
+        }
+    ],
+    &quot;minimum-stability&quot;: &quot;dev&quot;
+}
+</code></pre>
+
+<p>還少了 autoload 的部分，在最後面加上：</p>
+
+<pre><code class="language-json">&quot;autoload&quot;: {
+    &quot;psr-4&quot;: {
+        &quot;Louis\\&quot;: &quot;src/test&quot;
+    }
+}
+</code></pre>
+
+<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Louis</code> 指的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">namespace</code>，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">src/test</code> 指的是對應的目錄。</p>
+
+<p>接著新增我們剛剛指定的目錄，在專案根目錄新增 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">src</code> 資料夾和下一層的 test 資料夾，並新增一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Test.php</code>：</p>
+
+<pre><code class="language-php">&lt;?php
+namespace Louis;
+class Test 
+{
+    function test()
+    {
+        echo &quot;This is my first composer package!&quot;;
+    }
+}
+</code></pre>
+
+<p>記得檔名跟類別名都要遵守 psr-4 的規範，到這裡已經基本完成整個 package 的內容了。</p>
+
+<h3 id="step-4-上傳">Step 4. 上傳</h3>
+
+<p>到 <a href="https://packagist.org/">packagist</a> 申請一個帳號，點擊右上方的 Submit：
+<img src="https://i.imgur.com/DPQG7yE.png" alt="" />
+然後你會發現需要一個 Github Repository 的網址：
+<img src="https://i.imgur.com/AxPjtaO.png" alt="" /></p>
+
+<p>將專案上傳到 Github 的部份就不用教學了吧，如果對 Git 不熟悉的話，<a href="https://szlforgithub.github.io/post/git/">請移駕此處</a>。</p>
+
+<p>將 Github Repository 的網址 Submit，應該就可以看到 Package 的畫面了。</p>
+
+<p><img src="https://i.imgur.com/s2GsKBf.png" alt="" /></p>
+
+<p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice">Repository</a> 看到。</p>
+
+<h3 id="測試">測試</h3>
+
+<p>新建一個專案資料夾，像一般在使用第三方套件一樣， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require louissu/composer-practice</code>，記得換成自己的 Package name。</p>
+
+<p>新建一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">index.php</code>：</p>
+
+<pre><code class="language-php">&lt;?php
+require &quot;vendor/autoload.php&quot;;
+
+use Louis\Test;
+
+$test = new Test();
+$test-&gt;test();
+
+</code></pre>
+
+<p>執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">index.php</code>，你應該會看到：</p>
+
+<pre><code>This is my first composer package!
+</code></pre>
+
+<p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice-use">Repository</a> 看到。</p>
+
+<h2 id="結語">結語</h2>
+
+<p>用了那麼久的 Composer，一直沒有真正的寫過一個 Package，在寫的過程也更理解 Composer 實際上是用什麼方式在管理 Package 之間的依賴，算是蠻有趣的收穫。</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+<li><a href="https://packagist.org/">https://packagist.org/</a></li>
+<li><a href="https://getcomposer.org/doc/04-schema.md">https://getcomposer.org/doc/04-schema.md</a></li>
+</ol>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">學習筆記</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/backend" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">backend</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">心得分享</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/php" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">PHP</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://louissublog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+    
+
+
+
+
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>目錄</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%89%8d%e8%a8%80">
+                            前言
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#ok-let-s-do-it">
+                            Ok, Let’s do it!
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#step-1-%e5%bb%ba%e7%ab%8b%e4%bd%a0%e7%9a%84-package-%e8%b3%87%e6%96%99%e5%a4%be">
+                            Step 1. 建立你的 Package 資料夾
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#step-2-%e5%88%9d%e5%a7%8b%e5%8c%96-composer-package">
+                            Step 2. 初始化 Composer package
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#package-name">
+                            Package Name
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#description">
+                            Description
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#author">
+                            Author
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#minimum-stability">
+                            Minimum Stability
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#package-type">
+                            Package Type:
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#license">
+                            License
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#dependencies">
+                            Dependencies
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#generate">
+                            Generate
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#step-3-%e5%ae%8c%e6%88%90-package-%e5%85%a7%e5%ae%b9">
+                            Step 3. 完成 Package 內容
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#step-4-%e4%b8%8a%e5%82%b3">
+                            Step 4. 上傳
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e6%b8%ac%e8%a9%a6">
+                            測試
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e7%b5%90%e8%aa%9e">
+                            結語
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#references">
+                            References
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+  
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://szlforgithub.github.io/" >
+    &copy;  Louis's blog 2021 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+  <script type="text/javascript" color="0,0,0" opacity="0.5" pointColor="0,100,0" count="30" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+  </body>
+</html>

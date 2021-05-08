@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-08T15:03:37&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-08T15:03:37&#43;08:00" />
-<meta itemprop="wordCount" content="1302">
+<meta itemprop="wordCount" content="1303">
 
   <meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
 
@@ -173,7 +173,7 @@ if (!doNotTrack) {
       
       
         <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 1302 words</span>
+        <span class="f6 mv4 dib tracked"> - 1303 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
@@ -230,7 +230,7 @@ Package name (&lt;vendor&gt;/&lt;name&gt;) [suzhonglin/composer-practice]:
 <pre><code>Minimum Stability []:
 </code></pre>
 
-<p>這個值花了我一點時間才搞懂，<a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">官方文件</a>定義它由低到高有以下幾種值：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">dev, alpha, beta, RC, and stable</code>，並且標註了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code>。</p>
+<p>這個欄位花了我一點時間才搞懂，<a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">官方文件</a>定義它由低到高有以下幾種值：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">dev, alpha, beta, RC, and stable</code>，並且標註了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code>。</p>
 
 <p>首先它預設的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code>，意思是當 A package 依賴 B package 時，若 B package 都低於穩定版本(stable)時，就會出問題。而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code> 的意思則是對當前 A package 向下的依賴有效， B package 的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 裡面同樣也可以設置 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Minimun Stability</code>，這時的 root 就變成 B package 了。</p>
 

@@ -53,7 +53,7 @@
 
 <meta itemprop="datePublished" content="2021-05-08T15:03:37&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-08T15:03:37&#43;08:00" />
-<meta itemprop="wordCount" content="1303">
+<meta itemprop="wordCount" content="1450">
 
   <meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
 
@@ -173,7 +173,7 @@ if (!doNotTrack) {
       
       
         <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
-        <span class="f6 mv4 dib tracked"> - 1303 words</span>
+        <span class="f6 mv4 dib tracked"> - 1450 words</span>
       
     </header>
     <div class="nested-copy-line-height lh-copy sans-serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
@@ -342,6 +342,23 @@ class Test
 <p>將 Github Repository 的網址 Submit，應該就可以看到 Package 的畫面了。</p>
 
 <p><img src="https://i.imgur.com/s2GsKBf.png" alt="" /></p>
+
+<h3 id="step-5-推上-semantic-version">Step 5. 推上 Semantic Version</h3>
+
+<p>在正式讓別人可以 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 之前，還必須推上你的版號，還記得前面提到的 Minimum Stability 嗎？如果你填的是 dev 的話就不影響，但如果是預設的 stable 的話，沒有上版號是沒有辦法使用的：</p>
+
+<pre><code>[InvalidArgumentException]
+  Could not find a version of package &lt;package name&gt; matching your minimum-stability (stable). Require it
+  with an explicit version constraint allowing its desired stability.
+</code></pre>
+
+<p>所以你必須在你的專案中下：</p>
+
+<pre><code class="language-bash">$ git tag -a v1.0.0 -m &quot;first version&quot;
+$ git push --tag
+</code></pre>
+
+<p>才代表這個專案有穩定版本可以使用。</p>
 
 <p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice">Repository</a> 看到。</p>
 
@@ -839,6 +856,34 @@ s.setAttribute('data-timestamp', +new Date());
                         <li class="nav-item">
                             <a class="nav-link text-left" href="#step-4-%e4%b8%8a%e5%82%b3">
                             Step 4. 上傳
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#step-5-%e6%8e%a8%e4%b8%8a-semantic-version">
+                            Step 5. 推上 Semantic Version
                             </a>
                         </li>
                     

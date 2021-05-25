@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>我的 2020 年記</title>
+      <link>https://szlforgithub.github.io/post/almanac_2020_2021/</link>
+      <pubDate>Tue, 25 May 2021 05:43:10 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/almanac_2020_2021/</guid>
+      <description>時代浪潮下的小小打工仔。</description>
+    </item>
+    
+    <item>
       <title>開發自己的 Composer package</title>
       <link>https://szlforgithub.github.io/post/composer_package/</link>
       <pubDate>Sat, 08 May 2021 15:03:37 +0800</pubDate>

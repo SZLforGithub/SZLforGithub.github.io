@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>年記 on Louis&#39;s blog</title>
+    <link>https://szlforgithub.github.io/tags/%E5%B9%B4%E8%A8%98/</link>
+    <description>Recent content in 年記 on Louis&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 May 2021 05:43:10 +0800</lastBuildDate>
+    
+	<atom:link href="https://szlforgithub.github.io/tags/%E5%B9%B4%E8%A8%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>我的 2020 年記</title>
+      <link>https://szlforgithub.github.io/post/almanac_2020_2021/</link>
+      <pubDate>Tue, 25 May 2021 05:43:10 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/almanac_2020_2021/</guid>
+      <description>時代浪潮下的小小打工仔。</description>
+    </item>
+    
+  </channel>
+</rss>

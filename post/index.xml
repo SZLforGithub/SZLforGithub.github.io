@@ -6,10 +6,19 @@
     <description>Recent content on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 May 2021 05:43:10 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 18 Sep 2021 18:56:42 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>SSOCR 在 PHP 中的實作</title>
+      <link>https://szlforgithub.github.io/post/php_ssocr/</link>
+      <pubDate>Sat, 18 Sep 2021 18:56:42 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/php_ssocr/</guid>
+      <description>因為在工作上需要 SSOCR 的功能，但發現 PHP 只有一個跟 C library 的 bridge，所以決定自己實作一個 pure PHP 的版本。</description>
+    </item>
     
     <item>
       <title>我的 2020 年記</title>

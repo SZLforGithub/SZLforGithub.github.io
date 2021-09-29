@@ -6,10 +6,10 @@
     
     <title>CentOS 的 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). 問題 | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="為什麼內容農場的 SEO 這麼強可惡" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/centos_ssh_user_permission_denied/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/linux.jpg" />
 <meta property="article:published_time" content="2020-10-11T14:02:31+08:00" />
 <meta property="article:modified_time" content="2020-10-11T14:02:31+08:00" />
 <meta itemprop="name" content="CentOS 的 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). 問題">
 <meta itemprop="description" content="為什麼內容農場的 SEO 這麼強可惡">
-
-
 <meta itemprop="datePublished" content="2020-10-11T14:02:31&#43;08:00" />
 <meta itemprop="dateModified" content="2020-10-11T14:02:31&#43;08:00" />
 <meta itemprop="wordCount" content="272">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/linux.jpg">
-
+<meta itemprop="image" content="https://szlforgithub.github.io/images/linux.jpg">
 
 
-<meta itemprop="keywords" content="學習筆記,Linux,心得分享," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,Linux,心得分享," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/linux.jpg"/>
 
 <meta name="twitter:title" content="CentOS 的 Permission denied (publickey,gssapi-keyex,gssapi-with-mic). 問題"/>
 <meta name="twitter:description" content="為什麼內容農場的 SEO 這麼強可惡"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -186,41 +168,25 @@ if (!doNotTrack) {
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="問題描述">問題描述</h2>
-
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="問題描述">問題描述</h2>
 <p>開好一個新的伺服器之後，我希望新建一個 user louis 讓他可以用 ssh 的方式登入，所以我建完帳號之後在該用戶的 home 目錄 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">mkdir .ssh</code> ，然後在 .ssh 裡面 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vim autorized_keys</code>，最後把 local 的 ssh public key 放進 autorized_keys 裡面：</p>
-
-<pre><code class="language-bash=">$ adduser louis
+<pre><code class="language-bash=" data-lang="bash=">$ adduser louis
 $ passwd louis
 $ usermod -aG wheel louis
 $ su louis
 $ cd
 $ mkdir .ssh
 $ vim autorized_keys
-</code></pre>
-
-<p>回到我自己的機器後 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">ssh louis@serverIP</code> 之後出現：</p>
-
-<pre><code class="language-bash=">Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
-</code></pre>
-
-<h2 id="解決方法">解決方法</h2>
-
+</code></pre><p>回到我自己的機器後 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">ssh louis@serverIP</code> 之後出現：</p>
+<pre><code class="language-bash=" data-lang="bash=">Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+</code></pre><h2 id="解決方法">解決方法</h2>
 <p>Google 一直搜到一個內容農場的文章，完全沒有幫助，這 SEO 到底為什麼可以做這麼好內容又可以這麼爛。</p>
-
-<p><img src="https://i.imgur.com/w3B4m4L.png" alt="" /></p>
-
+<p><img src="https://i.imgur.com/w3B4m4L.png" alt=""></p>
 <p>最後是從錯誤訊息上判斷應該是跟權限有關的問題，多加了一些關鍵字才找到解法。</p>
-
 <p>主要是 user 目錄底下的 .ssh 的權限必須是 700 而 autorized_keys 的權限必須是 600：</p>
-
-<pre><code class="language-bash=">$ chmod 700 .ssh
+<pre><code class="language-bash=" data-lang="bash=">$ chmod 700 .ssh
 $ chmod 600 .ssh/authorized_keys
-</code></pre>
-
-<p>離開後重新 ssh 應該就可以成功登入了</p>
+</code></pre><p>離開後重新 ssh 應該就可以成功登入了</p>
 <ul class="pa0">
   
    <li class="list">

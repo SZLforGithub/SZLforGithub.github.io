@@ -6,10 +6,10 @@
     
     <title>開發自己的 Composer package | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="用了那麼久的 Composer，也該自己寫一個了吧？" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/composer_package/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/composer.png" />
 <meta property="article:published_time" content="2021-05-08T15:03:37+08:00" />
 <meta property="article:modified_time" content="2021-05-08T15:03:37+08:00" />
 <meta itemprop="name" content="開發自己的 Composer package">
 <meta itemprop="description" content="用了那麼久的 Composer，也該自己寫一個了吧？">
-
-
 <meta itemprop="datePublished" content="2021-05-08T15:03:37&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-08T15:03:37&#43;08:00" />
 <meta itemprop="wordCount" content="1450">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
-
+<meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
 
 
-<meta itemprop="keywords" content="學習筆記,backend,心得分享,PHP," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,backend,心得分享,PHP," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/composer.png"/>
 
 <meta name="twitter:title" content="開發自己的 Composer package"/>
 <meta name="twitter:description" content="用了那麼久的 Composer，也該自己寫一個了吧？"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -186,221 +168,129 @@ if (!doNotTrack) {
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="前言">前言</h2>
-
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="前言">前言</h2>
 <p>最近剛好有一些小工具的需求，本來是想要在 Local 用腳本處理就好，但既然都要寫了，不如寫成一個 Package，剛好填上一個文章的坑，之後如果要做成 web 也比較方便。</p>
-
 <p>本篇的對象是已經了解什麼是 Composer，並且想要自己開發一個 Package 的朋友，如果你還不知道什麼是 Composer，<a href="https://szlforgithub.github.io/post/composer/">請移駕此處</a>。</p>
-
-<h2 id="ok-let-s-do-it">Ok, Let&rsquo;s do it!</h2>
-
+<h2 id="ok-lets-do-it">Ok, Let&rsquo;s do it!</h2>
 <h3 id="step-1-建立你的-package-資料夾">Step 1. 建立你的 Package 資料夾</h3>
-
-<pre><code class="language-bash">$ mkdir composer-practice
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir composer-practice
 $ cd composer-practice
-</code></pre>
-
-<h3 id="step-2-初始化-composer-package">Step 2. 初始化 Composer package</h3>
-
-<pre><code class="language-bash">$ composer init
-</code></pre>
-
-<p>接下來會有一系列的交互式問答：</p>
-
+</code></pre></div><h3 id="step-2-初始化-composer-package">Step 2. 初始化 Composer package</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ composer init
+</code></pre></div><p>接下來會有一系列的交互式問答：</p>
 <h4 id="package-name">Package Name</h4>
-
 <pre><code>This command will guide you through creating your composer.json config.
 
 Package name (&lt;vendor&gt;/&lt;name&gt;) [suzhonglin/composer-practice]:
-</code></pre>
-
-<p>首先是 Package name，它會出現在完成頁面的這裡：
-<img src="https://i.imgur.com/5gAn8db.png" alt="" />
+</code></pre><p>首先是 Package name，它會出現在完成頁面的這裡：
+<img src="https://i.imgur.com/5gAn8db.png" alt="">
 也就是別人 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 時輸入的 Package 名稱。</p>
-
 <h4 id="description">Description</h4>
-
 <pre><code>Description []:
-</code></pre>
-
-<p>Package 描述，會出現在完成頁面的這裡：
-<img src="https://i.imgur.com/0iVgODc.png" alt="" /></p>
-
+</code></pre><p>Package 描述，會出現在完成頁面的這裡：
+<img src="https://i.imgur.com/0iVgODc.png" alt=""></p>
 <h4 id="author">Author</h4>
-
 <pre><code>Author [Louis.Su &lt;i0989872540@gmail.com&gt;, n to skip]:
-</code></pre>
-
-<p>維護者的姓名及連絡信箱。</p>
-
+</code></pre><p>維護者的姓名及連絡信箱。</p>
 <h4 id="minimum-stability">Minimum Stability</h4>
-
 <pre><code>Minimum Stability []:
-</code></pre>
-
-<p>這個欄位花了我一點時間才搞懂，<a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">官方文件</a>定義它由低到高有以下幾種值：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">dev, alpha, beta, RC, and stable</code>，並且標註了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code>。</p>
-
+</code></pre><p>這個欄位花了我一點時間才搞懂，<a href="https://getcomposer.org/doc/04-schema.md#minimum-stability">官方文件</a>定義它由低到高有以下幾種值：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">dev, alpha, beta, RC, and stable</code>，並且標註了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code>。</p>
 <p>首先它預設的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code>，意思是當 A package 依賴 B package 時，若 B package 低於穩定版本(stable)時，就會出問題。而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">root-only</code> 的意思則是對當前 A package 向下的依賴有效， B package 的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 裡面同樣也可以設置 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Minimun Stability</code>，這時的 root 就變成 B package 了。</p>
-
 <p>講到這裡你應該可以明白，這個欄位做的是穩定性檢查，當你設為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code> 時，你就可以確保你依賴的其他 Package 都會是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">stable</code>。</p>
-
 <h4 id="package-type">Package Type:</h4>
-
 <pre><code>Package Type (e.g. library, project, metapackage, composer-plugin) []:
-</code></pre>
-
-<p>看你的 Package 是哪一種類型就填哪一種，預設是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">library</code>。</p>
-
+</code></pre><p>看你的 Package 是哪一種類型就填哪一種，預設是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">library</code>。</p>
 <h4 id="license">License</h4>
-
 <pre><code>License []:
-</code></pre>
-
-<p>授權條款，我通常是用 MIT。</p>
-
+</code></pre><p>授權條款，我通常是用 MIT。</p>
 <h4 id="dependencies">Dependencies</h4>
-
 <pre><code>Define your dependencies.
 
 Would you like to define your dependencies (require) interactively [yes]?
-</code></pre>
-
-<p>是否依賴其他的 Package，輸入 yes 之後：</p>
-
+</code></pre><p>是否依賴其他的 Package，輸入 yes 之後：</p>
 <pre><code>Search for a package:
-</code></pre>
-
-<p>輸入 php</p>
-
+</code></pre><p>輸入 php</p>
 <pre><code>Enter the version constraint to require (or leave blank to use the latest version):
-</code></pre>
-
-<p>輸入依賴的 php 版本，這邊填的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">^7.3 || ^8.0</code>。</p>
-
+</code></pre><p>輸入依賴的 php 版本，這邊填的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">^7.3 || ^8.0</code>。</p>
 <p>接下來會再問一次依賴的流程，但這次是在 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">require-dev</code> 的情況。</p>
-
 <h4 id="generate">Generate</h4>
-
 <pre><code>Do you confirm generation [yes]? yes
 Would you like to install dependencies now [yes]? yes
-</code></pre>
-
-<p>最後會幫你安裝依賴的 Package，完成之後你應該要看到你的專案資料夾多了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vendor</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.lock</code>。</p>
-
+</code></pre><p>最後會幫你安裝依賴的 Package，完成之後你應該要看到你的專案資料夾多了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vendor</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.lock</code>。</p>
 <h3 id="step-3-完成-package-內容">Step 3. 完成 Package 內容</h3>
-
 <p>首先先來看一下我們的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer.json</code>：</p>
-
-<pre><code class="language-json">{
-    &quot;name&quot;: &quot;louissu/composer-practice&quot;,
-    &quot;description&quot;: &quot;composer-practice is a package which I use to practice&quot;,
-    &quot;type&quot;: &quot;library&quot;,
-    &quot;require&quot;: {
-        &quot;php&quot;: &quot;^7.3 || ^8.0&quot;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;louissu/composer-practice&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;composer-practice is a package which I use to practice&#34;</span>,
+    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;library&#34;</span>,
+    <span style="color:#f92672">&#34;require&#34;</span>: {
+        <span style="color:#f92672">&#34;php&#34;</span>: <span style="color:#e6db74">&#34;^7.3 || ^8.0&#34;</span>
     },
-    &quot;require-dev&quot;: {
-        &quot;php&quot;: &quot;^7.3 || ^8.0&quot;
+    <span style="color:#f92672">&#34;require-dev&#34;</span>: {
+        <span style="color:#f92672">&#34;php&#34;</span>: <span style="color:#e6db74">&#34;^7.3 || ^8.0&#34;</span>
     },
-    &quot;license&quot;: &quot;MIT&quot;,
-    &quot;authors&quot;: [
+    <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;MIT&#34;</span>,
+    <span style="color:#f92672">&#34;authors&#34;</span>: [
         {
-            &quot;name&quot;: &quot;Louis.Su&quot;,
-            &quot;email&quot;: &quot;i0989872540@gmail.com&quot;
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Louis.Su&#34;</span>,
+            <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;i0989872540@gmail.com&#34;</span>
         }
     ],
-    &quot;minimum-stability&quot;: &quot;dev&quot;
+    <span style="color:#f92672">&#34;minimum-stability&#34;</span>: <span style="color:#e6db74">&#34;dev&#34;</span>
 }
-</code></pre>
-
-<p>還少了 autoload 的部分，在最後面加上：</p>
-
-<pre><code class="language-json">&quot;autoload&quot;: {
-    &quot;psr-4&quot;: {
-        &quot;Louis\\&quot;: &quot;src/test&quot;
+</code></pre></div><p>還少了 autoload 的部分，在最後面加上：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;autoload&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+    <span style="color:#f92672">&#34;psr-4&#34;</span>: {
+        <span style="color:#f92672">&#34;Louis\\&#34;</span>: <span style="color:#e6db74">&#34;src/test&#34;</span>
     }
 }
-</code></pre>
-
-<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Louis</code> 指的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">namespace</code>，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">src/test</code> 指的是對應的目錄。</p>
-
+</code></pre></div><p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Louis</code> 指的是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">namespace</code>，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">src/test</code> 指的是對應的目錄。</p>
 <p>接著新增我們剛剛指定的目錄，在專案根目錄新增 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">src</code> 資料夾和下一層的 test 資料夾，並新增一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Test.php</code>：</p>
-
-<pre><code class="language-php">&lt;?php
-namespace Louis;
-class Test 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Louis</span>;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> 
 {
-    public function test()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">test</span>()
     {
-        echo &quot;This is my first composer package!&quot;;
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;This is my first composer package!&#34;</span>;
     }
 }
-</code></pre>
-
-<p>記得檔名跟類別名都要遵守 psr-4 的規範，到這裡已經基本完成整個 package 的內容了。</p>
-
+</code></pre></div><p>記得檔名跟類別名都要遵守 psr-4 的規範，到這裡已經基本完成整個 package 的內容了。</p>
 <h3 id="step-4-上傳">Step 4. 上傳</h3>
-
 <p>到 <a href="https://packagist.org/">Packagist</a> 申請一個帳號，點擊右上方的 Submit：
-<img src="https://i.imgur.com/DPQG7yE.png" alt="" />
+<img src="https://i.imgur.com/DPQG7yE.png" alt="">
 然後你會發現需要一個 Github Repository 的網址：
-<img src="https://i.imgur.com/AxPjtaO.png" alt="" /></p>
-
+<img src="https://i.imgur.com/AxPjtaO.png" alt=""></p>
 <p>將專案上傳到 Github 的部份就不用教學了吧，如果對 Git 不熟悉的話，<a href="https://szlforgithub.github.io/post/git/">請移駕此處</a>。</p>
-
 <p>將 Github Repository 的網址 Submit，應該就可以看到 Package 的畫面了。</p>
-
-<p><img src="https://i.imgur.com/s2GsKBf.png" alt="" /></p>
-
+<p><img src="https://i.imgur.com/s2GsKBf.png" alt=""></p>
 <h3 id="step-5-推上-semantic-version">Step 5. 推上 Semantic Version</h3>
-
 <p>在正式讓別人可以 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 之前，還必須推上你的版號，還記得前面提到的 Minimum Stability 嗎？如果你填的是 dev 的話就不影響，但如果是預設的 stable 的話，沒有上版號是沒有辦法使用的：</p>
-
 <pre><code>[InvalidArgumentException]
   Could not find a version of package &lt;package name&gt; matching your minimum-stability (stable). Require it
   with an explicit version constraint allowing its desired stability.
-</code></pre>
-
-<p>所以你必須在你的專案中下：</p>
-
-<pre><code class="language-bash">$ git tag -a v1.0.0 -m &quot;first version&quot;
+</code></pre><p>所以你必須在你的專案中下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git tag -a v1.0.0 -m <span style="color:#e6db74">&#34;first version&#34;</span>
 $ git push --tag
-</code></pre>
-
-<p>才代表這個專案有穩定版本可以使用。</p>
-
+</code></pre></div><p>才代表這個專案有穩定版本可以使用。</p>
 <p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice">Repository</a> 看到。</p>
-
 <h3 id="測試">測試</h3>
-
 <p>新建一個專案資料夾，像一般在使用第三方套件一樣， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require louissu/composer-practice</code>，記得換成自己的 Package name。</p>
-
 <p>新建一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">index.php</code>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">require</span> <span style="color:#e6db74">&#34;vendor/autoload.php&#34;</span>;
 
-<pre><code class="language-php">&lt;?php
-require &quot;vendor/autoload.php&quot;;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Louis\Test</span>;
 
-use Louis\Test;
+$test <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Test</span>();
+$test<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">test</span>();
 
-$test = new Test();
-$test-&gt;test();
-
-</code></pre>
-
-<p>執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">index.php</code>，你應該會看到：</p>
-
+</code></pre></div><p>執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">index.php</code>，你應該會看到：</p>
 <pre><code>This is my first composer package!
-</code></pre>
-
-<p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice-use">Repository</a> 看到。</p>
-
+</code></pre><p>以上程式碼可以在這個 <a href="https://github.com/SZLforGithub/composer-practice-use">Repository</a> 看到。</p>
 <h2 id="結語">結語</h2>
-
 <p>用了那麼久的 Composer，一直沒有真正的寫過一個 Package，在寫的過程也更理解 Composer 實際上是用什麼方式在管理 Package 之間的依賴，算是蠻有趣的收穫。</p>
-
 <h2 id="references">References</h2>
-
 <ol>
 <li><a href="https://packagist.org/">https://packagist.org/</a></li>
 <li><a href="https://getcomposer.org/doc/04-schema.md">https://getcomposer.org/doc/04-schema.md</a></li>
@@ -481,7 +371,7 @@ $test-&gt;test();
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#ok-let-s-do-it">
+                            <a class="nav-link text-left" href="#ok-lets-do-it">
                             Ok, Let’s do it!
                             </a>
                         </li>

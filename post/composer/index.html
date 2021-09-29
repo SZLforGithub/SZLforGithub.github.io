@@ -6,10 +6,10 @@
     
     <title>Composer 介紹與使用 | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="還在 include 一大堆檔案？" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/composer/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/composer.png" />
 <meta property="article:published_time" content="2020-06-07T19:33:01+08:00" />
 <meta property="article:modified_time" content="2020-06-07T19:33:01+08:00" />
 <meta itemprop="name" content="Composer 介紹與使用">
 <meta itemprop="description" content="還在 include 一大堆檔案？">
-
-
 <meta itemprop="datePublished" content="2020-06-07T19:33:01&#43;08:00" />
 <meta itemprop="dateModified" content="2020-06-07T19:33:01&#43;08:00" />
-<meta itemprop="wordCount" content="1118">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
-
+<meta itemprop="wordCount" content="1114">
+<meta itemprop="image" content="https://szlforgithub.github.io/images/composer.png">
 
 
-<meta itemprop="keywords" content="學習筆記,PHP," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,PHP," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/composer.png"/>
 
 <meta name="twitter:title" content="Composer 介紹與使用"/>
 <meta name="twitter:description" content="還在 include 一大堆檔案？"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -182,121 +164,69 @@ if (!doNotTrack) {
     
     
     <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
-    <span class="f6 mv4 dib tracked"> - 1118 words</span>
+    <span class="f6 mv4 dib tracked"> - 1114 words</span>
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="什麼是-composer">什麼是 Composer？</h2>
-
-<p><img src="https://i.imgur.com/nHqr8I5.jpg" alt="" />
-<br></p>
-
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="什麼是-composer">什麼是 Composer？</h2>
+<p><img src="https://i.imgur.com/nHqr8I5.jpg" alt="">
+<!-- raw HTML omitted --></p>
 <p>Composer 是 PHP 用來管理套件的工具，是現代 PHPer 必備的武器之一。</p>
-
 <h2 id="為什麼我們需要-composer">為什麼我們需要 Composer？</h2>
-
 <p>在沒有使用 Composer 的情況下，每使用一個套件就必須 include 一次，套件又可能相依其他套件，於是我們又要再 include 那個套件。</p>
-
 <p>若是自己開發的小專案還沒關係，要是專案一大起來，可能會有兩種情況，一種是不同的情況需要不同的套件，於是 include 就散落在各個檔案中，難以管理；另一種就是在程式進入點一次 include 一大堆，include 相連到天邊。</p>
-
-<p><img src="https://i.imgur.com/hS0gMsy.jpg" alt="" />
-<br></p>
-
+<p><img src="https://i.imgur.com/hS0gMsy.jpg" alt="">
+<!-- raw HTML omitted --></p>
 <p>但有了 Composer 之後，我們只需要一行</p>
-
-<pre><code class="language-php">require 'vendor/autoload.php';
-</code></pre>
-
-<p>怎麼樣？是不是有種把衣櫃整理乾淨的爽感？這就是我們使用 Composer 的原因。</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">require &#39;vendor/autoload.php&#39;;
+</code></pre></div><p>怎麼樣？是不是有種把衣櫃整理乾淨的爽感？這就是我們使用 Composer 的原因。</p>
 <h2 id="怎麼開始">怎麼開始？</h2>
-
-<h3 id="if-your-system-windows">if (your_system == &ldquo;windows&rdquo;)</h3>
-
+<h3 id="if-your_system--windows">if (your_system == &ldquo;windows&rdquo;)</h3>
 <p><a href="https://getcomposer.org/doc/00-intro.md#installation-windows">照著這份文件做</a>，下載  Composer-Setup.exe 後執行，他會下載最新版的 Composer 並修改你的 PATH 環境變數，但要記得重新啟動 terminal ，才會重新 load PATH。</p>
-
-<hr />
-
-<h3 id="if-your-system-linux-unix-macos">if (your_system == &ldquo;Linux / Unix / macOS&rdquo;)</h3>
-
+<hr>
+<h3 id="if-your_system--linux--unix--macos">if (your_system == &ldquo;Linux / Unix / macOS&rdquo;)</h3>
 <p><a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos">照著這份文件做</a>。</p>
-
 <blockquote>
 <p>分為 Locally 和 Globally，下載方式大同小異，差別在於把 Composer 放在專案內 (Locally) 或是全局可訪問 (Globally)，<a href="https://stackoverflow.com/questions/35405851/composer-installation-global-vs-local">這裡有一些討論</a>。</p>
 </blockquote>
-
 <p>首先請務必從 <a href="https://getcomposer.org/download/">Composer 正式的官網</a>下載，依據執行下面四行指令：</p>
-
-<pre><code class="language-bash=">php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
+<pre><code class="language-bash=" data-lang="bash=">php -r &quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;
 php -r &quot;if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;
 php composer-setup.php
 php -r &quot;unlink('composer-setup.php');&quot;
-</code></pre>
-
-<p>分別做的事情為<br />
-1. 下載 composer-setup.php 安裝程式<br />
-2. 對下載的檔案做檢查，確保來源正確<br />
-3. 執行 composer-setup.php 開始安裝<br />
-4. 安裝完成後刪除 composer-setup.php</p>
-
-<hr />
-
+</code></pre><p>分別做的事情為</p>
+<ol>
+<li>下載 composer-setup.php 安裝程式</li>
+<li>對下載的檔案做檢查，確保來源正確</li>
+<li>執行 composer-setup.php 開始安裝</li>
+<li>安裝完成後刪除 composer-setup.php</li>
+</ol>
+<hr>
 <p>按照上面的方法安裝完後，你會發現你的目錄中多了一個 composer.phar 檔案，執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php composer.phar</code> ，出現 Composer 圖案就代表成功了。</p>
-
-<p><img src="https://i.imgur.com/ZsbNXIi.png" alt="composer_success" /></p>
-
+<p><img src="https://i.imgur.com/ZsbNXIi.png" alt="composer_success"></p>
 <p>想要 Globally 使用 Composer ，還需要把你的 composer.phar 移動到 /usr/local/bin 中，並確定自己有把 /usr/local/bin 加入 $PATH 參數中</p>
-
-<pre><code class="language-bash=">mv composer.phar /usr/local/bin/composer
-</code></pre>
-
-<p>直接執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer</code> ，如果看到一樣的 Composer 圖案就代表成功了。</p>
-
+<pre><code class="language-bash=" data-lang="bash=">mv composer.phar /usr/local/bin/composer
+</code></pre><p>直接執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer</code> ，如果看到一樣的 Composer 圖案就代表成功了。</p>
 <h2 id="如何使用">如何使用？</h2>
-
 <h3 id="初始化">初始化</h3>
-
 <pre><code>composer -t
-</code></pre>
-
-<p>可以看到當前 Composer 的版本號。</p>
-
+</code></pre><p>可以看到當前 Composer 的版本號。</p>
 <p>切換到專案目錄執行</p>
-
 <pre><code>composer init
-</code></pre>
-
-<p>一陣問答之後會幫你產生一個 composer.json ，裡面會有 Composer 相關的設定，包含使用的套件以及版本等。</p>
-
+</code></pre><p>一陣問答之後會幫你產生一個 composer.json ，裡面會有 Composer 相關的設定，包含使用的套件以及版本等。</p>
 <h3 id="安裝套件">安裝套件</h3>
-
 <p>接著假設你想安裝的是 <a href="https://phpunit.de/index.html">phpUnit</a>，按照官方文件執行</p>
-
 <pre><code>composer require --dev phpunit/phpunit ^9.1
-</code></pre>
-
-<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 這個指令會安裝你指定的套件，並新增一個 composer.lock (如果沒有的話)，然後把這個套件的資訊記錄在 composer.lock 和 composer.json 中。</p>
-
+</code></pre><p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer require</code> 這個指令會安裝你指定的套件，並新增一個 composer.lock (如果沒有的話)，然後把這個套件的資訊記錄在 composer.lock 和 composer.json 中。</p>
 <p>&ndash;dev 的意思則是相關設定會寫在 composer.json 和 composer.lock 的 require-dev 中，這樣的區分是因為有些套件只需要在測試環境中執行 (development or testing)，在正式環境中並不需要 (production)，在正式環境中只需要執行 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer install --no-dev</code> 就可以排除掉 require-dev 中的套件 (<a href="https://stackoverflow.com/questions/19117871/what-is-the-difference-between-require-and-require-dev-sections-in-composer-json">詳見此</a>)。</p>
-
 <p>最後的 ^9.1 則代表版本。</p>
-
 <h3 id="composer-install">composer install</h3>
-
 <p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer install</code> 指令會去找專案內的 composer.lock，並按照裡面記錄的套件和版號安裝。如果找不到 composer.lock ，就會按照 composer.json 的紀錄安裝，並產生一個 composer.lock。</p>
-
 <h3 id="composer-update">composer update</h3>
-
 <p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer update</code> 則會根據 composer.json 中指定的版本下載。</p>
-
 <p>也就是說，如果有 composer.lock，就乖乖用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer install</code> 來確保自己的套件版本與原開發者是一模一樣的。若是用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer update</code> 的話，就有套件的版本可能不同導致的不相容問題。另外，在沒有 composer.lock 的情況下， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer install</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">composer update</code> 做的事情是一樣的 (讀取 composer.json 並安裝套件)。</p>
-
 <p>以上就是基本的 Composer 使用方式，想了解更多請至參考資料。</p>
-
 <h2 id="參考資料">參考資料</h2>
-
 <ol>
 <li><a href="https://getcomposer.org/">https://getcomposer.org/</a></li>
 <li><a href="http://blog.tonycube.com/2016/12/composer-php.html">http://blog.tonycube.com/2016/12/composer-php.html</a></li>
@@ -420,7 +350,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#if-your-system-windows">
+                            <a class="nav-link text-left" href="#if-your_system--windows">
                             if (your_system == “windows”)
                             </a>
                         </li>
@@ -448,7 +378,7 @@ php -r &quot;unlink('composer-setup.php');&quot;
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#if-your-system-linux-unix-macos">
+                            <a class="nav-link text-left" href="#if-your_system--linux--unix--macos">
                             if (your_system == “Linux / Unix / macOS”)
                             </a>
                         </li>

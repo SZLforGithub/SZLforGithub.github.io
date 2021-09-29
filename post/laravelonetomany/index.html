@@ -6,10 +6,10 @@
     
     <title>Laravel 一對多關聯 (one-to-many Relationship) | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="Laravel 一對多關聯的學習紀錄。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/laravelonetomany/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/laravel.jpeg" />
 <meta property="article:published_time" content="2020-07-26T18:34:02+08:00" />
 <meta property="article:modified_time" content="2020-07-26T18:34:02+08:00" />
 <meta itemprop="name" content="Laravel 一對多關聯 (one-to-many Relationship)">
 <meta itemprop="description" content="Laravel 一對多關聯的學習紀錄。">
-
-
 <meta itemprop="datePublished" content="2020-07-26T18:34:02&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-26T18:34:02&#43;08:00" />
 <meta itemprop="wordCount" content="764">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/laravel.jpeg">
-
+<meta itemprop="image" content="https://szlforgithub.github.io/images/laravel.jpeg">
 
 
-<meta itemprop="keywords" content="學習筆記,PHP," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,PHP," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/laravel.jpeg"/>
 
 <meta name="twitter:title" content="Laravel 一對多關聯 (one-to-many Relationship)"/>
 <meta name="twitter:description" content="Laravel 一對多關聯的學習紀錄。"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -182,95 +164,71 @@ if (!doNotTrack) {
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<p>當一筆資料同時關聯到另一張表的許多資料時，我們通常會用一對多來操作，比如說一個用戶 (user) 會有很多則貼文 (posts) ，我會盡可能的從創建到使用都記錄下來，希望可以幫到同樣使用這個框架的 <del>未來的自己</del> 你。</p>
-
+    nested-img mid-gray pr4-l w-two-thirds-l"><p>當一筆資料同時關聯到另一張表的許多資料時，我們通常會用一對多來操作，比如說一個用戶 (user) 會有很多則貼文 (posts) ，我會盡可能的從創建到使用都記錄下來，希望可以幫到同樣使用這個框架的 <del>未來的自己</del> 你。</p>
 <h2 id="environment">Environment</h2>
-
 <ul>
 <li>PHP 7.3.18</li>
 <li>Laravel 6.18.20</li>
 </ul>
-
 <h2 id="migration">Migration</h2>
-
 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:migration create_users_table</code>
-
-<pre><code class="language-php">Schema::create('users', function (Blueprint $table) {
-    $table-&gt;bigIncrements('id');
-    $table-&gt;string('name');
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">Schema::create(&#39;users&#39;, function (Blueprint $table) {
+    $table-&gt;bigIncrements(&#39;id&#39;);
+    $table-&gt;string(&#39;name&#39;);
     $table-&gt;timestamps();
 }
-</code></pre>
-
-<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:migration create_posts_table</code>
-
-<pre><code class="language-php">Schema::create('posts', function (Blueprint $table) {
-    $table-&gt;bigIncrements('id');
-    $table-&gt;bigInteger('user_id')-&gt;unsigned();
+</code></pre></div><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:migration create_posts_table</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">Schema::create(&#39;posts&#39;, function (Blueprint $table) {
+    $table-&gt;bigIncrements(&#39;id&#39;);
+    $table-&gt;bigInteger(&#39;user_id&#39;)-&gt;unsigned();
     $table-&gt;text-&gt;content();
     $table-&gt;timestamps();
     
-    $table-&gt;foreign('user_id')-&gt;references('id')-&gt;on('users')-&gt;onDelete('cascade');
+    $table-&gt;foreign(&#39;user_id&#39;)-&gt;references(&#39;id&#39;)-&gt;on(&#39;users&#39;)-&gt;onDelete(&#39;cascade&#39;);
 }
-</code></pre>
-
-<h2 id="models">Models</h2>
-
+</code></pre></div><h2 id="models">Models</h2>
 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:model Models/User</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<pre><code class="language-php">&lt;?php
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App\Models</span>;
 
-namespace App\Models;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Database\Eloquent\Model</span>;
 
-use Illuminate\Database\Eloquent\Model;
-
-class User extends Model
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">User</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Model</span>
 {
-    protected $table = 'users';
+    <span style="color:#66d9ef">protected</span> $table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;users&#39;</span>;
 
-    protected $guarded = [];
+    <span style="color:#66d9ef">protected</span> $guarded <span style="color:#f92672">=</span> [];
     
-    public function posts()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">posts</span>()
     {
-        return $this-&gt;hasMany('App\Models\Post');
+        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">hasMany</span>(<span style="color:#e6db74">&#39;App\Models\Post&#39;</span>);
     }    
 }
-</code></pre>
+</code></pre></div><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:model Models/Post</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">php artisan make:model Models/Post</code>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">App\Models</span>;
 
-<pre><code class="language-php">&lt;?php
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Illuminate\Database\Eloquent\Model</span>;
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Post extends Model
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Post</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Model</span>
 {
-    protected $table = 'posts';
+    <span style="color:#66d9ef">protected</span> $table <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;posts&#39;</span>;
 
-    protected $guarded = [];
+    <span style="color:#66d9ef">protected</span> $guarded <span style="color:#f92672">=</span> [];
 
-    public function user()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">user</span>()
     {
-        return $this-&gt;belongsTo('App\Models\User');
+        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">belongsTo</span>(<span style="color:#e6db74">&#39;App\Models\User&#39;</span>);
     }
 }
-</code></pre>
-
-<h2 id="how-to-use">How to use</h2>
-
+</code></pre></div><h2 id="how-to-use">How to use</h2>
 <p>我通常會在 Controller 和 Model 之間多一層 Repository 來操作和整理資料，讓 Model 盡可能的只有對 DB 的設定 (例如可填充或關聯等)，讓 Controller 盡可能的只做流程控制。</p>
-
 <p>所以我會在 Repository 裡面注入 Model：</p>
-
 <h3 id="get">Get</h3>
-
 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">UserRepository.php</code>
-
-<pre><code class="language-php">namespace App\Repositories;
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace App\Repositories;
 
 use App\Models\User;
 use App\Models\Post;
@@ -291,11 +249,8 @@ class UserRepository
         return $user-&gt;posts;
     }
 }
-</code></pre>
-
-<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">PostRepository.php</code>
-
-<pre><code class="language-php">namespace App\Repositories;
+</code></pre></div><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">PostRepository.php</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace App\Repositories;
 
 use App\Models\Post;
 
@@ -315,11 +270,8 @@ class PostRepository
         return $post-&gt;user;
     }
 }
-</code></pre>
-
-<h3 id="associate">Associate</h3>
-
-<pre><code class="language-php">function associate($user_id, $post_id)
+</code></pre></div><h3 id="associate">Associate</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function associate($user_id, $post_id)
 {
     $user = $_user::find($user_id);
 
@@ -330,11 +282,8 @@ class PostRepository
     // or
     $post-&gt;user()-&gt;associate($user)-&gt;save;
 }
-</code></pre>
-
-<h3 id="dissociate">Dissociate</h3>
-
-<pre><code class="language-php">function dissociate($user_id, $post_id)
+</code></pre></div><h3 id="dissociate">Dissociate</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function dissociate($user_id, $post_id)
 {
     $user = $_user::find($user_id);
 
@@ -343,66 +292,52 @@ class PostRepository
 
     $user-&gt;posts()-&gt;dissociate();
 }
-</code></pre>
-
-<h3 id="create">Create</h3>
-
-<pre><code class="language-php">function createPostWithCreate($user_id)
+</code></pre></div><h3 id="create">Create</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function createPostWithCreate($user_id)
 {
     $user = $_user::find($user_id);
 
     $user-&gt;posts()-&gt;create([
-        'content' =&gt; 'blablabla...'
+        &#39;content&#39; =&gt; &#39;blablabla...&#39;
     ]);
     
     // ...
 }
-</code></pre>
-
-<pre><code class="language-php">function createPostWithCreateMany($user_id, $post_id)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function createPostWithCreateMany($user_id, $post_id)
 {
     $user = $_user::find($user_id);
     
     $user-&gt;posts()-&gt;createMany([
-        ['content' =&gt; 'blablabla...'],
-        ['content' =&gt; 'Another blablabla...'],
+        [&#39;content&#39; =&gt; &#39;blablabla...&#39;],
+        [&#39;content&#39; =&gt; &#39;Another blablabla...&#39;],
     ]);
 
     // ...
 }
-</code></pre>
-
-<h3 id="save">Save</h3>
-
-<pre><code class="language-php">function createPostWithSave($user_id)
+</code></pre></div><h3 id="save">Save</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function createPostWithSave($user_id)
 {
-    $post = new App\Models\Post(['content' =&gt; 'blablabla...']);
+    $post = new App\Models\Post([&#39;content&#39; =&gt; &#39;blablabla...&#39;]);
 
     $user = $_user::find($user_id);
 
     $user-&gt;posts()-&gt;save($post);
 }
-</code></pre>
-
-<pre><code class="language-php">function createPostWithSaveMany($user_id, $post_id)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">function createPostWithSaveMany($user_id, $post_id)
 {
     $user = $_user::find($user_id);
     
     $user-&gt;posts()-&gt;saveMany([
-        new App\Models\Post(['content' =&gt; 'blablabla...']),
-        new App\Models\Post(['content' =&gt; 'Another blablabla...']),
+        new App\Models\Post([&#39;content&#39; =&gt; &#39;blablabla...&#39;]),
+        new App\Models\Post([&#39;content&#39; =&gt; &#39;Another blablabla...&#39;]),
     ]);
 
     // ...
 }
-</code></pre>
-
-<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">create</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">save</code> 的差別在於 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">save</code> 接收的是一個 Model 物件。</p>
-
+</code></pre></div><p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">create</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">save</code> 的差別在於 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">create</code> 接收的參數是 PHP 的陣列，而 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">save</code> 接收的是一個 Model 物件。</p>
 <p>從 Laravel 的 source code 可以看到：
 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php</code></p>
-
-<pre><code class="language-php">/**
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
  * Save a new model and return the instance.
  *
  * @param  array  $attributes
@@ -414,12 +349,9 @@ public function create(array $attributes = [])
         $instance-&gt;save();
     });
 }
-</code></pre>
-
-<p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">tap</code> 是 Laravel 的 Helper Function：
+</code></pre></div><p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">tap</code> 是 Laravel 的 Helper Function：
 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">vendor/laravel/framework/src/Illuminate/Support/helpers.php</code></p>
-
-<pre><code class="language-php">/**
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
  * Call the given Closure with the given value then return the value.
  *
  * @param  mixed  $value
@@ -436,17 +368,11 @@ function tap($value, $callback = null)
 
     return $value;
 }
-</code></pre>
-
-<p>接收兩個參數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$value</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$callback</code>，並將 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$value</code> 放進 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$callback</code> 後返回。</p>
-
+</code></pre></div><p>接收兩個參數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$value</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$callback</code>，並將 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$value</code> 放進 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$callback</code> 後返回。</p>
 <p>所以我們回到 create 就可以看出，它其實只是在裡面幫你把 new 物件這件事做掉而已。</p>
-
 <h3 id="delete">Delete</h3>
-
 <p>這會把 user 所有的 posts 都刪掉</p>
-
-<pre><code class="language-php">public function delete($user_id)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function delete($user_id)
 {
     $user = $_user::find($user_id);
 
@@ -454,21 +380,13 @@ function tap($value, $callback = null)
 
     // ...
 }
-</code></pre>
-
-<h3 id="select">Select</h3>
-
+</code></pre></div><h3 id="select">Select</h3>
 <p>有時候可能會需要對關聯的資料做篩選，比如說：需要篩選出 Post 的 content 包含 Laravel 這個詞的 User：</p>
-
-<pre><code class="language-php">$user = $this-&gt;_user::with(['post' =&gt; function ($query) {
-    $query-&gt;where('content', 'like', '%Laravel%');
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$user = $this-&gt;_user::with([&#39;post&#39; =&gt; function ($query) {
+    $query-&gt;where(&#39;content&#39;, &#39;like&#39;, &#39;%Laravel%&#39;);
 }])-&gt;get();
-</code></pre>
-
-<p>用 with 來避免 N+1 problem，並傳送一個 Closure 來對其中的資料做篩選。</p>
-
+</code></pre></div><p>用 with 來避免 N+1 problem，並傳送一個 Closure 來對其中的資料做篩選。</p>
 <h2 id="參考資料">參考資料</h2>
-
 <ol>
 <li><a href="https://laravel.com/docs/6.x/eloquent-relationships">Laravel 官方文件</a></li>
 </ol>

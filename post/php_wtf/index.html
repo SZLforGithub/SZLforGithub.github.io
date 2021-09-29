@@ -6,10 +6,10 @@
     
     <title>PHP 關於 zero、false、null 和 isset、empty、is_null 之間的恩怨糾葛 | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="下次再搞錯我就從這裡跳下去！" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/php_wtf/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/php.jpg" />
 <meta property="article:published_time" content="2021-05-01T13:08:19+08:00" />
 <meta property="article:modified_time" content="2021-05-01T13:08:19+08:00" />
 <meta itemprop="name" content="PHP 關於 zero、false、null 和 isset、empty、is_null 之間的恩怨糾葛">
 <meta itemprop="description" content="下次再搞錯我就從這裡跳下去！">
-
-
 <meta itemprop="datePublished" content="2021-05-01T13:08:19&#43;08:00" />
 <meta itemprop="dateModified" content="2021-05-01T13:08:19&#43;08:00" />
-<meta itemprop="wordCount" content="1093">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/php.jpg">
-
+<meta itemprop="wordCount" content="1090">
+<meta itemprop="image" content="https://szlforgithub.github.io/images/php.jpg">
 
 
-<meta itemprop="keywords" content="學習筆記,backend,心得分享,PHP," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,backend,心得分享,PHP," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/php.jpg"/>
 
 <meta name="twitter:title" content="PHP 關於 zero、false、null 和 isset、empty、is_null 之間的恩怨糾葛"/>
 <meta name="twitter:description" content="下次再搞錯我就從這裡跳下去！"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -182,182 +164,146 @@ if (!doNotTrack) {
     
     
     <span class="f6 mv4 dib tracked"> - 3 minutes read</span>
-    <span class="f6 mv4 dib tracked"> - 1093 words</span>
+    <span class="f6 mv4 dib tracked"> - 1090 words</span>
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="前言">前言</h2>
-
-<p><img src="https://i.imgur.com/CLlEicj.png" alt="" />
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="前言">前言</h2>
+<p><img src="https://i.imgur.com/CLlEicj.png" alt="">
 開個玩笑大家別當真啊，PHP 真香。</p>
-
 <p>之所以會有這篇比較基礎的文章，是因為去年在面試時，曾經被問到 isset、empty、is_null 三者的差別，但當時因為太依賴 <a href="https://www.php.net/manual/en/types.comparisons.php">PHP 官方的比對表</a>，一時之間答得亂七八糟，但當時其實也怎麼沒放在心上，心裡想著實際遇到時再查表就好。</p>
-
 <p>但是，人生總是有個但是，後來工作上某個專案紮紮實實的踩到坑，浪費了我一個下午的美好時光。這個故事告訴我們，遇到坑不填，早晚會再摔進去一次。</p>
-
 <p>文中所有程式碼可以在這個 <a href="https://github.com/SZLforGithub/php-wtf">repository</a> 看到。</p>
-
-<hr />
-
+<hr>
 <h2 id="environment">Environment</h2>
-
 <p>PHP 8.0.5 (<a href="https://hub.docker.com/layers/php/library/php/8.0.5-cli/images/sha256-6dbc7603c99016c013eb26ebb0f3898448a9d97670718d5cb11382750122d7ee?context=explore">official docker image php:8.0.5-cli</a>)</p>
-
-<hr />
-
+<hr>
 <h2 id="填坑囉">填坑囉</h2>
-
-<h3 id="isset-https-www-php-net-manual-en-function-isset-php"><a href="https://www.php.net/manual/en/function.isset.php">isset()</a></h3>
-
+<h3 id="issethttpswwwphpnetmanualenfunctionissetphp"><a href="https://www.php.net/manual/en/function.isset.php">isset()</a></h3>
 <p>字面上的意思就是判斷變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">是否被設置</code>，這裡的尚未被設置包含 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">undefined</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">尚未給予初始值</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">null</code> 這三種狀態，簡單來說就是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">檢查變數已經設置且值不為null</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<pre><code class="language-php">&lt;?php
-
-// undefined
-var_dump(isset($x)); // bool(false)
-
-// 尚未給予初始值
-$x;
-var_dump(isset($x)); // bool(false)
-
-// null
-$x = null;
-var_dump(isset($x)); // bool(false)
-
-</code></pre>
-
-<blockquote>
-<p>容易混淆的部分：<br />
-1. 給 0 算是有設置，這點算合理，之所以會做這個檢查是因為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">0 == null</code> 會回傳 true，看看我都被 PHP 嚇成什麼樣子了<br />
-2. 如果對一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">unset</code>，那他自然會變成 isset false 的狀態</p>
-
-<pre><code class="language-php">$x = 0;
+<span style="color:#75715e">// undefined
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">isset</span>($x)); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 尚未給予初始值
+</span><span style="color:#75715e"></span>$x;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">isset</span>($x)); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// null
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">isset</span>($x)); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+</code></pre></div><blockquote>
+<p>容易混淆的部分：</p>
+<ol>
+<li>給 0 算是有設置，這點算合理，之所以會做這個檢查是因為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">0 == null</code> 會回傳 true，看看我都被 PHP 嚇成什麼樣子了</li>
+<li>如果對一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">unset</code>，那他自然會變成 isset false 的狀態</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$x = 0;
 var_dump(isset($x)); // bool(true)
 
 unset($x);
 var_dump(isset($x)); // bool(false)
 
-</code></pre>
-</blockquote>
-
-<hr />
-
-<h3 id="empty-https-www-php-net-manual-en-function-empty-php"><a href="https://www.php.net/manual/en/function.empty.php">empty()</a></h3>
-
+</code></pre></div><hr>
+<h3 id="emptyhttpswwwphpnetmanualenfunctionemptyphp"><a href="https://www.php.net/manual/en/function.empty.php">empty()</a></h3>
 <p><code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">empty</code> 是一個比較不容易識別的詞，什麼叫空？0 算空嗎？null 算空嗎？我的錢包算&hellip;咳，直接看程式吧</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<pre><code class="language-php">&lt;?php
-
-// undefined
-var_dump(empty($x)); // bool(true)
-
-// 尚未給予初始值
-$x;
-var_dump(empty($x)); // bool(true)
-
-// null
-$x = null;
-var_dump(empty($x)); // bool(true)
-
-// 0
-$x = 0;
-var_dump(empty($x)); // bool(true)
-
-// 空字串
-$x = '';
-var_dump(empty($x)); // bool(true)
-
-// 空陣列
-$x = array();
-var_dump(empty($x)); // bool(true)
-
-// 字串 0
-$x = '0';
-var_dump(empty($x)); // bool(true)
-
-// false
-$x = false;
-var_dump(empty($x)); // bool(true)
-
-</code></pre>
-
-<p>除了剛剛 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">isset()</code> 檢查的<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">undefined</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">尚未給予初始值</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">null</code> 三種狀態以外，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">0</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">空字串</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">空陣列</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'0'</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">false</code> 這幾種也算 empty</p>
-
+<span style="color:#75715e">// undefined
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 尚未給予初始值
+</span><span style="color:#75715e"></span>$x;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// null
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 0
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 空字串
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 空陣列
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 字串 0
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;0&#39;</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">empty</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>除了剛剛 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">isset()</code> 檢查的<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">undefined</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">尚未給予初始值</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">null</code> 三種狀態以外，<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">0</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">空字串</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">空陣列</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'0'</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">false</code> 這幾種也算 empty</p>
 <blockquote>
-<p>容易混淆的部分：<br />
-1. 後兩種 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'0'</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">false</code>，比較容易搞混，因為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'1'</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">true</code> 並不算空</p>
+<p>容易混淆的部分：</p>
+<ol>
+<li>後兩種 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'0'</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">false</code>，比較容易搞混，因為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">'1'</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">true</code> 並不算空</li>
+</ol>
 </blockquote>
-
-<hr />
-
-<h3 id="is-null-https-www-php-net-manual-en-function-is-null-php"><a href="https://www.php.net/manual/en/function.is-null.php">is_null()</a></h3>
-
+<hr>
+<h3 id="is_nullhttpswwwphpnetmanualenfunctionis-nullphp"><a href="https://www.php.net/manual/en/function.is-null.php">is_null()</a></h3>
 <p>語意上是判斷是否為 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">null</code>，但 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">undefined</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">尚未給予初始值</code> ，雖然 PHP 會丟一個 Warning 級別的錯誤，但 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">is_null()</code> 仍然會回 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">true</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<pre><code class="language-php">&lt;?php
-
-// undefined
-var_dump(is_null($x)); // Warning: Undefined variable $x bool(true)
-
-// 尚未給予初始值
-$x;
-var_dump(is_null($x)); // Warning: Undefined variable $x bool(true)
-
-// null
-$x = null;
-var_dump(is_null($x)); // bool(true)
-
-// 0 不算是 null
-$x = 0;
-var_dump(is_null($x)); // bool(false)
-
-// unset 之後 is_null false
-unset($x);
-var_dump(is_null($x)); // Warning: Undefined variable $x  bool(true)
-
-</code></pre>
-
-<p>簡單來說，如果無視錯誤的話， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">is_null()</code> 的行為是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">isset()</code> 的相反</p>
-
-<h3 id="php-的-loose-comparisons">PHP 的 Loose comparisons (==)</h3>
-
+<span style="color:#75715e">// undefined
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">is_null</span>($x)); <span style="color:#75715e">// Warning: Undefined variable $x bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 尚未給予初始值
+</span><span style="color:#75715e"></span>$x;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">is_null</span>($x)); <span style="color:#75715e">// Warning: Undefined variable $x bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// null
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">is_null</span>($x)); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 0 不算是 null
+</span><span style="color:#75715e"></span>$x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">is_null</span>($x)); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// unset 之後 is_null false
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">unset</span>($x);
+<span style="color:#a6e22e">var_dump</span>(<span style="color:#a6e22e">is_null</span>($x)); <span style="color:#75715e">// Warning: Undefined variable $x  bool(true)
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>簡單來說，如果無視錯誤的話， <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">is_null()</code> 的行為是 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">isset()</code> 的相反</p>
+<h3 id="php-的-loose-comparisons-">PHP 的 Loose comparisons (==)</h3>
 <p>順便紀錄同樣很常搞錯的鬆散比較</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<pre><code class="language-php">&lt;?php
-
-// 如果是 int 或者其中一個是 int ，會自動轉為 int 比對
-var_dump(1 == '1'); // bool(true)
-var_dump(2 == '1'); // bool(false)
-var_dump('2' == '1'); // bool(false)
-
-// null 會等於 0，但若是字串跟數字則都不等於
-var_dump(null == 0); // bool(true)
-var_dump('null' == 0); // bool(false)
-var_dump('null' == '0'); // bool(false)
-var_dump(null == '0'); // bool(false)
-
-// false 會等於 0，字串的 false 相當正常，但 bool 的 false 會等於字串的 0
-var_dump(false == 0); // bool(true)
-var_dump('false' == 0); // bool(false)
-var_dump('false' == '0'); // bool(false)
-var_dump(false == '0'); // bool(true)
-
-// 空字串則是都不等於 0
-var_dump('' == 0); // bool(false)
-var_dump('' == '0'); // bool(false)
-
-</code></pre>
-
-<p>這還只是一小部份，完成內容還是請參考<a href="https://www.php.net/manual/en/types.comparisons.php">官方</a>，是不是看得頭很痛？那就對了，請愛用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">===</code> 的嚴格比較，他會先檢查型別才檢查值，所以絕對不會出現意外。</p>
-
+<span style="color:#75715e">// 如果是 int 或者其中一個是 int ，會自動轉為 int 比對
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;2&#39;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;1&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// null 會等於 0，但若是字串跟數字則都不等於
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;null&#39;</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;null&#39;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">null</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// false 會等於 0，字串的 false 相當正常，但 bool 的 false 會等於字串的 0
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">false</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;false&#39;</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;false&#39;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#66d9ef">false</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>); <span style="color:#75715e">// bool(true)
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// 空字串則是都不等於 0
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">var_dump</span>(<span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>); <span style="color:#75715e">// bool(false)
+</span><span style="color:#75715e"></span>
+</code></pre></div><p>這還只是一小部份，完成內容還是請參考<a href="https://www.php.net/manual/en/types.comparisons.php">官方</a>，是不是看得頭很痛？那就對了，請愛用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">===</code> 的嚴格比較，他會先檢查型別才檢查值，所以絕對不會出現意外。</p>
 <h2 id="結語">結語</h2>
-
 <p>花了一些時間爬官方文件，也自己寫了簡單的<a href="https://github.com/SZLforGithub/php-wtf">範例</a>，梳理了長久以來不太在意的問題，這次算是學到一個教訓，也希望未來遇到所有的坑都要記得盡量探究到底。</p>
-
 <h2 id="references">References</h2>
-
 <ol>
 <li><a href="https://www.php.net/manual/en/types.comparisons.php">https://www.php.net/manual/en/types.comparisons.php</a></li>
 <li><a href="https://www.php.net/manual/en/language.operators.comparison.php">https://www.php.net/manual/en/language.operators.comparison.php</a></li>
@@ -488,7 +434,7 @@ var_dump('' == '0'); // bool(false)
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#isset-https-www-php-net-manual-en-function-isset-php">
+                            <a class="nav-link text-left" href="#issethttpswwwphpnetmanualenfunctionissetphp">
                             isset()
                             </a>
                         </li>
@@ -516,7 +462,7 @@ var_dump('' == '0'); // bool(false)
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#empty-https-www-php-net-manual-en-function-empty-php">
+                            <a class="nav-link text-left" href="#emptyhttpswwwphpnetmanualenfunctionemptyphp">
                             empty()
                             </a>
                         </li>
@@ -544,7 +490,7 @@ var_dump('' == '0'); // bool(false)
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#is-null-https-www-php-net-manual-en-function-is-null-php">
+                            <a class="nav-link text-left" href="#is_nullhttpswwwphpnetmanualenfunctionis-nullphp">
                             is_null()
                             </a>
                         </li>
@@ -572,7 +518,7 @@ var_dump('' == '0'); // bool(false)
                     
                     
                         <li class="nav-item">
-                            <a class="nav-link text-left" href="#php-%e7%9a%84-loose-comparisons">
+                            <a class="nav-link text-left" href="#php-%e7%9a%84-loose-comparisons-">
                             PHP 的 Loose comparisons (==)
                             </a>
                         </li>

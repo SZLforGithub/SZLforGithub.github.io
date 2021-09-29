@@ -6,10 +6,10 @@
     
     <title>Singleton pattern (單例模式) for PHP | Louis&#39;s blog</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.58.3" />
+    <meta name="generator" content="Hugo 0.72.0" />
     
     
-      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
     
@@ -46,46 +46,28 @@
 <meta property="og:description" content="單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://szlforgithub.github.io/post/singletonphp/" />
-
 <meta property="og:image" content="https://szlforgithub.github.io/images/php.jpg" />
 <meta property="article:published_time" content="2020-07-26T14:15:24+08:00" />
 <meta property="article:modified_time" content="2020-07-26T14:15:24+08:00" />
 <meta itemprop="name" content="Singleton pattern (單例模式) for PHP">
 <meta itemprop="description" content="單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。">
-
-
 <meta itemprop="datePublished" content="2020-07-26T14:15:24&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-26T14:15:24&#43;08:00" />
 <meta itemprop="wordCount" content="771">
-
-  <meta itemprop="image" content="https://szlforgithub.github.io/images/php.jpg">
-
+<meta itemprop="image" content="https://szlforgithub.github.io/images/php.jpg">
 
 
-<meta itemprop="keywords" content="學習筆記,PHP,design pattern," />
-<meta name="twitter:card" content="summary_large_image"/>
+
+<meta itemprop="keywords" content="學習筆記,PHP,design pattern," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://szlforgithub.github.io/images/php.jpg"/>
 
 <meta name="twitter:title" content="Singleton pattern (單例模式) for PHP"/>
 <meta name="twitter:description" content="單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。"/>
 
-      
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-169325906-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-    
 	
   </head>
 
-  <body class="ma0 sans-serif production">
+  <body class="ma0 sans-serif">
 
     
 
@@ -182,18 +164,12 @@ if (!doNotTrack) {
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
-    nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="什麼是單例模式">什麼是單例模式</h2>
-
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="什麼是單例模式">什麼是單例模式</h2>
 <p>單例模式是一種 design pattern，要求一個 Class 只能有一個實例，通常會使用在系統中需要一個全局物件的情況。</p>
-
 <p>在實作時的邏輯就是：「一個 Class 只能有一個儲存自身實例化的靜態變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 、和一個獲得這個變數的靜態方法 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> 」
 實際在使用時會 call <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> 這個靜態方法，他會檢查 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 是否為空，若不為空則回傳，若為空則實例化 Class 賦予 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$instance</code> 並回傳。</p>
-
 <h2 id="以php為例">以PHP為例</h2>
-
-<pre><code class="language-php=">&lt;?php
+<pre><code class="language-php=" data-lang="php=">&lt;?php
 final class Singleton
 {
     private static $instance;
@@ -209,80 +185,47 @@ final class Singleton
     
     public $_somethingWeWantToKeep = null;
 }
-</code></pre>
-
-<p>我們用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">final</code> 宣告 class 來確保不會被繼承，並如同上面所說的，建立 static function 來 return 一個存了 class 實體化後物件的 static 變數，最後在 class 中宣告一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$_somethingWeWantToKeep</code>。</p>
-
+</code></pre><p>我們用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">final</code> 宣告 class 來確保不會被繼承，並如同上面所說的，建立 static function 來 return 一個存了 class 實體化後物件的 static 變數，最後在 class 中宣告一個變數 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">$_somethingWeWantToKeep</code>。</p>
 <p>實際上在使用的情況是這樣的：</p>
-
-<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
-</code></pre>
-
-<p>之後我們在任何地方都可以引用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Singleton::getInstance()->_somethingWeWantToKeep</code> ，並且都會得到一樣的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">I'm smart!</code></p>
-
+<pre><code class="language-php=" data-lang="php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+</code></pre><p>之後我們在任何地方都可以引用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Singleton::getInstance()->_somethingWeWantToKeep</code> ，並且都會得到一樣的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">I'm smart!</code></p>
 <p>但這樣就夠了嗎？</p>
-
 <p>在上面的例子中， Singleton 大致上完成了，但還不夠嚴謹。</p>
-
 <h3 id="防止被外部調用">防止被外部調用</h3>
-
 <p>舉一個簡單的例子：</p>
-
-<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+<pre><code class="language-php=" data-lang="php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
 
 $stupidGuy = new Singleton;
 $stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
-</code></pre>
-
-<p>上述的情況簡單來說就是在 Singleton 之後，被外部調用並重新賦值，所以我們可以在 class 中新增：</p>
-
-<pre><code class="language-php=">private function __construct() {}
-</code></pre>
-
-<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__construct()</code> 來避免 Singleton 被外部調用。</p>
-
+</code></pre><p>上述的情況簡單來說就是在 Singleton 之後，被外部調用並重新賦值，所以我們可以在 class 中新增：</p>
+<pre><code class="language-php=" data-lang="php=">private function __construct() {}
+</code></pre><p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__construct()</code> 來避免 Singleton 被外部調用。</p>
 <h3 id="防止被-clone">防止被 clone</h3>
-
 <p>還有可能出現另一種情況：</p>
-
-<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+<pre><code class="language-php=" data-lang="php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
 
 $stupidGuy = clone Singleton::getInstance();
 $stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
-</code></pre>
-
-<p>這個地方也是發生類似的事情，我們的 Singleton 被 clone 之後調用了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> ，同樣的我們</p>
-
-<pre><code class="language-php=">private function __clone() {}
-</code></pre>
-
-<p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__clone</code> 來避免 Singleton 被 clone 。</p>
-
+</code></pre><p>這個地方也是發生類似的事情，我們的 Singleton 被 clone 之後調用了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">getInstance()</code> ，同樣的我們</p>
+<pre><code class="language-php=" data-lang="php=">private function __clone() {}
+</code></pre><p>覆寫 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">__clone</code> 來避免 Singleton 被 clone 。</p>
 <h3 id="防止被序列化">防止被序列化</h3>
-
 <p>最後還有一個可能是序列化(serialize)</p>
-
-<pre><code class="language-php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
+<pre><code class="language-php=" data-lang="php=">Singleton::getInstance()-&gt;_somethingWeWantToKeep = 'I\'m smart!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm smart!
 
 $stupidGuy = serialize(Singleton::getInstance());
 $stupidGuy = unserialize($stupidGuy);
 $stupidGuy-&gt;getInstance()-&gt;_somethingWeWantToKeep = 'I\'m stupid!';
 var_dump(Singleton::getInstance()-&gt;_somethingWeWantToKeep);    //I'm stupid!
-</code></pre>
-
-<p>相對應的防範措施是</p>
-
-<pre><code class="language-php=">private function __wakeup() {}
-</code></pre>
-
-<p>所以完整的 Singleton 如下：</p>
-
-<pre><code class="language-php=">&lt;?php
+</code></pre><p>相對應的防範措施是</p>
+<pre><code class="language-php=" data-lang="php=">private function __wakeup() {}
+</code></pre><p>所以完整的 Singleton 如下：</p>
+<pre><code class="language-php=" data-lang="php=">&lt;?php
 final class Singleton
 {
     private static $instance;
@@ -304,12 +247,8 @@ final class Singleton
 
     private function __wakeup() {}
 }
-</code></pre>
-
-<h2 id="結語">結語</h2>
-
+</code></pre><h2 id="結語">結語</h2>
 <p>總之我們做的事情就是防止這位 stupidGuy 對這個應該要是單例的 Class 建了物件，然後還呼叫 static function 來修改我們想要保持不變的東西，也就是<strong>在其他開發者在不知情的情況下，建立了副本並修改時，噴 error 給他</strong>。</p>
-
 <p>事實上 Singleton pattern 因為隱藏依賴和難以測試，被廣泛地認為是一種 anti-pattern，可以參考<a href="https://stackoverflow.com/questions/137975/what-is-so-bad-about-singletons">在 stackoverflow 的討論</a>。</p>
 <ul class="pa0">
   

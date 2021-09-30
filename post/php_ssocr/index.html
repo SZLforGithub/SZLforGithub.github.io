@@ -52,7 +52,7 @@
 <meta itemprop="description" content="找不到套件那就自己幹一個吧">
 <meta itemprop="datePublished" content="2021-09-18T18:56:42&#43;08:00" />
 <meta itemprop="dateModified" content="2021-09-18T18:56:42&#43;08:00" />
-<meta itemprop="wordCount" content="1740">
+<meta itemprop="wordCount" content="1736">
 
 
 
@@ -160,7 +160,7 @@
     
     
     <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
-    <span class="f6 mv4 dib tracked"> - 1740 words</span>
+    <span class="f6 mv4 dib tracked"> - 1736 words</span>
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
@@ -168,7 +168,7 @@
 <p>Hi there，這次要分享的是最近工作上用到的 SSOCR (Seven Segment Optical Character Recognition) 功能，就是類似以下這樣的圖片：</p>
 <p><img src="https://i.imgur.com/Zdp0IpY.png" alt=""></p>
 <p>這樣的顯示方式被稱為 Seven Segment，因為它是由七個柱狀體來組合成數字，常見的中文名稱是七字節或是七段顯示器。</p>
-<p>而需要實作的功能，初步的想像是這樣的：會由前端傳來一張這樣的圖片，然後我(後端)要對這張圖片做簡單的處理和辨識，並回傳 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">73</code>。</p>
+<p>而需要實作的功能，初步的想像是這樣的：前端會傳來一張這樣的圖片，然後由後端對這張圖片做簡單的處理和辨識，並回傳 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">73</code>。</p>
 <h2 id="有哪些工具可以使用">有哪些工具可以使用？</h2>
 <p>我第一步先嘗試了一些視覺辨識的套件，比如大名鼎鼎的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Google Cloud Vision API</code> 和 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Tesseract</code>，但效果很出我意料的不甚理想，與其說是不甚理想，不如說根本完全無法辨識。</p>
 <p>過程中做了一些 survey，主要的原因是一般的視覺辨識套件的流程是：</p>

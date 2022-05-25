@@ -6,10 +6,19 @@
     <description>Recent content in Louis的技術部落格 on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 May 2022 22:11:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 25 May 2022 13:39:04 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我的 2021 年記</title>
+      <link>https://szlforgithub.github.io/post/almanac_2021_2022/</link>
+      <pubDate>Wed, 25 May 2022 13:39:04 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/almanac_2021_2022/</guid>
+      <description>大疫情時代的確診可憐蟲。</description>
+    </item>
     
     <item>
       <title>Docker🐳 - 使用 (2/2)</title>

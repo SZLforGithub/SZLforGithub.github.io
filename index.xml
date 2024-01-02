@@ -6,10 +6,19 @@
     <description>Recent content in Louis的技術部落格 on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Nov 2023 16:20:23 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2024 22:04:15 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我的 2022 - 2023 年記</title>
+      <link>https://szlforgithub.github.io/post/almanac_2023/</link>
+      <pubDate>Mon, 01 Jan 2024 22:04:15 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/almanac_2023/</guid>
+      <description>轉換跑道 x 自我成長 x 得到與失去</description>
+    </item>
     
     <item>
       <title>如何成為一個好的 internship mentor</title>

@@ -60,7 +60,7 @@
 <meta itemprop="description" content="轉換跑道 x 自我成長 x 得到與失去">
 <meta itemprop="datePublished" content="2024-01-01T22:04:15&#43;08:00" />
 <meta itemprop="dateModified" content="2024-01-01T22:04:15&#43;08:00" />
-<meta itemprop="wordCount" content="1685">
+<meta itemprop="wordCount" content="1810">
 
 
 
@@ -181,7 +181,7 @@ if (!doNotTrack) {
     
     
     <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
-    <span class="f6 mv4 dib tracked"> - 1685 words</span>
+    <span class="f6 mv4 dib tracked"> - 1810 words</span>
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
@@ -197,19 +197,21 @@ if (!doNotTrack) {
 <p>但如果我的目的是了解 Infra 的話，有什麼會比我直接加入一個 Infra team 還要更快的方法嗎？ <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">我如果繼續在開發 Team 裡面，我永遠都是從開發的角度去設計和思考</code>，我可能會更傾向選擇那些 developer friendly 的工具，如 serverless 等，而沒辦法從維運者的角度來看待其他工具。</p>
 <p>一個 Team 使用和十個 Team 使用，設計時要思考的點就已經截然不同了，而我目前接觸和管理的 Kubernetes 就是由多個 Team 共用，規模大概是 300 多台 Node 和 8000 多顆 pod，如何管理這些資源？這也是在開發 Team 兼作 Infra 時很難得到的經驗：<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">規模大時，設計會更傾向 Platform Engineering</code>。</p>
 <p>整體來說，在這一年裡，我的 tech stack 除了本來已經有的開發能力，又拓展了 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Container Orchestration (Kubernetes)</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Monitoring</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">CI/CD Pipeline</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Infra as Code</code>、<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">E2E testing platform</code> 以及 Cloud 上各種 resource 的使用和 troubleshooting 經驗。</p>
-<p>另外值得一提的是，雖然是 Infra team，但也不是完全沒有開發相關的 Task ，這段時間也做了一個規模比較大的開發任務，內容是一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">event-driven</code> 的資料流中的 Forwarder，所以可以想見的是會需要 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Message Queue (Kafka)</code> 相關的知識，同時它也是一個用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Golang</code> 實作的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Microservice</code>，架設在 Kubernetes 中，peak QPS 可以到 4000 ~ 7000 之間，除了可預估的常態性 peak 以外，還時不時會有亂流的 peak 出現，所以也實作了 monitor metrics 的 auto scaling，也算是圓了我處理<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">高併發場景</code>的夢。</p>
+<p>另外值得一提的是，雖然是 Infra team，但也不是完全沒有開發相關的 Task ，這段時間也做了一個規模比較大的開發任務，內容是一個 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">event-driven</code> 的資料流中的 Forwarder，所以可以想見的是會需要 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Message Queue (Kafka)</code> 相關的知識，同時它也是一個用 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Go</code> 實作的 <code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">Microservice</code>，架設在 Kubernetes 中，peak QPS 可以到 4000 ~ 7000 之間，除了可預估的常態性 peak 以外，還時不時會有亂流的 peak 出現，所以也實作了 monitor metrics 的 auto scaling，也算是圓了我處理<code style="font-size: 85%; background-color: rgba(0,0,0); border-radius: 3px; word-wrap: break-word; color: white; padding: 3px;">高併發場景</code>的夢。</p>
 <p>這個專案加很多班，但也學到很多。</p>
 <h3 id="那些準備開始的">那些準備開始的&hellip;</h3>
-<p>因為太忙的關係，這一年除了吸收新學的知識，幾乎沒時間搞別的事，但花了一年多的時間，目前已經逐步穩定下來，接下來想持續深耕幾個有興趣的工具，如 Kubernetes、Prometheus、Loki 這幾個開源專案，如果有時間的話，想讀一讀程式碼，最好是能對這些專案有貢獻。</p>
+<p>因為太忙的關係，這一年除了吸收新學的知識，幾乎沒時間搞別的事，但花了一年多的時間，目前已經逐步穩定下來，接下來想持續深耕幾個有興趣的工具，如 Kubernetes、Prometheus、Loki 這幾個開源專案，如果有時間的話，想讀一讀原始碼，最好是能對這些專案有貢獻。</p>
 <p>另外還會持續做的事情就是刷題，我認為暫且不論是不是有換工作的動機，讓自己持續有跳槽的能力在職場上才是比較聰明的做法。</p>
 <p>第三點就是練習英文了吧，今年陸續去了新加坡和日本，又再次深深感覺到英文的重要性，未來會更積極在這上面。</p>
-<p>最後就是今年三月公司就會公布我今年有沒有順利升職了 (俗稱開獎)，有鑒於去年算是蠻努力的，也和老闆積極溝通這件事，幸好老闆是個明事理的人，基本上可以說是我目前為止遇過最主動幫忙且積極溝通的上司了，希望一切順利，也希望看到這篇文章的人可以祝我好運，先謝過兄弟了。</p>
+<p>最後就是今年三月公司就會公布我今年有沒有順利升職了 (俗稱開獎)，有鑒於去年算是蠻努力的，也和老闆積極溝通這件事，幸好老闆是個明事理的人，可以說是我目前為止遇過最主動幫忙且積極溝通的上司了，希望一切順利，也希望看到這篇文章的人可以祝我好運，先謝過兄弟了。</p>
 <h2 id="回顧與展望">回顧與展望</h2>
 <p>感覺咻的又過完一年，彷彿才剛吃完春酒，轉眼卻又是新的一年了。</p>
 <p>在 2024 年的第一天，雖然剛跟女友旅遊回來，累得半死超想睡，但還是撐著把年記給寫完了，希望第一天的自律能給今年一個好的開頭。</p>
-<p>或許因為年紀越來越大，最近對於選擇對人生帶來的影響越來越有感觸了，同時也認為人脈對職涯的幫助越來越大，逼得我這個典型的 I 人都離開舒適圈去參加了科技業的大型社交活動。</p>
-<p>同樣在這一年，做了一些重要的決定，拒絕了一些機會，在做出決定的當下，我幾乎真實的感覺到人生的軌道有所改變，但我永遠都無法知道自己是對是錯，或許只有時間能給我答案。</p>
-<p>希望我所有選擇的結果都能不負所望。</p>
+<p>或許因為年紀越來越大，最近對於選擇對人生帶來的影響越來越有感觸了，也認為人脈對職涯的幫助越來越大，逼得我這個 I 人都離開舒適圈，穿得人模人樣地去參加了科技業的大型社交活動，除了 Linkedin 大暴加以外，也感慨果然還是有很多很聰明很努力的人啊，讓自己更不敢懈怠了。</p>
+<p>今年也第一次離開台灣去別的國家，而且一年內就出國了兩次，分別去新加坡旅遊和去日本半出差半玩，各方面來說都是很有趣的經驗。</p>
+<p>世界很大，開始有條件可以去看看真是太好了。</p>
+<p>而在職涯上，同樣在這一年，做了一些重要的決定，拒絕了一些機會，在做出決定的當下，我幾乎真實的感覺到人生的軌道有所改變，但我永遠都無法知道自己是對是錯，或許只有時間能給我答案。</p>
+<p>希望所有選擇的結果都能不負所望。</p>
 <p>那今年就寫到這啦，年記系列我們明年再見。</p>
 <ul class="pa0">
   

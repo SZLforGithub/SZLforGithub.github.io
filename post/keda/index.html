@@ -60,7 +60,7 @@
 <meta itemprop="description" content="KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。">
 <meta itemprop="datePublished" content="2024-12-29T16:58:33&#43;08:00" />
 <meta itemprop="dateModified" content="2024-12-29T16:58:33&#43;08:00" />
-<meta itemprop="wordCount" content="1611">
+<meta itemprop="wordCount" content="1504">
 
 
 
@@ -181,7 +181,7 @@ if (!doNotTrack) {
     
     
     <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
-    <span class="f6 mv4 dib tracked"> - 1611 words</span>
+    <span class="f6 mv4 dib tracked"> - 1504 words</span>
     
   </header>
   <div class="nested-copy-line-height lh-copy serif f4 nested-links
@@ -339,8 +339,6 @@ HPA 根據提供的 metrics 進行計算，調整 Workload 中 Pod 的 replica �
 <li>持續監控變化<br>
 當 event metrics 改變時，KEDA 持續更新數據並動態調整 Pod 的數量。</li>
 </ol>
-<p>從系統設計上，我會把 KEDA 理解為 HPA 和 external metrics 的中間層，把 metrics 的轉換和 Kubernetes 的溝通這兩段抽離出來，使用 KEDA 時不需要我和外部系統如何溝通，也不需要自己實作 Adapter。</p>
-<p>這些細節被封裝在 KEDA 中，降低了 Kubernetes 中基於外部 events 或是 metrics 來做 Autoscaling 的複雜度。</p>
 <h2 id="example">Example</h2>
 <p>要使用 KEDA 很簡單，只需要直接定義一個 ScaledObject 的 Resource:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: keda.sh/v1alpha1

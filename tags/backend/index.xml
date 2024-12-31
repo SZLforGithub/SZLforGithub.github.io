@@ -6,10 +6,19 @@
     <description>Recent content in backend on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 May 2022 22:11:33 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 29 Dec 2024 16:58:33 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/tags/backend/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>KEDA：事件驅動的 Kubernetes 自動擴展解決方案</title>
+      <link>https://szlforgithub.github.io/post/keda/</link>
+      <pubDate>Sun, 29 Dec 2024 16:58:33 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/keda/</guid>
+      <description>KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。</description>
+    </item>
     
     <item>
       <title>Docker🐳 - 使用 (2/2)</title>

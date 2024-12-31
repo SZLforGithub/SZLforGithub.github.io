@@ -6,10 +6,28 @@
     <description>Recent content in 心得分享 on Louis&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Dec 2024 15:37:59 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2024 14:43:13 +0800</lastBuildDate>
     
 	<atom:link href="https://szlforgithub.github.io/tags/%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>我的 2024 年記</title>
+      <link>https://szlforgithub.github.io/post/almanac_2024/</link>
+      <pubDate>Tue, 31 Dec 2024 14:43:13 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/almanac_2024/</guid>
+      <description>生活失衡 x 語言挑戰 x 選擇與轉變</description>
+    </item>
+    
+    <item>
+      <title>KEDA：事件驅動的 Kubernetes 自動擴展解決方案</title>
+      <link>https://szlforgithub.github.io/post/keda/</link>
+      <pubDate>Sun, 29 Dec 2024 16:58:33 +0800</pubDate>
+      
+      <guid>https://szlforgithub.github.io/post/keda/</guid>
+      <description>KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。</description>
+    </item>
     
     <item>
       <title>掌握 1 on 1 Meeting：有效溝通與職涯成長的秘訣</title>

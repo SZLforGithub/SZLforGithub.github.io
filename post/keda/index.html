@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>KEDA：事件驅動的 Kubernetes 自動擴展解決方案 | Louis&#39;s blog</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.72.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css" rel="stylesheet">
+    
+
+    
+      <link rel="stylesheet" href="/dist/css/custom.css">
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+    integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+    
+      <script src="/dist/js/custom.js"></script>
+    
+
+    
+      
+<link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+
+
+    
+
+    
+
+    <link rel="stylesheet" href="/prism.css"/>
+    <script src="/prism.js"></script>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169325906-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-169325906-1');
+    </script>
+
+    <meta property="og:title" content="KEDA：事件驅動的 Kubernetes 自動擴展解決方案" />
+<meta property="og:description" content="KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://szlforgithub.github.io/post/keda/" />
+<meta property="article:published_time" content="2024-12-29T16:58:33+08:00" />
+<meta property="article:modified_time" content="2024-12-29T16:58:33+08:00" />
+<meta itemprop="name" content="KEDA：事件驅動的 Kubernetes 自動擴展解決方案">
+<meta itemprop="description" content="KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。">
+<meta itemprop="datePublished" content="2024-12-29T16:58:33&#43;08:00" />
+<meta itemprop="dateModified" content="2024-12-29T16:58:33&#43;08:00" />
+<meta itemprop="wordCount" content="1611">
+
+
+
+<meta itemprop="keywords" content="學習筆記,backend,cloud,心得分享," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="KEDA：事件驅動的 Kubernetes 自動擴展解決方案"/>
+<meta name="twitter:description" content="KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。"/>
+
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-169325906-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+	
+  </head>
+
+  <body class="ma0 sans-serif">
+
+    
+
+
+
+  
+  
+  <header class="cover bg-top" style="background-image: url('https://szlforgithub.github.io/images/keda.jpg');">
+    <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib" style="font-family: oswald; font-weight:bold;">
+      
+        Louis&#39;s blog
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/archives/" title="Archives page">
+              Archives
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/post/" title=" page">
+              
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    <div class="pb3-m pb6-l bg-black-60">
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <h1 class="f2 f1-l fw2 white-90 mb0 lh-title">KEDA：事件驅動的 Kubernetes 自動擴展解決方案</h1>
+          
+            <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3 mb4">
+              KEDA 是 Kubernetes 的事件驅動自動擴展利器。本篇文章深入探討 KEDA 的核心功能、適用場景、配置範例，以滿足現代應用的擴展需求。
+            </h2>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+
+<article class="flex-l flex-wrap justify-between mw8 center ph3">
+  <header class="mt4 w-100">
+    
+
+    
+
+
+
+    <h1 class="f1 athelas mt3 mb1">KEDA：事件驅動的 Kubernetes 自動擴展解決方案</h1>
+    
+    
+    <time class="f6 mv4 dib tracked" datetime=" 2024-12-29T16:58:33&#43;08:00">2024-12-29 16:58:33</time>
+
+    
+    
+    <span class="f6 mv4 dib tracked"> - 4 minutes read</span>
+    <span class="f6 mv4 dib tracked"> - 1611 words</span>
+    
+  </header>
+  <div class="nested-copy-line-height lh-copy serif f4 nested-links
+    nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="keda-簡介">KEDA 簡介</h2>
+<p>KEDA 是一個 Kubernetes-based Event-driven 的 Autoscaler，白話文就是他可以基於不同的 events 來自動調整 Pod 的 Autoscaling。</p>
+<p>簡單介紹幾個核心的功能：</p>
+<ul>
+<li>Event-driven：根據 Event 來決定 Autoscaling 的規模</li>
+<li>Vendor 相依性低：內建多種 Vendor 的 Autoscaler</li>
+<li>元件構造：簡單精簡，分隔 Kubernetes 系統設計，非侵入式且支援多種 Workload</li>
+</ul>
+<h2 id="為何需要-keda">為何需要 KEDA？</h2>
+<p>我相信第一次接觸 KEDA 的同學們一定會有這個疑惑：Kubernetes 已經提供 HPA (HorizontalPodAutoscaler) 了，我們為何還需要 KEDA？</p>
+<p>主要的原因是：<strong>HPA 提供的 Autoscaling 機制已經不足以支援複雜的擴展需求了</strong>。</p>
+<p>眾所周知，HPA 開箱即用只提供 CPU / Memory 兩種 metrics，如果想使用 custom metrics / external metrics 的話就需要自己搞定 Adapter。<br>
+但使用 KEDA，我們就可以直接對接大量的、各式各樣的 Event 來當作 Autosclaing 的 metrics，只能說一句真香。<br>
+
+
+<style type="text/css">
+    .box-shortcode {
+      padding: 1.6em;
+      padding-top: 1.4em;
+      line-height: 1.4em;
+      margin-top: 1em;
+      margin-bottom: 2em;
+      border-radius: 4px;
+      color: #444;
+      background: #f3ebe850;
+    }
+
+    .box-title {
+      margin: -18px -18px 12px;
+      padding: 4px 18px;
+      border-radius: 4px 4px 0 0;
+      font-weight: 700;
+      color: #fff;
+      background: #6ab0de;
+    }
+    .box-shortcode.warning .box-title {
+      background: #ff6b6b;
+    }
+    .box-shortcode.warning {
+      background: #ff6b6b4f;
+    }
+    .box-shortcode.info .box-title {
+      background: #0089e488;
+    }
+    .box-shortcode.info {
+      background: #0089e41c;
+      box-shadow: 3px 3px 5px #0089e410;
+    }
+    .box-shortcode.important .box-title {
+      background: #f7ec2c;
+    }
+    .box-shortcode.important {
+      background: #f7ec2c7d;
+    }
+    .box-shortcode.tip .box-title {
+      background: #a3ffa34d;
+    }
+    .box-shortcode.tip {
+      background: #a3ffa34d;
+      box-shadow: 3px 3px 5px #0089e410;
+    }
+    .icon-box {
+      display: inline-flex;
+      align-self: center;
+      margin-right: 8px;
+    }
+    .icon-box img,
+    .icon-box svg {
+      height: 1em;
+      width: 1em;
+      fill: currentColor;
+    }
+    .icon-box img,
+    .icon-box.baseline svg {
+      top: 0.125em;
+      position: relative;
+    }
+    .box-shortcode p {
+      margin-bottom: 0.6em;
+    }
+    .box-shortcode p:first-of-type {
+      display: inline;
+    }
+    .box-shortcode p:nth-of-type(2) {
+      margin-top: 0.6em;
+    }
+    .box-shortcode p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+
+  
+  <svg width="0" height="0" display="none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="tip-box" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+      <path
+        d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/>
+    </symbol>
+    <symbol id="important-box" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+      <path
+        d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/>
+    </symbol>
+    <symbol id="warning-box" viewBox="0 0 576 512" preserveAspectRatio="xMidYMid meet">
+      <path
+        d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"/>
+    </symbol>
+    <symbol id="info-box" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+      <path
+        d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"/>
+    </symbol>
+  </svg><div class="box box-shortcode info" >
+    <span class="icon-box baseline">
+      <svg><use href="#info-box"></use></svg>
+    </span>
+    <p>其實 KEDA 最終還是需要創建 / 操作 HPA 來達到 Autoscaling 的目的，它實作了一個 external metrics 的 HPA，所以新建 KEDA resource 同時也可以看到對應的 HPA resource 被創建。(Ref: <a href="https://github.com/kedacore/keda/blob/87158f3dae1d08ddb897079aa42d89c31fc4861c/controllers/keda/scaledobject_controller.go#L290-L291">Keda source code</a>)</p>
+  </div></p>
+<p>請試想以下的情境：</p>
+<ul>
+<li>固定時間的大量流量：美國/歐洲的上班時間，伴隨著大量的客戶起床開始使用，會產生大量的 traffic</li>
+<li>搶票/促銷：這類典型的大流量高併發場景，短時間內可能需要應對數十倍的 traffic 增長</li>
+<li>Data pipeline：在一個 pipeline 的生命週期中，你可能會選擇一些 Message Queue 來當作解決方案，而這種情況你會希望用 Queue 中 Lag 的 metrics 來當作 Autoscaling 的基準</li>
+</ul>
+<p>傳統 HPA 只能基於 CPU 或 Memory 的使用率進行擴展，可能無法即時反映 traffic 暴增情況。而 KEDA 可以透過各式各樣的 metrics 來動態的調整 Pod 數量，確保各種場景下使用者的體驗是流暢的。</p>
+<h2 id="架構">架構</h2>
+<p><img src="https://i.imgur.com/LKVjpcW.png" alt="image"></p>
+<blockquote>
+<p>Ref: <a href="https://keda.sh/docs/2.16/concepts/">KEDA Concepts</a></p>
+</blockquote>
+<p>我會解釋架構圖中的幾個 components，以及 KEDA 觸發 Autoscaling 的流程，但實務上使用未必需要了解的這麼深入，我在最後會提供範例的 YAML。</p>
+<h3 id="components">Components</h3>
+<h4 id="scaledobject">ScaledObject</h4>
+<p>ScaledObject 是一個 Kubernetes CRD (Custom Resource Definition)，這個 CRD 包含以下資訊：</p>
+<ul>
+<li>觸發條件 (Triggers)：例如外部系統的 metrics 或 events。</li>
+<li>縮放行為 (Scaling Behaviors)：例如 Pod 的最小/最大 replica 數量。</li>
+</ul>
+<h4 id="kubernetes-api-server">Kubernetes API Server</h4>
+<p>ScaledObject 會與 Kubernetes API Server 溝通，將我們定義的 Triggers 和 Scaling Behaviors 註冊到 Kubernetes 中，讓 Kubernetes 知道如何通過 KEDA 進行 Autoscaling。</p>
+<h4 id="metrics-adapter">Metrics Adapter</h4>
+<p>將 external metrics (如來自 Prometheus、Kafka、AWS SQS 等) expose 為 Kubernetes 可用的指標，供 HPA 使用。</p>
+<h4 id="horizontal-pod-autoscaler-hpa">Horizontal Pod Autoscaler (HPA)</h4>
+<p>當 KEDA 需要擴展時，會通過 Metrics Adapter 提供 metrics，HPA 則會根據這些 metrics 調整 Pod 的 replica 數量。</p>
+<h4 id="external-trigger-source">External Trigger Source</h4>
+<p>這就是我們希望當作 Autoscaling 基準的外部 resource，如 Kafka、RabbitMQ、CloudWatch、Redis &hellip; 等。</p>
+<h3 id="流程">流程</h3>
+<ol>
+<li>Any Events?<br>
+KEDA 通過 Scaler 監控 External Trigger Source，如果檢測到滿足條件的事件，則觸發 Autoscaling</li>
+<li>Metrics Adapter<br>
+External Trigger Source 通過 Metrics Adapter 轉換為 Kubernetes API 可用的 metrics，這些 metrics 被傳遞給 HPA。</li>
+<li>HPA 調整 Pod<br>
+HPA 根據提供的 metrics 進行計算，調整 Workload 中 Pod 的 replica 數量。</li>
+<li>持續監控變化<br>
+當 event metrics 改變時，KEDA 持續更新數據並動態調整 Pod 的數量。</li>
+</ol>
+<p>從系統設計上，我會把 KEDA 理解為 HPA 和 external metrics 的中間層，把 metrics 的轉換和 Kubernetes 的溝通這兩段抽離出來，使用 KEDA 時不需要我和外部系統如何溝通，也不需要自己實作 Adapter。</p>
+<p>這些細節被封裝在 KEDA 中，降低了 Kubernetes 中基於外部 events 或是 metrics 來做 Autoscaling 的複雜度。</p>
+<h2 id="example">Example</h2>
+<p>要使用 KEDA 很簡單，只需要直接定義一個 ScaledObject 的 Resource:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: keda.sh/v1alpha1
+<span style="color:#66d9ef">kind</span>: ScaledObject
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: keda-scaleobject-poc
+  <span style="color:#66d9ef">namespace</span>: poc
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">minReplicaCount</span>: <span style="color:#ae81ff">2</span>
+  <span style="color:#66d9ef">maxReplicaCount</span>: <span style="color:#ae81ff">5</span>
+  <span style="color:#66d9ef">pollingInterval: 10 # Optional. Default</span>: <span style="color:#ae81ff">30</span> seconds
+  <span style="color:#66d9ef">scaleTargetRef</span>:
+    <span style="color:#66d9ef">name</span>: &lt;your workload name<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">  triggers:</span>
+  - <span style="color:#66d9ef">type</span>: &lt;your scaler<span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">    metadata:</span>
+      &lt;base on your scaler&gt;
+</code></pre></div><p>填入你要 scale 的 target 和對應的 triggers 並部署到 Cluster 中，確認對應的 CRD 有被建立後，就可以開始監控他是否正常運行了</p>
+<h2 id="小結">小結</h2>
+<p>從系統設計上，我會把 KEDA 理解為 HPA 和 external metrics 的中間層，把 metrics 的轉換和與 Kubernetes 的溝通這兩段抽離出來</p>
+<p>使用 KEDA 時不需要知道和外部系統如何溝通，也不需要自己實作 Adapter。這些細節被封裝在 KEDA 中，有效解決了傳統 HPA 無法處理多元化和複雜擴展需求的痛點，降低了 Kubernetes 中基於外部 events 或是 metrics 來做 Autoscaling 的複雜度。</p>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://keda.sh/docs/2.16/concepts/">https://keda.sh/docs/2.16/concepts/</a></li>
+<li><a href="https://github.com/kedacore/keda">https://github.com/kedacore/keda</a></li>
+<li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/">https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/</a></li>
+</ol>
+<ul class="pa0">
+  
+   <li class="list">
+     <a href="/tags/%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">學習筆記</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/backend" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">backend</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/cloud" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">cloud</a>
+   </li>
+  
+   <li class="list">
+     <a href="/tags/%E5%BF%83%E5%BE%97%E5%88%86%E4%BA%AB" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">心得分享</a>
+   </li>
+  
+</ul>
+<script src="https://utteranc.es/client.js" repo="SZLforGithub/comment-utterances" issue-term="pathname"
+      theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+
+  <aside class="w-30-l mt6-l">
+    
+
+
+
+
+
+
+
+
+
+<div class="toc">
+
+    <div class="page-header"><strong>目錄</strong></div>
+
+    <div id="page-scrollspy" class="toc-nav">
+
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#keda-%e7%b0%a1%e4%bb%8b">
+                            KEDA 簡介
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e7%82%ba%e4%bd%95%e9%9c%80%e8%a6%81-keda">
+                            為何需要 KEDA？
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e6%9e%b6%e6%a7%8b">
+                            架構
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#components">
+                            Components
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#scaledobject">
+                            ScaledObject
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#kubernetes-api-server">
+                            Kubernetes API Server
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#metrics-adapter">
+                            Metrics Adapter
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#horizontal-pod-autoscaler-hpa">
+                            Horizontal Pod Autoscaler (HPA)
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#external-trigger-source">
+                            External Trigger Source
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e6%b5%81%e7%a8%8b">
+                            流程
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#example">
+                            Example
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#%e5%b0%8f%e7%b5%90">
+                            小結
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+        
+            
+                
+                
+                    
+                    <ul class="nav">
+                    
+                    <ul class="nav">
+                    
+                    
+                        <li class="nav-item">
+                            <a class="nav-link text-left" href="#reference">
+                            Reference
+                            </a>
+                        </li>
+                    
+                    
+                    </ul>
+                    
+                    </ul>
+                    
+                
+            
+        
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+  
+
+</aside>
+</article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://szlforgithub.github.io/" >
+    &copy;  Louis's blog 2024 
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+  <script type="text/javascript" color="0,0,0" opacity="0.5" pointColor="0,100,0" count="30" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+  </body>
+</html>
